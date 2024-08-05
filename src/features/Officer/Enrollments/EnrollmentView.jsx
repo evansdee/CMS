@@ -14,7 +14,7 @@ import { useDeleteEnrollment } from "./useDeleteEnrollment";
 export default function EnrollmentView({ data,onCloseModal }) {
     const { updateCount } = useUpdateCourseCount();
     const { data: countList } = useCount();
-  const { mutate:updateStudent, isPending } = useUpdateEnrollment();
+  const { mutate:updateStudent } = useUpdateEnrollment();
   const mutate = useDeleteEnrollment()
   const { id, fullName, photo, dob, courseCode, codeAlt } = data;
 
