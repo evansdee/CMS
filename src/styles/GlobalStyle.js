@@ -146,7 +146,7 @@ input:disabled {
   color: var(--color-grey-500);
 }
 
-input:focus,
+/* input:focus, */
 button:focus,
 textarea:focus,
 select:focus {

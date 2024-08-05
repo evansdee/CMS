@@ -7,6 +7,7 @@ import GlobalStyles from "./styles/GlobalStyle";
 import { TestProvider } from "./hook/useTest";
 import { DarkModeProvider } from "./hook/DarkModeToggle";
 import Home from "./pages/Home";
+import Test from "./pages/Test";
 import Report from "./pages/Report";
 import Student from "./pages/Student";
 import Enrollment from "./pages/Enrollment";
@@ -18,6 +19,9 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import Login from "./pages/Login";
 import NoPage from "./pages/NoPage";
 import RoleSideBarContent from "./context/RoleSideBarContent";
+import EnrollmentListContext from "./hook/EnrollmentListContext";
+import Enrollments from "./pages/Enrollments";
+import EnrollmentsContext from "./hook/EnrollmentsContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,8 +32,7 @@ const queryClient = new QueryClient({
   },
 });
 
-
-//  COPY THE APPLAYOUT GRID CSS TO CHAT GPT TO GIVE YOU A MOBILE VERSION CSS 
+//  COPY THE APPLAYOUT GRID CSS TO CHAT GPT TO GIVE YOU A MOBILE VERSION CSS
 
 function App() {
   return (
@@ -48,10 +51,13 @@ function App() {
                   // path="/applayout"
                   element={
                     <ProtectedRoute>
-                      <RoleSideBarContent>
-
-                      <Applayout />
-                      </RoleSideBarContent>
+                      <EnrollmentsContext>
+                        <EnrollmentListContext>
+                          <RoleSideBarContent>
+                            <Applayout />
+                          </RoleSideBarContent>
+                        </EnrollmentListContext>
+                      </EnrollmentsContext>
                     </ProtectedRoute>
                   }
                 >
@@ -64,8 +70,10 @@ function App() {
                     <Route path="report" element={<Report />} />
                     <Route path="enrollment" element={<Enrollment />} />
                     <Route path="settings" element={<Setting />} />
+                    <Route path="enrollments" element={<Enrollments />} />
                   </Route>
                 </Route>
+                <Route path="test" element={<Test />} />
                 <Route path="*" element={<NoPage />} />
               </Routes>
             </BrowserRouter>

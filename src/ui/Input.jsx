@@ -7,6 +7,11 @@ const Input = styled.input`
   padding: 0.6rem 1.2rem;
   box-shadow: var(--shadow-sm);
   width: 100%;
+  &[type=checkbox]{
+
+    accent-color: var(--color-icon);
+  }
+
 `;
 
 export default Input;

@@ -5,6 +5,7 @@ import Button from "../../ui/Button";
 import { useLogin } from "./useLogin";
 import SpinnerMini from "../../ui/SpinnerMini";
 import toast from "react-hot-toast";
+import LoginPanel from "./LoginPanel";
 
 const StyledLogin = styled.div`
   display: flex;
@@ -58,6 +59,7 @@ export default function LoginUi() {
            {isLoading ? <SpinnerMini/>: 'Log in'}
         </Button>
       </form>
+      <LoginPanel email={setEmail} pass={setPassword}/>
     </StyledLogin>
   );
 }

@@ -46,6 +46,12 @@ const variations = {
       background-color: var(--color-red-800);
     }
   `,
+  btn: css`
+    color: var(--color-grey-100);
+    background-color: var(--color-green-700);
+
+ 
+  `,
 };
 
 const Button = styled.button`

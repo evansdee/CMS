@@ -15,6 +15,7 @@ const linkArr = [
   { label: "enrollment", icon: HiDocumentAdd, role: "office" },
   { label: "student", icon: PiStudentDuotone, role: "office" },
   { label: "report", icon: TbReportAnalytics, role: "office" },
+  { label: "enrollments", icon: HiDocumentAdd, role: "madam" },
   { label: "settings", icon: MdDisplaySettings, role: "all" },
   { label: "certificate", icon: PiCertificate, role: "cert" },
 ];

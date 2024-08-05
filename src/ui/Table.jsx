@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import styled from "styled-components";
-import SessionRow from "../features/Officer/Session/SessionRow";
 
 const TableContainer = styled.div`
   display: grid;
@@ -11,29 +10,33 @@ const TableContainer = styled.div`
 
 const TableHeader = styled.div`
   display: grid;
-  grid-template-columns: 1fr repeat(4, 0.25fr);
-  /* grid-template-columns:1fr repeat(4, auto); */
-  background-color: var(--color-grey-20n0);
+  grid-template-columns: ${(prop) => prop.column};
+  background-color: var(--color-grey-200);
   color: var(--color-grey-600);
   padding: 10px;
   gap: 0.5em;
-  border: 2px solid var(--color-grey-100);
+  /* border: 2px solid var(--color-grey-100); */
   text-align: center;
 `;
-const TableBody = styled.div`
+const StyledRow = styled.div`
+  display: grid;
+  grid-template-columns: ${(prop) => prop.column};
+  gap: 1em;
+  align-items: center;
 
+  padding: 10px;
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-grey-100);
+  }
 `;
 
+const TableBody = styled.div``;
+
 const TableHeaderItem = styled.div`
-  /* padding: 0 1.2rem; */
   text-transform: uppercase;
-  /* border: 5px solid red; */
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+
   font-size: 1.3rem;
   font-weight: 800;
-  /* row-gap: 5em; */
 `;
 const Empty = styled.p`
   font-size: 1.6rem;
@@ -44,35 +47,39 @@ const Empty = styled.p`
 
 const TableContext = createContext();
 
-export default function Table({ children }) {
+export default function Table({ children, column }) {
   return (
-    <TableContext.Provider value={{}}>
-      <TableContainer>{children}</TableContainer>
+    <TableContext.Provider value={{ column }}>
+      <TableContainer column={column}>{children}</TableContainer>
     </TableContext.Provider>
   );
 }
 
 function Header({ data }) {
+  const { column } = useContext(TableContext);
+
   return (
-    <TableHeader>
+    <TableHeader column={column}>
       {data?.map((ele) => (
         <TableHeaderItem key={ele}>{ele}</TableHeaderItem>
       ))}
     </TableHeader>
   );
 }
-
-function Body({ data }) {
+function Row({ children }) {
+  const { column } = useContext(TableContext);
+  return (
+    <StyledRow role="row" column={column}>
+      {children}
+    </StyledRow>
+  );
+}
+function Body({ data, render }) {
   if (!data?.length) return <Empty>No data to show at the moment</Empty>;
 
-  return (
-    <TableBody>
-      {data?.map((row) => (
-        <SessionRow key={row.id} row={row} />
-      ))}
-    </TableBody>
-  );
+  return <TableBody>{data?.map(render)}</TableBody>;
 }
 
 Table.Header = Header;
+Table.Row = Row;
 Table.Body = Body;

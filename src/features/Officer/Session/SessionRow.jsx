@@ -8,28 +8,16 @@ import { format } from "date-fns";
 import { HiOutlineTrash } from "react-icons/hi2";
 import ConfirmDelete from "../../../ui/ConfirmDelete";
 import { useDeleteSession } from "./useDeleteSession";
+import Table from "../../../ui/Table";
 
 // WORK ON THE OVERALL COLOR AND SESSION DESIGN ALSO ENROLLMENT
 // ALSO MAKE THE TABLES REUSABLE
 
-const GridRow = styled.div`
-  display: grid;
-  grid-template-columns: 1fr repeat(4, 0.25fr);
-  /* grid-template-columns: 1fr repeat(2, 0.175fr) 0.15fr 0.1fr; */
-  gap: 1em;
-  /* background-color: ${(props) =>
-    props.index % 2 === 0 ? "#f2f2f2" : "#fff"}; */
-  padding: 10px;
-  /* text-align: center; */
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
 
 const GridCell = styled.div`
   padding: 0 0.5rem;
 
-  &:not(:nth-child(5n + 1)) {
+  &:not(:first-child) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,20 +29,21 @@ const GridCell = styled.div`
   }
 `;
 
-export default function SessionRow({ row, index }) {
+export default function SessionRow({ row }) {
+  const { mutate, isPending } = useDeleteSession();
 
-   const {mutate,isPending} = useDeleteSession()
-   console.log(row.startDate)
+  const {id,courseName,startDate,endDate,active} = row
+  console.log(row.startDate);
 
   return (
     <>
-      <GridRow index={index}>
+      <Table.Row >
         <GridCell>{row.courseName}</GridCell>
-        <GridCell>{format(row.startDate, "EEEE dd MMM yyyy")}</GridCell>
-        <GridCell>{format(row.endDate, "EEEE dd MMM yyyy")}</GridCell>
+        <GridCell>{format(startDate, "EEEE dd MMM yyyy")}</GridCell>
+        <GridCell>{format(endDate, "EEEE dd MMM yyyy")}</GridCell>
         <GridCell
           style={{
-            color: row.active ? "var(--color-green)" : "var(--color-red-700)",
+            color: active ? "var(--color-green)" : "var(--color-red-700)",
           }}
         >
           {row.active ? "true" : "false"}
@@ -66,15 +55,15 @@ export default function SessionRow({ row, index }) {
                 <FaEdit />
               </Modal.Open>
             </ButtonIcon>
-            <ButtonIcon>
+            <ButtonIcon variation='danger'>
               <Modal.Open opens="deleteSession">
                 <HiOutlineTrash />
               </Modal.Open>
             </ButtonIcon>
             <Modal.Window name="deleteSession">
               <ConfirmDelete
-                resourceName={row.courseName}
-                onConfirm={()=>mutate(row.id)}
+                resourceName={courseName}
+                onConfirm={() => mutate(id)}
                 disabled={isPending}
               />
             </Modal.Window>
@@ -83,7 +72,7 @@ export default function SessionRow({ row, index }) {
             </Modal.Window>
           </Modal>
         </GridCell>
-      </GridRow>
+      </Table.Row>
     </>
   );
 }

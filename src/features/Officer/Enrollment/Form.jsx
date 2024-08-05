@@ -33,7 +33,7 @@ const StyledFormSingle = styled(CommonRow)`
 const FormContext = createContext();
 export default function Form({ children, onSubmit }) {
   return (
-    <FormContext.Provider>
+    <FormContext.Provider value={{}}>
       <StyledForm onSubmit={onSubmit}>{children}</StyledForm>;
     </FormContext.Provider>
   );

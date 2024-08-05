@@ -21,8 +21,7 @@ const Main = styled.div`
 export default function Enrollment() {
   const [searchParams] = useSearchParams();
 
-  const value = searchParams.get("enrollment");
-  console.log(value);
+  const value = searchParams.get("enrollment") ||'list';
   return (
     <StyledContainer>
       <Row type="horizontal">

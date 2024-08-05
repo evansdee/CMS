@@ -14,6 +14,7 @@ width: 100%;
   background-color: var(--color-grey-0);
   font-weight: 500;
   box-shadow: var(--shadow-sm);
+  
 `;
 
 export default Select

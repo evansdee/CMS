@@ -92,10 +92,10 @@ function Window({ children, name }) {
       </StyledModal>
     </Overlay>,
     document.body
-  );
+  )
 }
 
 Modal.Open = Open;
 Modal.Window = Window;
 
-export default Modal;
+export default Modal

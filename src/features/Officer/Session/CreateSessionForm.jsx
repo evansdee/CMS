@@ -12,13 +12,16 @@ import { useCreateEditSession } from "./useCreateEditSession";
 import { isAfter } from "date-fns";
 import { useEditSession } from "./useEditSession";
 
-export default function CreateSessionForm({ sessionToEdit={}, onCloseModal }) {
+export default function CreateSessionForm({
+  sessionToEdit = {},
+  onCloseModal,
+}) {
   const courses = sessArr.filter((ele) => ele.course);
 
   const { mutate, isPending: isLoading } = useCreateEditSession();
-  const {editSession,isEditing} = useEditSession()
+  const { editSession, isEditing } = useEditSession();
 
-  const isWorking = isLoading || isEditing
+  const isWorking = isLoading || isEditing;
   const { id: editId, ...editValues } = sessionToEdit;
   const isEditSession = Boolean(editId);
   const [isChecked, setIsChecked] = useState(editValues.active);
@@ -30,8 +33,8 @@ export default function CreateSessionForm({ sessionToEdit={}, onCloseModal }) {
         : {
             courseName: courses[0].course,
             courseCode: courses[0].code,
-            startDate:'2024-08-01',
-            endDate:'2024-08-05',
+            startDate: "2024-08-01",
+            endDate: "2024-08-05",
           },
     }
   );
@@ -42,19 +45,22 @@ export default function CreateSessionForm({ sessionToEdit={}, onCloseModal }) {
   useEffect(() => {
     const x = courses.find((ele) => ele.course.includes(selectedCourseName));
     if (x) {
-      setValue("courseCode", x.code)
-      setValue("codeAlt", x.codeAlt)
+      setValue("courseCode", x.code);
+      setValue("codeAlt", x.codeAlt);
     }
   }, [courses, setValue, selectedCourseName]);
 
   function onSubmit(data) {
     if (isEditSession) {
-      editSession({newSession:{...data,active:isChecked},id:editId}, {
-        onSuccess: () => {
-          reset();
-          onCloseModal?.();
-        },
-      })
+      editSession(
+        { newSession: { ...data, active: isChecked }, id: editId },
+        {
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
+        }
+      );
     } else {
       const isActive = isAfter(data.endDate, new Date());
       mutate(
@@ -72,24 +78,22 @@ export default function CreateSessionForm({ sessionToEdit={}, onCloseModal }) {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} type="modal">
-      <Input type="text" {...register('codeAlt')} hidden/>
+      <Input type="text" {...register("codeAlt")} hidden />
       <FormRow label="Course Code">
         <Input {...register("courseCode")} disabled readOnly />
       </FormRow>
       <FormRow label="Course Name">
         <Select
-          options={courses}
           disabled={isWorking}
-          x={{
-            ...register("courseName", { required: "This field is needeed" }),
-          }}
+          {...register("courseName", { required: "This field is needeed" })}
           type="white"
-          render={(ele) => (
+        >
+          {courses?.map((ele) => (
             <option key={ele.course} value={ele.course}>
               {ele.course}
             </option>
-          )}
-        />
+          ))}
+        </Select>
       </FormRow>
 
       {/* <Flex gap="1rem"> */}
@@ -118,7 +122,9 @@ export default function CreateSessionForm({ sessionToEdit={}, onCloseModal }) {
         </FormRow>
       )}
       {/* </Flex> */}
-      <Button disabled={isWorking}>{isEditSession ? "Edit Session" : "Add Session"}</Button>
+      <Button disabled={isWorking}>
+        {isEditSession ? "Edit Session" : "Add Session"}
+      </Button>
     </Form>
   );
 }
