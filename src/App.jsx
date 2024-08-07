@@ -28,6 +28,10 @@ const queryClient = new QueryClient({
     queries: {
       // staleTime: 60 * 1000,
       staleTime: 0,
+  
+    refetchOnWindowFocus: true, // refetch data on window focus
+    refetchOnMount: true, // refetch data on mount
+    refetchOnReconnect: true, // refetch data on reconnect
     },
   },
 });

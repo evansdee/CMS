@@ -5,6 +5,8 @@ import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import { useSearchParams } from "react-router-dom";
 import EnrollmentList from "../features/Officer/Enrollment/EnrollmentList";
+import Button from "../ui/Button";
+import { useAddAllEnrollment } from "../features/Officer/Enrollment/useEnrollment";
 
 const StyledContainer = styled.div`
   padding: 0 2em;
@@ -22,6 +24,7 @@ export default function Enrollment() {
   const [searchParams] = useSearchParams();
 
   const value = searchParams.get("enrollment") ||'list';
+
   return (
     <StyledContainer>
       <Row type="horizontal">

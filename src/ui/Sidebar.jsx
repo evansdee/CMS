@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Logo from "./Logo";
 import SideBarList from "./SideBarList";
+import FakeData from "../FakeData";
+import { useUser } from "../features/authentication/useUser";
 
 
 const StyledSidebar = styled.aside`
@@ -16,10 +18,12 @@ const StyledSidebar = styled.aside`
 
 
 function Sidebar() {
+  const {user} = useUser()
   return (
     <StyledSidebar>
       <Logo />
      <SideBarList />
+    {user.user_metadata.role ==='office' && <FakeData/>}
     </StyledSidebar>
   );
 }

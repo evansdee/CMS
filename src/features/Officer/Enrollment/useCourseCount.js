@@ -18,7 +18,7 @@ export function useUpdateCourseCount() {
     isPending: isCounting,
   } = useMutation({
     mutationFn: updateCourseCount,
-    onSuccess: () =>queryClient.invalidateQueries({ queryKey: ["courseCount"] }),
+    onSuccess: () =>queryClient.invalidateQueries({ queryKey: ["count"] }),
   })
 
   return { data,

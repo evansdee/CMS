@@ -17,7 +17,7 @@ export default function ContactUi({ register, data, errors }) {
         </Form.FormSingleRow>
         <Form.FormSingleRow>
           <Label label="State Reside in" error={errors?.stateReside?.message}>
-            {/* <Select
+            <Select
               {...register("stateReside", {
                 required: "This field is required",
               })}
@@ -29,7 +29,7 @@ export default function ContactUi({ register, data, errors }) {
                   {state.name.split(' ')[0]}
                 </option>
               ))}
-            </Select> */}
+            </Select>
           </Label>
         </Form.FormSingleRow>
         <Form.FormMultipleRow>

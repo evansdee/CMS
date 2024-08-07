@@ -74,14 +74,14 @@ export default function PersonalUi({register,isLoading,country,state,errors}) {
               </Select>
             </Label>
             <Label label="State of Origin" error={errors?.state?.message}>
-              {/* <Select {...register("state",{required:'This field is required'})} disabled={isLoading} >
+              <Select {...register("state",{required:'This field is required'})} disabled={isLoading} >
                 <option value="">Select a state</option>
                 {state?.map((state, index) => (
                   <option key={index} value={state.name}>
                     {state.name}
                   </option>
                 ))}
-              </Select> */}
+              </Select>
             </Label>
             <Label label="LGA">
               <Input {...register("lga")} />

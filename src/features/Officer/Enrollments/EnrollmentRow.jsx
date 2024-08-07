@@ -7,6 +7,7 @@ import Modal from "../../../ui/Modal";
 import { CiViewList } from "react-icons/ci";
 import EnrollmentView from "./EnrollmentView";
 import Test from "../../../pages/Test";
+import { format, parse } from "date-fns";
 
 const GridCell = styled.div`
   padding: 0 0.5rem;
@@ -32,19 +33,13 @@ const GridCell = styled.div`
 `;
 
 export default function EnrollmentRow({ enroll }) {
-  const { gsm, fullName, courseName, enrollDate, status } = enroll;
+  const {  fullName, courseName, enrollDate, status } = enroll;
+// const parsedDate = parse(enrollDate, 'dd-MMMM-yy', new Date());
+// const formattedDate = format(parsedDate, 'dd MMMM yy hh:MM aaa');
   // console.log(enroll)
 
   //   const { setEnroll } = useLocalEnroll();
 
-  function handleDelete(gsm) {
-    // setEnroll((p) => p.filter((ele) => ele.gsm !== gsm));
-  }
-
-  function handleSubmit(gsm) {
-    // mutate(enroll);
-    // setEnroll((p) => p.filter((ele) => ele.gsm !== gsm));
-  }
   return (
     <>
       <Table.Row>

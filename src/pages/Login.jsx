@@ -18,7 +18,7 @@ const StyledLogin = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--color-black);
+    background-color: var(--color-grey-700);
     opacity: .6;
     z-index: 1;
   }

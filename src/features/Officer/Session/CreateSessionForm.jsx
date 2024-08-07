@@ -47,6 +47,8 @@ export default function CreateSessionForm({
     if (x) {
       setValue("courseCode", x.code);
       setValue("codeAlt", x.codeAlt);
+      setValue("newAmount", x.newAmount);
+      setValue("renewAmount", x.renewAmount);
     }
   }, [courses, setValue, selectedCourseName]);
 
@@ -79,6 +81,8 @@ export default function CreateSessionForm({
   return (
     <Form onSubmit={handleSubmit(onSubmit)} type="modal">
       <Input type="text" {...register("codeAlt")} hidden />
+      <Input type="text" {...register("newAmount")} hidden />
+      <Input type="text" {...register("renewAmount")} hidden />
       <FormRow label="Course Code">
         <Input {...register("courseCode")} disabled readOnly />
       </FormRow>

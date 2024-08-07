@@ -7,7 +7,7 @@ const GridItem = styled.div`
   /* display: flex;
   align-items: center;
   justify-content: center; */
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: var(--color-grey-800);
   border: 1px solid var(--color-grey-50);
 
@@ -15,12 +15,12 @@ const GridItem = styled.div`
     grid-column: 1 / 4;
     grid-row: 1 / 4;
     display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: calc().5em;
-  justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5em;
+    justify-content: center;
 
-  img {
+    img {
       width: 100px; /* Adjust the size as needed */
       height: 100px; /* Ensure it's a square */
       border-radius: 50%;
@@ -47,6 +47,11 @@ const GridItem = styled.div`
   &.item2 {
     grid-column: 1 / 4;
     grid-row: 4 / -1;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
 
     @media (max-width: 1200px) {
       grid-column: 1 / -1;
@@ -67,6 +72,11 @@ const GridItem = styled.div`
   &.item3 {
     grid-column: 4 / -1;
     grid-row: 1 / 3;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    gap: 2em;
+    justify-content: center;
 
     @media (max-width: 1200px) {
       grid-column: 1 / -1;
@@ -87,6 +97,11 @@ const GridItem = styled.div`
   &.item4 {
     grid-column: 4 / 6;
     grid-row: 3 / -1;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    gap: 2em;
+    justify-content: center;
 
     @media (max-width: 1200px) {
       grid-column: 1 / -1;
@@ -125,4 +140,4 @@ const GridItem = styled.div`
   }
 `;
 
-export default GridItem
+export default GridItem;

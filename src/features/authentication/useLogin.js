@@ -20,10 +20,10 @@ export function useLogin() {
     onError: (err) => {
       console.log('ERROR', err);
       if(err.message.includes('Network')) toast.error("Check your Network Connection")
-        else
-      toast.error('Provided email or password are incorrect');
+        else toast.error('Provided email or password are incorrect');
     },
   });
 
+  console.log(error)
   return { login, isLoading,error };
 }

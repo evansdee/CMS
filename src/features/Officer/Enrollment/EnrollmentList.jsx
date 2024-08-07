@@ -2,26 +2,27 @@ import {} from "react";
 import Table from "../../../ui/Table";
 import { useLocalEnroll } from "../../../hook/EnrollmentListContext";
 import EnrollmentRow from "./EnrollmentRow";
-import { useGetEnrollment } from "./useEnrollment";
+import { useAddAllEnrollment, useGetEnrollment } from "./useEnrollment";
+import Button from "../../../ui/Button";
+import { filterDataFromOneDayAgo } from "../../../helper/helper";
 
 export default function EnrollmentList() {
   const { data: enrollment, isLoading } = useGetEnrollment();
 
-  const { enrollArr } = useLocalEnroll();
-  if (isLoading) return <p>...loading</p>;
+  const { enrollArr, setEnroll } = useLocalEnroll();
+  const { mutate } = useAddAllEnrollment();
 
-//   console.log(enrollment.find(ele=>(ele.status)))
-//   console.log(enrollment?.find((ele) => ele.status).status === "FALSE")
-  
+  if (isLoading) return <p>...loading</p>;
+  const filteredData = filterDataFromOneDayAgo(enrollment);
   let data =
-    enrollArr.length > 0 
-    // && enrollment.find((ele) => ele.status).status === "FALSE"
+    enrollArr.length > 0
       ? enrollArr
-      : enrollment.filter(ele=>(ele.status === true));
-  console.log(data);
+      : filteredData.filter((ele) => ele.status === true );
+
+  console.log(enrollArr);
   return (
     <div>
-      <Table column="1fr  1fr repeat(5, 0.5fr)">
+      <Table column="1fr 1fr repeat(5, 0.5fr)">
         <Table.Header
           data={[
             "Student",
@@ -38,6 +39,16 @@ export default function EnrollmentList() {
           render={(enroll) => <EnrollmentRow key={enroll.id} enroll={enroll} />}
         />
       </Table>
+      {enrollArr.length > 1 && (
+        <Button
+          onClick={() => {
+            mutate(enrollArr);
+            setEnroll([]);
+          }}
+        >
+          lol
+        </Button>
+      )}
     </div>
   );
 }

@@ -23,15 +23,19 @@ export default function EditLocalEnrollment({
   const selectedCode = watch("courseName");
 
   useEffect(() => {
-    const x = data.find((ele) => ele.courseName.includes(selectedCode));
+    const x = data?.find((ele) => ele.courseName.includes(selectedCode));
     if (x) {
       setValue("codeAlt", x.codeAlt);
       setValue("courseCode", x.courseCode);
+      setValue("newAmount", x.newAmount);
+      setValue("renewAmount", x.renewAmount);
     }
   }, [selectedCode, data, setValue]);
 
   function onSubmit(data) {
-    // console.log(data);
+
+    const x = data.fullName.split(' ')
+    const [firstName,middleName,lastName] = x
     setEnroll((p) =>
       p.map((ele) =>
         ele.gsm === data.gsm
@@ -40,7 +44,9 @@ export default function EditLocalEnrollment({
               fullName: data.fullName,
               courseName: data.courseName,
               codeAlt: data.codeAlt,
-              courseCode:data.courseCode
+              courseCode:data.courseCode,
+              firstName,middleName,lastName,
+              amount: data.isRenewal ? data.renewAmount : data.newAmount
             }
           : ele
       )
@@ -66,6 +72,8 @@ export default function EditLocalEnrollment({
         <FormRow>
           <Input {...register("courseCode")} hidden />
           <Input {...register("codeAlt")} hidden />
+          <Input type="text" {...register("newAmount")} hidden />
+          <Input type="text" {...register("renewAmount")} hidden />
         </FormRow>
         <Button>Edit Enrollment</Button>
       </Form>

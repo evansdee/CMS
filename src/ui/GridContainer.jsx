@@ -7,7 +7,7 @@ const GridContainer = styled.div`
   grid-template-rows: repeat(5, 1fr);
   grid-gap: 10px;
   height: 80vh;
-  width: 85dvw;
+  width: 80dvw;
 
   @media (max-width: 1200px) {
     grid-template-columns: repeat(4, 1fr);

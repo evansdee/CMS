@@ -48,7 +48,7 @@ export default function CourseRegUi({
             </Select>
           </Label>
           <Label label="Amount">
-            <Input value="0000000000" readOnly />
+            <Input {...register("amount")} readOnly />
           </Label>
         </Form.FormMultipleRow>
       </div>

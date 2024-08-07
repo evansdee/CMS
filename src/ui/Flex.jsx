@@ -12,6 +12,3 @@ const Flex = styled.div`
 
 
 export default Flex
-// export default function Flex({ children,...prop }) {
-//   return <StyledFlex {...prop}>{children}</StyledFlex>;
-// }
