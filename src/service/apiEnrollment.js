@@ -111,3 +111,15 @@ export async function updateAllEnrollmentStatus(objects) {
     )
     return updateData
 }
+export async function updateAllEnrollmentSignature(objects,value) {
+  const updateData = await Promise.all(
+    objects?.map(async object => {
+      const {id} = object
+      const { data, error } = await supabase.from("enrolled").update({...object,isSignature:value}).eq('id',id).select();
+      if(error) throw new Error("Failed to update data")
+        
+        return data
+      })
+    )
+    return updateData
+}

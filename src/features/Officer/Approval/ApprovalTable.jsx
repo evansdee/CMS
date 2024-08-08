@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import Spinner from "../../../ui/Spinner";
 import Table from "../../../ui/Table";
 import { useGetEnrollment } from "../Enrollment/useEnrollment";
-import EnrollmentRow from "./EnrollmentRow";
+import EnrollmentRow from "./ApprovalRow";
 import { useCount, useUpdateCourseCount } from "../Enrollment/useCourseCount";
 import { format } from "date-fns";
 import { useUpdateAllStatus } from "./useUpdateAllStatus";
-import Button from "../../../ui/Button";
+import BottomButtonAll from "../../../ui/BottomButtonAll";
 
 export default function EnrollmentTable() {
   const { data: enrollment, isLoading } = useGetEnrollment();
@@ -97,7 +97,7 @@ export default function EnrollmentTable() {
          render={(enroll) => <EnrollmentRow key={enroll.id} enroll={enroll} />}
         />
       </Table>
-      {activeEnrollment.length > 2 &&<Button size='small' onClick={handleSubmitAll}>Approve all</Button>}
+      {activeEnrollment.length > 1 &&<BottomButtonAll onClick={handleSubmitAll}>Approve all</BottomButtonAll>}
     </>
   );
 }

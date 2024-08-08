@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
-import EnrollmentTable from "../features/Officer/Enrollments/EnrollmentTable";
 import { useView } from "../hook/useView";
+import SignatureTable from "../features/Signature/SignatureTable";
 
 
 const StyledContainer = styled.div`
@@ -13,21 +13,21 @@ const StyledContainer = styled.div`
 `;
 
 const Main = styled.div`
-    height: 70dvh;
+    /* height: 70dvh; */
     overflow-y: scroll;
     scrollbar-width: none;
     margin: 1.5em 0;
 `
-export default function Enrollment() {
+export default function Signature() {
   const {isView} = useView()
 
   return (
     <StyledContainer>
       <Row type={!isView ? 'vertical' : 'horizontal'}>
-        <Heading as={isView ? 'h2' : 'h3'}>Enrollment Baby😁</Heading>
+        <Heading as={isView ? 'h2' : 'h3'}>Available Certificates</Heading>
       </Row>
       <Main>
-        <EnrollmentTable/>
+        <SignatureTable/>
       </Main>
     </StyledContainer>
   );

@@ -17,6 +17,7 @@ import { TbGenderBigender } from "react-icons/tb";
 import { AiFillHeart, AiOutlineUser } from "react-icons/ai";
 import { MdNumbers, MdOutlineEmail } from "react-icons/md";
 import { IoIdCardOutline } from "react-icons/io5";
+import toast from "react-hot-toast";
 
 export default function EnrollmentView({ data, onCloseModal }) {
   const { updateCount } = useUpdateCourseCount();
@@ -60,8 +61,7 @@ export default function EnrollmentView({ data, onCloseModal }) {
     };
 
     console.log(newObj);
-    updateStudent(newObj);
-
+    updateStudent(newObj,{onSuccess:(data)=>toast.success(`${data.fullName} has been approved`)})
     updateCount({
       item: { ...count, count: count.count + 1 },
       countId: count.codeAlt,

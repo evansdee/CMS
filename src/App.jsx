@@ -20,9 +20,10 @@ import Login from "./pages/Login";
 import NoPage from "./pages/NoPage";
 import RoleSideBarContent from "./context/RoleSideBarContent";
 import EnrollmentListContext from "./hook/EnrollmentListContext";
-import Enrollments from "./pages/Enrollments";
 import EnrollmentsContext from "./hook/EnrollmentsContext";
 import ToggleProvider from "./hook/useMenuToggle";
+import Approval from "./pages/Approval";
+import Signature from "./pages/Signature";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -75,7 +76,8 @@ function App() {
                       <Route path="report" element={<Report />} />
                       <Route path="enrollment" element={<Enrollment />} />
                       <Route path="settings" element={<Setting />} />
-                      <Route path="enrollments" element={<Enrollments />} />
+                      <Route path="approval" element={<Approval />} />
+                      <Route path="signature" element={<Signature />} />
                     </Route>
                   </Route>
                   <Route path="test" element={<Test />} />

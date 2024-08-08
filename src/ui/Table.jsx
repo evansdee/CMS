@@ -8,7 +8,7 @@ const TableContainer = styled.div`
   gap: 1px;
   border: 1px solid var(--color-grey-200);
   overflow-x: auto; /* Add horizontal scrolling for small screens */
-  
+
   @media (max-width: 768px) {
     /* grid-template-columns: 1fr auto; Single column layout on small screens */
   }
@@ -25,7 +25,7 @@ const TableHeader = styled.div`
   text-align: center;
 
   @media (max-width: 768px) {
-    font-size: .8rem; /* Smaller font size on mobile */
+    font-size: 0.8rem; /* Smaller font size on mobile */
   }
 `;
 
@@ -36,23 +36,20 @@ const StyledRow = styled.div`
   gap: 1em;
   align-items: center;
   padding: 10px;
-  
+
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
   }
   @media (max-width: 768px) {
     padding: 5px; /* Reduce padding for mobile */
-    font-size: 1em!important;
-   
-
+    font-size: 1em !important;
   }
-  
 `;
 
 const TableBody = styled.div`
-height: 55dvh;
-    overflow-y: scroll;
-    scrollbar-width: none;
+  height: 60dvh;
+  overflow-y: scroll;
+  scrollbar-width: none;
 `;
 
 const TableHeaderItem = styled.div`
@@ -62,11 +59,10 @@ const TableHeaderItem = styled.div`
 
   @media (max-width: 768px) {
     /* font-size: .9rem; Smaller font size on mobile */
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 

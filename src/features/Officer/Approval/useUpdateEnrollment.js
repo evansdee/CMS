@@ -7,9 +7,8 @@ export function useUpdateEnrollment() {
   const { mutate, isPending } = useMutation({
     mutationFn: ({ newEnrollment, id }) =>
       createEditEnrollment(newEnrollment, id),
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["enrollment"] });
-      toast.success(`${data.fullName} has been Approved 😎`);
     },
     onError: () => toast.error("failed to approve"),
   });

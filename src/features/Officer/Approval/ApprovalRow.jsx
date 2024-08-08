@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import ButtonIcon from "../../../ui/ButtonIcon";
 import Modal from "../../../ui/Modal";
 import { CiViewList } from "react-icons/ci";
-import EnrollmentView from "./EnrollmentView";
+import EnrollmentView from "./ApprovalView";
 
 
 const GridCell = styled.div`

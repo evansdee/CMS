@@ -5,8 +5,6 @@ import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import { useSearchParams } from "react-router-dom";
 import EnrollmentList from "../features/Officer/Enrollment/EnrollmentList";
-import Button from "../ui/Button";
-import { useAddAllEnrollment } from "../features/Officer/Enrollment/useEnrollment";
 import { useView } from "../hook/useView";
 
 const StyledContainer = styled.div`
@@ -16,7 +14,7 @@ const StyledContainer = styled.div`
 `;
 
 const Main = styled.div`
-    height: 70dvh;
+    /* height: 60dvh; */
     overflow-y: scroll; 
     scrollbar-width: none; 
     margin:1em 0 0;

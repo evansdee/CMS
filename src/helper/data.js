@@ -130,7 +130,7 @@ const fake = [
     dob: "12-Apr-2000",
     email: "youremail@lover.com",
     enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
-
+    isRenewal:true,
     fullName: "Wex Daniel Adenikinju",
     marital: "Married",
     means: "NationalId",

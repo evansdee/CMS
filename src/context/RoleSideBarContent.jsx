@@ -3,10 +3,11 @@ import { useUser } from "../features/authentication/useUser";
 import { HiHome } from "react-icons/hi2";
 import { PiCertificate, PiStudentDuotone } from "react-icons/pi";
 import { TbReportAnalytics } from "react-icons/tb";
-import { MdDisplaySettings } from "react-icons/md";
+import { MdApproval, MdDisplaySettings } from "react-icons/md";
 import { TfiTimer } from "react-icons/tfi";
 import { HiDocumentAdd } from "react-icons/hi";
 import Spinner from "../ui/Spinner";
+import { FcApproval } from "react-icons/fc";
 
 const RoleContext = createContext();
 const linkArr = [
@@ -15,14 +16,15 @@ const linkArr = [
   { label: "enrollment", icon: HiDocumentAdd, role: "office" },
   { label: "student", icon: PiStudentDuotone, role: "office" },
   { label: "report", icon: TbReportAnalytics, role: "office" },
-  { label: "enrollments", icon: HiDocumentAdd, role: "madam" },
-  { label: "settings", icon: MdDisplaySettings, role: "all" },
+  { label: "approval", icon: FcApproval, role: "madam" },
+  { label: "signature", icon: MdApproval, role: "ceo" },
   { label: "certificate", icon: PiCertificate, role: "cert" },
+  { label: "settings", icon: MdDisplaySettings, role: "all" },
 ];
 export default function RoleSideBarContent({ children }) {
   const { user, isLoading } = useUser();
 
-  if(isLoading) return <Spinner/>
+  // if(isLoading) return <Spinner/>
   const role = user?.user_metadata?.role;
   const data = linkArr.filter(
     (ele) => ele.role.includes(role) || ele.role.includes("all")
