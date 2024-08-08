@@ -45,7 +45,7 @@ export default function EnrollmentView({ data, onCloseModal }) {
   } = data;
 
   function handleUpdate() {
-    const count = countList?.filter((ele) => ele.courseCode === courseCode)[0];
+    const count = countList?.filter((ele) => ele.codeAlt === codeAlt)[0];
 
     let newObj = {
       newEnrollment: {
@@ -64,7 +64,7 @@ export default function EnrollmentView({ data, onCloseModal }) {
 
     updateCount({
       item: { ...count, count: count.count + 1 },
-      countId: count.courseCode,
+      countId: count.codeAlt,
     });
     onCloseModal?.();
   }

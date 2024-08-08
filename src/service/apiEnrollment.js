@@ -73,14 +73,14 @@ export async function updateAllEnrollmentData(objects) {
         .from("passport")
         .upload(imageName, object.photo);
 
-     // 3. Delete the cabin IF there was an error uplaoding image
-  if (photoError) {
-    await supabase.from("enrolled").delete().eq("id", data.id);
-    console.error(photoError);
-    throw new Error(
-      "Cabin image could not be uploaded and the cabin was not created"
-    );
-  }
+      // 3. Delete the cabin IF there was an error uplaoding image
+      if (photoError) {
+        await supabase.from("enrolled").delete().eq("id", data.id);
+        console.error(photoError);
+        throw new Error(
+          "Student image could not be uploaded and the cabin was not created"
+        );
+      }
 
       // Insert data into the table with the photo URL
       const { data, error } = await supabase.from("enrolled").insert({
@@ -97,4 +97,17 @@ export async function updateAllEnrollmentData(objects) {
   );
 
   return uploadedData;
+}
+
+export async function updateAllEnrollmentStatus(objects) {
+  const updateData = await Promise.all(
+    objects.map(async object => {
+      const {id} = object
+      const { data, error } = await supabase.from("enrolled").update({...object}).eq('id',id).select();
+      if(error) throw new Error("Failed to update data")
+        
+        return data
+      })
+    )
+    return updateData
 }

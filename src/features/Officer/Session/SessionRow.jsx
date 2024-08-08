@@ -33,7 +33,6 @@ export default function SessionRow({ row }) {
   const { mutate, isPending } = useDeleteSession();
 
   const {id,courseName,startDate,endDate,active} = row
-  console.log(row.startDate);
 
   return (
     <>

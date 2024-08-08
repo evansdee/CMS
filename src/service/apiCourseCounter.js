@@ -4,7 +4,7 @@ export async function updateCourseCount({item, countId}) {
   const { data, error } = await supabase
     .from("courseCounter")
     .update(item)
-    .eq("courseCode", countId)
+    .eq("codeAlt", countId)
     .select()
 
     console.log(data)

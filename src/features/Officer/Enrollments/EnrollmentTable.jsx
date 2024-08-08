@@ -4,10 +4,19 @@ import Spinner from "../../../ui/Spinner";
 import Table from "../../../ui/Table";
 import { useGetEnrollment } from "../Enrollment/useEnrollment";
 import EnrollmentRow from "./EnrollmentRow";
+import { useCount, useUpdateCourseCount } from "../Enrollment/useCourseCount";
+import { format } from "date-fns";
+import { useUpdateAllStatus } from "./useUpdateAllStatus";
+import Button from "../../../ui/Button";
 
 export default function EnrollmentTable() {
   const { data: enrollment, isLoading } = useGetEnrollment();
-  const { data, setData } = useLocalEnrollments();
+  const { data:enroll, setData } = useLocalEnrollments();
+  const { updateCount } = useUpdateCourseCount();
+  const { data: countList } = useCount();
+  const {mutate,isPending} = useUpdateAllStatus()
+
+
   
   useEffect(() => {
     if (enrollment?.length > 0) setData([...enrollment]);
@@ -15,8 +24,62 @@ export default function EnrollmentTable() {
   }, [setData, enrollment]); 
   
   
-  const activeEnrollment = data.filter(ele=>(!ele.status))
-  if (isLoading) return <Spinner />;
+  const activeEnrollment = enroll.filter(ele=>(!ele.status))
+  if (isLoading || isPending) return <Spinner />;
+
+  async function handleSubmitAll() {
+    const updatePromises = activeEnrollment.map(async (ele) => {
+      const { codeAlt, courseCode } = ele;
+      const count = countList?.find((item) => item.codeAlt === codeAlt);
+  
+      const newData = {
+        ...ele,
+        status: true,
+        certificateNo: `JINSR/${courseCode}/${codeAlt}/${count?.count}/${format(
+          new Date(),
+          "yyyy"
+        )}`,
+      };
+  
+      // Perform the update operation for count
+      await updateCount({
+        item: { ...count, count: count.count + 1 },
+        countId: count.codeAlt,
+      });
+  
+      // Return newData for further processing if needed
+      return newData;
+    });
+  
+    // Wait for all update operations to complete
+    const results = await Promise.all(updatePromises);
+  
+    // Do something with the results if needed
+    mutate(results)
+    console.log(results);
+    setData([])
+  }
+  
+
+    
+  //   const newData = activeEnrollment.map(ele=>{
+  //     const {codeAlt,courseCode} = ele
+  //   const count = countList?.filter((ele) => ele.codeAlt === codeAlt)[0];
+
+  //   return {
+  //     ...ele,
+  //     status: true,
+  //     certificateNo: `JINSR/${courseCode}/${codeAlt}/${count?.count}/${format(
+  //       new Date(),
+  //       "yyyy"
+  //     )}`,
+  //   }
+  //   updateCount({
+  //     item: { ...count, count: count.count + 1 },
+  //     countId: count.codeAlt,
+  //   });
+  //   })
+  // }
   // console.log(activeEnrollment);
   return (
     <>
@@ -34,6 +97,7 @@ export default function EnrollmentTable() {
          render={(enroll) => <EnrollmentRow key={enroll.id} enroll={enroll} />}
         />
       </Table>
+      {activeEnrollment.length > 2 &&<Button size='small' onClick={handleSubmitAll}>Approve all</Button>}
     </>
   );
 }

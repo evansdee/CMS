@@ -7,6 +7,7 @@ import Button from "../../../ui/Button";
 import { filterDataFromOneDayAgo } from "../../../helper/helper";
 import Menus from "../../../ui/Menus";
 import styled from "styled-components";
+import Spinner from "../../../ui/Spinner";
 const Bottom = styled.div`
 float: right;
 margin: .5em 1em;
@@ -16,7 +17,7 @@ export default function EnrollmentList() {
   const { data: enrollment } = useGetEnrollment();
 
   const { enrollArr, setEnroll } = useLocalEnroll();
-  const { mutate } = useAddAllEnrollment();
+  const { mutate,isPending } = useAddAllEnrollment();
 
   const filteredData = filterDataFromOneDayAgo(enrollment);
   let data =
@@ -24,6 +25,7 @@ export default function EnrollmentList() {
       ? enrollArr
       : filteredData?.filter((ele) => ele.status === true);
 
+      if(isPending) return <Spinner/>
   // console.log(filteredData);
   return (
     <>
