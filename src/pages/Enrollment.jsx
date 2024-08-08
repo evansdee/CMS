@@ -7,6 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import EnrollmentList from "../features/Officer/Enrollment/EnrollmentList";
 import Button from "../ui/Button";
 import { useAddAllEnrollment } from "../features/Officer/Enrollment/useEnrollment";
+import { useView } from "../hook/useView";
 
 const StyledContainer = styled.div`
   padding: 0 2em;
@@ -16,19 +17,21 @@ const StyledContainer = styled.div`
 
 const Main = styled.div`
     height: 70dvh;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    margin: 1.5em 0;
+    overflow-y: scroll; 
+    scrollbar-width: none; 
+    margin:1em 0 0;
 `
 export default function Enrollment() {
   const [searchParams] = useSearchParams();
 
   const value = searchParams.get("enrollment") ||'list';
 
+  const {isView} = useView()
+
   return (
     <StyledContainer>
-      <Row type="horizontal">
-        <Heading as="h2">Enrollment Baby😁</Heading>
+      <Row type={!isView ? 'vertical' : 'horizontal'}>
+        <Heading as={isView ? 'h2' : 'h3'}>Enrollment Baby😁</Heading>
         <EnrollmentTableOperation />
       </Row>
       <Main>

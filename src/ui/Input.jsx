@@ -8,7 +8,10 @@ const Input = styled.input`
   box-shadow: var(--shadow-sm);
   width: 100%;
   &[type=checkbox]{
-
+    width: .5em;
+    height: .5em;
+    /* padding: 3em; */
+    font-size: 3em;
     accent-color: var(--color-icon);
   }
 

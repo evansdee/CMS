@@ -9,25 +9,43 @@ const StyledForm = styled.form`
   border: 1px solid var(--color-grey-200);
   border-radius: var(--border-radius-md);
   padding: 2.4rem 4rem;
-  /* gap: 5em; */
   overflow: hidden;
 
   > div {
-    /* gap: 2em; */
     padding: 0 1em;
   }
+
+  @media (max-width: 768px) {
+    padding: 1.6rem 2rem; /* Adjust padding for mobile */
+    grid-template-rows: repeat(5, auto); /* Adjust row count if needed */
+  }
 `;
+
+// Common row styling
 const CommonRow = styled.div`
   display: grid;
   margin: 1em 0;
   gap: 1.5em;
-`;
-const StyledFormMultiple = styled(CommonRow)`
 
-  grid-template-columns: ${props=> `repeat(${props.len}, 1fr)`};
+  @media (max-width: 768px) {
+    gap: 1em; 
+  }
 `;
+
+// Multiple column row styling
+const StyledFormMultiple = styled(CommonRow)`
+  grid-template-columns: ${props => `repeat(${props.len}, 1fr)`};
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; 
+  }
+`;
+
+// Single column row styling
 const StyledFormSingle = styled(CommonRow)`
   grid-template-columns: 1fr;
+
+
 `;
 
 const FormContext = createContext();

@@ -37,8 +37,8 @@ export default function CourseRegUi({
             <Input type="checkbox" {...register("isRenewal")} />
             <Input type="hidden" {...register("courseCode")} />
           </Label>
-          <Label label="Bank">
-            <Select {...register("bank")}>
+          <Label label="Bank"  error={errors?.bank?.message}>
+            <Select {...register("bank",{required:'Field required'})}>
               <option value="">Select Bank</option>
               {["AMJU bank", "Zenith Bank"]?.map((ele) => (
                 <option key={ele} value={ele}>
@@ -48,7 +48,7 @@ export default function CourseRegUi({
             </Select>
           </Label>
           <Label label="Amount">
-            <Input {...register("amount")} readOnly />
+            <Input readOnly />
           </Label>
         </Form.FormMultipleRow>
       </div>
@@ -67,18 +67,34 @@ const Table = styled.div`
   text-align: center;
   margin: 1em 0;
   /* padding: 10px; */
+
+  @media (max-width: 768px) {
+    /* grid-template-columns: 1fr; Stack columns on mobile devices */
+    gap: 5px; /* Reduce gap for mobile devices */
+  }
 `;
 
+// Table cell
 const Cell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  
   &:nth-child(-n + 3) {
     background-color: var(--color-grey-200); /* Example styling */
     padding: 10px;
+
+    @media (max-width: 768px) {
+      padding: 8px; /* Adjust padding for mobile */
+    }
   }
+  
   &:nth-child(n + 4) {
     font-size: 0.9em;
+
+    @media (max-width: 768px) {
+      font-size: 0.8em; /* Adjust font size for mobile */
+    }
   }
 `;
 

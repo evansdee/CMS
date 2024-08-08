@@ -5,13 +5,15 @@ import styled from "styled-components";
 import ButtonIcon from "../../../ui/ButtonIcon";
 import { IoIosPaperPlane } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
-import { HiOutlineTrash } from "react-icons/hi2";
+import { HiOutlineTrash, HiSquare2Stack } from "react-icons/hi2";
 import Modal from "../../../ui/Modal";
 import EditLocalEnrollment from "./EditLocalEnrollment";
 import { useLocalEnroll } from "../../../hook/EnrollmentListContext";
 import { useAddEnrollment } from "./useEnrollment";
 import { formatToNaira } from "../../../helper/helper";
-import { format, parse, parseISO } from "date-fns";
+import { format, parse } from "date-fns";
+import { nanoid } from "nanoid";
+import Menus from "../../../ui/Menus";
 
 const GridCell = styled.div`
   padding: 0 0.5rem;
@@ -30,12 +32,9 @@ const GridCell = styled.div`
 
 export default function EnrollmentRow({ enroll }) {
   const { mutate, isPending } = useAddEnrollment();
-  const { gsm, fullName, courseName, enrollDate, bank, status, amount } =
+  const { lid, fullName, courseName, enrollDate, bank, status, amount } =
     enroll;
-  console.log(enrollDate);
-  // const parsedDate = parse(enrollDate, 'dd-MMMM-yy', new Date());
-  // const formattedDate = format(parsedDate, 'dd MMMM yy hh:MM aaa');
-  // const p = parseISO(enrollDate)
+
   const parseDate = (date) => {
     if (date.includes("-")) {
       return format(
@@ -47,15 +46,22 @@ export default function EnrollmentRow({ enroll }) {
     }
   };
 
-  const { setEnroll } = useLocalEnroll();
+  const { enrollArr: arr, setEnroll } = useLocalEnroll();
 
-  function handleDelete(gsm) {
-    setEnroll((p) => p.filter((ele) => ele.gsm !== gsm));
+  function handleDelete(lid) {
+    setEnroll((p) => p.filter((ele) => ele.lid !== lid));
   }
 
-  function handleSubmit(gsm) {
-    mutate(enroll);
-    setEnroll((p) => p.filter((ele) => ele.gsm !== gsm));
+  function handleDuplicate() {
+    const dup = { ...enroll, lid: nanoid() };
+
+    setEnroll([...arr, dup]);
+  }
+
+  function handleSubmit(id) {
+    const { lid, ...enr } = enroll;
+    mutate({ ...enr });
+    setEnroll((p) => p.filter((ele) => ele.lid !== id));
   }
   return (
     <>
@@ -79,27 +85,41 @@ export default function EnrollmentRow({ enroll }) {
         {!status && (
           <GridCell>
             <Modal>
-              <ButtonIcon>
-                <Modal.Open opens="editLocal">
-                  <FaEdit />
-                </Modal.Open>
-              </ButtonIcon>
-              <ButtonIcon
-                onClick={() => handleSubmit(gsm)}
-                disabled={isPending}
-              >
-                <IoIosPaperPlane />
-              </ButtonIcon>
-              <ButtonIcon
-                variation="danger"
-                onClick={() => handleDelete(gsm)}
-                disabled={isPending}
-              >
-                <HiOutlineTrash />
-              </ButtonIcon>
-              <Modal.Window name="editLocal">
-                <EditLocalEnrollment enroll={enroll} setEnroll={setEnroll} />
-              </Modal.Window>
+              <Menus.Menu>
+                <Menus.Toggle id={lid} />
+
+                <Menus.List id={lid}>
+                  <Modal.Open opens="editLocal">
+                    <Menus.Button icon={<FaEdit />}>Edit</Menus.Button>
+                  </Modal.Open>
+
+                  <Menus.Button
+                    icon={<HiSquare2Stack />}
+                    onClick={() => handleDuplicate()}
+                  >
+                    Duplicate
+                  </Menus.Button>
+
+                  <Menus.Button
+                    icon={<IoIosPaperPlane />}
+                    onClick={() => handleSubmit(lid)}
+                    disabled={isPending}
+                  >
+                    Enroll
+                  </Menus.Button>
+                  <Menus.Button
+                    icon={<HiOutlineTrash />}
+                    onClick={() => handleDelete(lid)}
+                    disabled={isPending}
+                  >
+                    Delete
+                  </Menus.Button>
+                </Menus.List>
+
+                <Modal.Window name="editLocal">
+                  <EditLocalEnrollment enroll={enroll} setEnroll={setEnroll} />
+                </Modal.Window>
+              </Menus.Menu>
             </Modal>
           </GridCell>
         )}

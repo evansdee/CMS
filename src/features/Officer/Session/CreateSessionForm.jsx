@@ -122,6 +122,7 @@ export default function CreateSessionForm({
             checked={isChecked}
             disabled={isWorking}
             onChange={() => setIsChecked((p) => !p)}
+            id='active'
           />
         </FormRow>
       )}

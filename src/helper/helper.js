@@ -26,14 +26,29 @@ export const getDateFromOneDayAgo = () => {
 };
 const parseDate = (date) => {
   if (typeof date === 'string') {
-    return parse(date, 'dd-MMMM-yy', new Date());
+    return parse(date, 'dd MMMM yy, hh:mm aaa', new Date());
   } else if (date instanceof Date) {
     return date;
   }
   return null;
 };
 
-export function filterDataFromOneDayAgo(data){
+// export function filterDataFromOneDayAgo(data){
+//   const oneDayAgo = getDateFromOneDayAgo();
+//   return data.filter(item => isSameDay(parseDate(item.enrollDate), oneDayAgo));
+// }
+export function filterDataFromOneDayAgo(data) {
   const oneDayAgo = getDateFromOneDayAgo();
-  return data.filter(item => isSameDay(parseDate(item.enrollDate), oneDayAgo));
+  console.log('One Day Ago:', oneDayAgo.toISOString());
+
+  return data?.filter(item => {
+    const parsedDate = parseDate(item.enrollDate);
+    if (parsedDate) {
+      console.log('Parsed Date:', parsedDate.toISOString());
+      return isSameDay(parsedDate, new Date());
+    } else {
+      console.error('Failed to parse date:', item.enrollDate);
+      return false;
+    }
+  });
 }

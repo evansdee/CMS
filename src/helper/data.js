@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { nanoid } from "nanoid";
 
 const sessArr = [
   {
@@ -95,6 +96,7 @@ const sessArr = [
 
 const fake = [
   {
+    lid: nanoid(),
     gsm: Math.random() * 100,
     amount: 55000,
     address: "lorem nigga",
@@ -116,6 +118,7 @@ const fake = [
   },
   {
     gsm: Math.random() * 100,
+    lid: nanoid(),
 
     amount: 120000,
     address: "lorem nigga",
@@ -138,6 +141,7 @@ const fake = [
   },
   {
     gsm: Math.random() * 100,
+    lid: nanoid(),
 
     amount: 80000,
     address: "lorem nigga",
@@ -160,6 +164,7 @@ const fake = [
   },
   {
     gsm: Math.random() * 100,
+    lid: nanoid(),
 
     amount: 45000,
     address: "lorem nigga",
@@ -182,6 +187,7 @@ const fake = [
   },
   {
     gsm: Math.random() * 100,
+    lid: nanoid(),
 
     amount: 55000,
     address: "lorem nigga",
@@ -204,6 +210,7 @@ const fake = [
   },
   {
     gsm: Math.random() * 100,
+    lid: nanoid(),
 
     amount: 120000,
     address: "lorem nigga",

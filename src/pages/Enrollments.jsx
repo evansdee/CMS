@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import EnrollmentTable from "../features/Officer/Enrollments/EnrollmentTable";
+import { useView } from "../hook/useView";
 
 
 const StyledContainer = styled.div`
@@ -18,11 +19,12 @@ const Main = styled.div`
     margin: 1.5em 0;
 `
 export default function Enrollment() {
+  const {isView} = useView()
 
   return (
     <StyledContainer>
-      <Row type="horizontal">
-        <Heading as="h3">Enrollment Baby😁</Heading>
+      <Row type={!isView ? 'vertical' : 'horizontal'}>
+        <Heading as={isView ? 'h2' : 'h3'}>Enrollment Baby😁</Heading>
       </Row>
       <Main>
         <EnrollmentTable/>

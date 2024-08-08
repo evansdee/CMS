@@ -7,8 +7,8 @@ export function useAddEnrollment() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: createEditEnrollment,
-    onSuccess: () => {
-      toast.success(`Added`);
+    onSuccess: (data) => {
+      toast.success(`${data?.firstName} has been enrolled successfully`);
       queryClient.invalidateQueries({ queryKey: ["enrollment"] });
     },
     onError: (err) => toast.error(err.message),
@@ -34,7 +34,7 @@ export function useAddAllEnrollment(){
   const { mutate, isPending } = useMutation({
     mutationFn: updateAllEnrollmentData,
     onSuccess: () => {
-      toast.success(`it worked`);
+      toast.success(`All Enrollmeent Added Successfully`);
       queryClient.invalidateQueries({ queryKey: ["enrollment"] });
     },
     onError: (err) => toast.error(err.message),

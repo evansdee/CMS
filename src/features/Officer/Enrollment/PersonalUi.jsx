@@ -27,7 +27,7 @@ export default function PersonalUi({register,isLoading,country,state,errors}) {
             />
             </Label>
             <Label label="Middle Name" error={errors?.middleName?.message}>
-              <Input {...register("middleName",{required:'This field is required'})} />
+              <Input {...register("middleName")} />
             </Label>
             <Label label="Last Name" error={errors?.lastName?.message}>
               <Input {...register("lastName",{required:'This field is required'})} />

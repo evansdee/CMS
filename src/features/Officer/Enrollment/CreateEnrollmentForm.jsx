@@ -16,9 +16,12 @@ import Flex from "../../../ui/Flex";
 import { useLocalEnroll } from "../../../hook/EnrollmentListContext";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
+import { nanoid } from "nanoid";
+import { useView } from "../../../hook/useView";
 
 const StyledContainer = styled.div``;
 export default function CreateEnrollmentForm() {
+  const {isView} = useView()
   const navigate = useNavigate();
   const [isStay, setIsStay] = useState(false);
   const { data: session } = useSession();
@@ -42,16 +45,16 @@ export default function CreateEnrollmentForm() {
       country: ["Nigeria"][0],
 
       // FOR TEST PURPOSES
-      firstName: "Evans",
-      middleName: "EmuoboNuvie",
-      lastName: "Diegbe",
+      // firstName: "Evans",
+      // middleName: "EmuoboNuvie",
+      // lastName: "Diegbe",
 
-      dob: "2024-04-12",
-      photo: "two.jpg",
-      address: "jfff",
-      gsm: "ddkd",
-      courseName: ["EFFICIENT DECK HAND"][0],
-      bank: ["AMJU bank"][0],
+      // dob: "2024-04-12",
+      // photo: "two.jpg",
+      // address: "jfff",
+      // gsm: "ddkd",
+      // courseName: ["EFFICIENT DECK HAND"][0],
+      // bank: ["AMJU bank"][0],
     },
   });
 
@@ -95,11 +98,12 @@ export default function CreateEnrollmentForm() {
       status: false,
       enrollDate: format(new Date(),'dd MMMM yy, hh:mm aaa'),
       amount: data.isRenewal ? renewAmount : newAmount,
+      lid:nanoid()
       // enrollDate: new Date().toISOString(),
     };
 
     setEnroll([...value, newObj]);
-    toast.success(`${data.firstName} has been Enrolled`);
+    toast.success(`${data.firstName} has been added to the list`);
 
     reset();
     if (!isStay) navigate("/dashboard/enrollment");
@@ -152,7 +156,7 @@ export default function CreateEnrollmentForm() {
           </Form.FormMultipleRow>
         </div>
 
-        <Flex justify="space-between" align="center">
+        <Flex justify="space-between" align="center" direction={!isView ? "column" : 'row'} gap='1em'>
           <label>
             <Flex gap=".5em" align="center">
               <input

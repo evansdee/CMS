@@ -17,7 +17,7 @@ export default function EnrollmentTable() {
   
   const activeEnrollment = data.filter(ele=>(!ele.status))
   if (isLoading) return <Spinner />;
-  console.log(activeEnrollment);
+  // console.log(activeEnrollment);
   return (
     <>
       <Table column="1fr  1fr repeat(3, 0.5fr)">

@@ -15,7 +15,7 @@ import Table from "../../../ui/Table";
 
 
 const GridCell = styled.div`
-  padding: 0 0.5rem;
+  /* padding: 0 0.5rem; */
 
   &:not(:first-child) {
     display: flex;

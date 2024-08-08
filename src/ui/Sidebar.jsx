@@ -13,16 +13,17 @@ const StyledSidebar = styled.aside`
   grid-row: 1 / -1;
   display: flex;
   flex-direction: column;
+  /* align-items: center; */
   gap: 3.2rem;
 `;
 
 
-function Sidebar() {
+function Sidebar({close}) {
   const {user} = useUser()
   return (
     <StyledSidebar>
       <Logo />
-     <SideBarList />
+     <SideBarList close={close}/>
     {user.user_metadata.role ==='office' && <FakeData/>}
     </StyledSidebar>
   );

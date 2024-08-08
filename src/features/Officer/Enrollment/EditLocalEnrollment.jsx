@@ -38,7 +38,7 @@ export default function EditLocalEnrollment({
     const [firstName,middleName,lastName] = x
     setEnroll((p) =>
       p.map((ele) =>
-        ele.gsm === data.gsm
+        ele.lid === data.lid
           ? {
               ...ele,
               fullName: data.fullName,
