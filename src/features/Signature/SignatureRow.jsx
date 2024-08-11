@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import {} from "react";
 import styled, { css } from "styled-components";
-import Table from "../../ui/Table";
+import Table from "../../ui/Table-v1";
 import ButtonIcon from "../../ui/ButtonIcon";
 import { FcApprove, FcDisapprove } from "react-icons/fc";
 import { useUpdateEnrollment } from "../Officer/Approval/useUpdateEnrollment";

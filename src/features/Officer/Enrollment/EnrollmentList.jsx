@@ -1,5 +1,5 @@
 import {} from "react";
-import Table from "../../../ui/Table";
+// import Table from "../../../ui/Table";
 import { useLocalEnroll } from "../../../hook/EnrollmentListContext";
 import EnrollmentRow from "./EnrollmentRow";
 import { useAddAllEnrollment, useGetEnrollment } from "./useEnrollment";
@@ -7,6 +7,7 @@ import { filterDataFromOneDayAgo } from "../../../helper/helper";
 import Menus from "../../../ui/Menus";
 import Spinner from "../../../ui/Spinner";
 import BottomButtonAll from "../../../ui/BottomButtonAll";
+import Table from "../../../ui/Table";
 
 
 export default function EnrollmentList() {
@@ -37,7 +38,7 @@ export default function EnrollmentList() {
     <>
       <div>
         <Menus>
-          <Table column="1fr 1fr repeat(5, 0.5fr)">
+          <Table >
             <Table.Header
               data={[
                 "Student",

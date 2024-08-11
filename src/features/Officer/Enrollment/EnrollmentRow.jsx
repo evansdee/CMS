@@ -1,50 +1,23 @@
 /* eslint-disable react/prop-types */
-import {} from "react";
-import Table from "../../../ui/Table";
-import styled from "styled-components";
-import ButtonIcon from "../../../ui/ButtonIcon";
 import { IoIosPaperPlane } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 import { HiOutlineTrash, HiSquare2Stack } from "react-icons/hi2";
-import Modal from "../../../ui/Modal";
 import EditLocalEnrollment from "./EditLocalEnrollment";
 import { useLocalEnroll } from "../../../hook/EnrollmentListContext";
 import { useAddEnrollment } from "./useEnrollment";
-import { formatToNaira } from "../../../helper/helper";
-import { format, parse } from "date-fns";
+import { formatToNaira, parseDateInclude } from "../../../helper/helper";
 import { nanoid } from "nanoid";
+import Modal from "../../../ui/Modal";
 import Menus from "../../../ui/Menus";
+import Table from "../../../ui/Table";
+import Td from "../../../ui/TableRow";
 
-const GridCell = styled.div`
-  padding: 0 0.5rem;
-
-  &:not(:first-child) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  &:nth-child(5n + 1) {
-    padding: 0.5em;
-  }
-`;
 
 export default function EnrollmentRow({ enroll }) {
   const { mutate, isPending } = useAddEnrollment();
   const { lid, fullName, courseName, enrollDate, bank, status, amount } =
     enroll;
 
-  const parseDate = (date) => {
-    if (date.includes("-")) {
-      return format(
-        parse(date, "dd-MMMM-yy", new Date()),
-        "dd MMMM yy hh:MM aaa"
-      );
-    } else {
-      return date;
-    }
-  };
 
   const { enrollArr: arr, setEnroll } = useLocalEnroll();
 
@@ -66,13 +39,12 @@ export default function EnrollmentRow({ enroll }) {
   return (
     <>
       <Table.Row>
-        <GridCell>{fullName}</GridCell>
-        <GridCell>{courseName}</GridCell>
-        <GridCell>{parseDate(enrollDate)}</GridCell>
-        {/* <GridCell>{formattedDate}</GridCell> */}
-        <GridCell>{bank}</GridCell>
-        <GridCell>{formatToNaira(amount)}</GridCell>
-        <GridCell
+        <Td>{fullName}</Td>
+        <Td>{courseName}</Td>
+        <Td>{parseDateInclude(enrollDate)}</Td>
+        <Td>{bank}</Td>
+        <Td>{formatToNaira(amount)}</Td>
+        <Td
           status={status}
           style={{
             color: `${
@@ -81,9 +53,9 @@ export default function EnrollmentRow({ enroll }) {
           }}
         >
           {status ? "Approved" : "Awaiting Approval"}
-        </GridCell>
+        </Td>
         {!status && (
-          <GridCell>
+          <Td>
             <Modal>
               <Menus.Menu>
                 <Menus.Toggle id={lid} />
@@ -121,7 +93,7 @@ export default function EnrollmentRow({ enroll }) {
                 </Modal.Window>
               </Menus.Menu>
             </Modal>
-          </GridCell>
+          </Td>
         )}
       </Table.Row>
     </>

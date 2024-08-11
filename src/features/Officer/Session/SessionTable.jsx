@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useSession } from "./useSession";
 import Spinner from "../../../ui/Spinner";
-import Table from "../../../ui/Table";
+import Table from "../../../ui/Table-v1";
 import SessionRow from "./SessionRow";
 
 const StyledSessionTable = styled.div`

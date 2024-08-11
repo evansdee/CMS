@@ -8,7 +8,7 @@ import { format } from "date-fns";
 import { HiOutlineTrash } from "react-icons/hi2";
 import ConfirmDelete from "../../../ui/ConfirmDelete";
 import { useDeleteSession } from "./useDeleteSession";
-import Table from "../../../ui/Table";
+import Table from "../../../ui/Table-v1";
 
 // WORK ON THE OVERALL COLOR AND SESSION DESIGN ALSO ENROLLMENT
 // ALSO MAKE THE TABLES REUSABLE
@@ -28,6 +28,7 @@ const GridCell = styled.div`
     padding: 0.5em;
   }
 `;
+
 
 export default function SessionRow({ row }) {
   const { mutate, isPending } = useDeleteSession();

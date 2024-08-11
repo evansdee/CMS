@@ -1,7 +1,7 @@
 import { useLocalEnrollments } from "../../../hook/EnrollmentsContext";
 import { useEffect } from "react";
 import Spinner from "../../../ui/Spinner";
-import Table from "../../../ui/Table";
+import Table from "../../../ui/Table-v1";
 import { useGetEnrollment } from "../Enrollment/useEnrollment";
 import EnrollmentRow from "./ApprovalRow";
 import { useCount, useUpdateCourseCount } from "../Enrollment/useCourseCount";

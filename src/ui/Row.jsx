@@ -14,7 +14,7 @@ const Row = styled.div`
     props.type === "vertical" &&
     css`
       flex-direction: column;
-      /* align-items: center; */
+      align-items: center;
       gap: 1.6rem;
     `}
 `;

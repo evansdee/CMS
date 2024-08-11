@@ -101,25 +101,47 @@ export async function updateAllEnrollmentData(objects) {
 
 export async function updateAllEnrollmentStatus(objects) {
   const updateData = await Promise.all(
-    objects.map(async object => {
-      const {id} = object
-      const { data, error } = await supabase.from("enrolled").update({...object}).eq('id',id).select();
-      if(error) throw new Error("Failed to update data")
-        
-        return data
-      })
-    )
-    return updateData
+    objects.map(async (object) => {
+      const { id } = object;
+      const { data, error } = await supabase
+        .from("enrolled")
+        .update({ ...object })
+        .eq("id", id)
+        .select();
+      if (error) throw new Error("Failed to update data");
+
+      return data;
+    })
+  );
+  return updateData;
 }
-export async function updateAllEnrollmentSignature(objects,value) {
+export async function updateAllEnrollmentSignature(objects, value) {
   const updateData = await Promise.all(
-    objects?.map(async object => {
-      const {id} = object
-      const { data, error } = await supabase.from("enrolled").update({...object,isSignature:value}).eq('id',id).select();
-      if(error) throw new Error("Failed to update data")
-        
-        return data
-      })
-    )
-    return updateData
+    objects?.map(async (object) => {
+      const { id } = object;
+      const { data, error } = await supabase
+        .from("enrolled")
+        .update({ ...object, isSignature: value })
+        .eq("id", id)
+        .select();
+      if (error) throw new Error("Failed to update data");
+
+      return data;
+    })
+  );
+  return updateData;
 }
+
+export async function getStudent(id) {
+  const { data, error } = await supabase
+    .from("enrolled")
+    .select('*')
+    .eq("id", id)
+    .single();
+
+    if(error) throw new Error("Failed to fetch student")
+
+      return data
+}
+
+

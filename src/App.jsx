@@ -9,7 +9,7 @@ import { DarkModeProvider } from "./hook/DarkModeToggle";
 import Home from "./pages/Home";
 import Test from "./pages/Test";
 import Report from "./pages/Report";
-import Student from "./pages/Student";
+import StudentPage from "./pages/StudentPage";
 import Enrollment from "./pages/Enrollment";
 import Applayout from "./pages/Applayout";
 import Session from "./pages/Session";
@@ -24,12 +24,13 @@ import EnrollmentsContext from "./hook/EnrollmentsContext";
 import ToggleProvider from "./hook/useMenuToggle";
 import Approval from "./pages/Approval";
 import Signature from "./pages/Signature";
+import Student from "./features/Officer/Student/Student";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // staleTime: 60 * 1000,
-      staleTime: 300,
+      staleTime: 0,
     },
   },
 });
@@ -72,7 +73,8 @@ function App() {
                       <Route index element={<Navigate replace to="home" />} />
                       <Route path="home" element={<Home />} />
                       <Route path="session" element={<Session />} />
-                      <Route path="student" element={<Student />} />
+                      <Route path="student" element={<StudentPage />} />
+                      <Route path="student/:id" element={<Student />} />
                       <Route path="report" element={<Report />} />
                       <Route path="enrollment" element={<Enrollment />} />
                       <Route path="settings" element={<Setting />} />

@@ -1,4 +1,4 @@
-import { isSameDay, parse, subDays } from 'date-fns';
+import { format, isSameDay, parse, subDays } from 'date-fns';
 import { isAfter } from "date-fns";
 
 export function isCurrentDayGreaterThanEndDate(endDate) {
@@ -29,6 +29,17 @@ const parseDate = (date) => {
     return date;
   }
   return null;
+};
+
+export const parseDateInclude = (date) => {
+  if (date.includes("-")) {
+    return format(
+      parse(date, "dd-MMMM-yy", new Date()),
+      "dd MMMM yy hh:MM aaa"
+    );
+  } else {
+    return date;
+  }
 };
 
 

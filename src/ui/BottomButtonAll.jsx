@@ -3,7 +3,7 @@ import Button from "./Button";
 
 
 const Container = styled.div`
-  float: right;
+  float: left;
   margin: 0.5em 1em;
 `;
 
@@ -12,6 +12,7 @@ const Container = styled.div`
 export default function BottomButtonAll({children,onClick}) {
   return (
     <Container>
+      
         <Button size="small" onClick={onClick}>
         {children}
         </Button>

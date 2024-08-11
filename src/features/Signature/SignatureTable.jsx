@@ -1,6 +1,6 @@
 import {} from "react";
 import { useGetEnrollment } from "../Officer/Enrollment/useEnrollment";
-import Table from "../../ui/Table";
+import Table from "../../ui/Table-v1";
 import SignatureRow from "./SignatureRow";
 import Spinner from "../../ui/Spinner";
 import BottomButtonAll from "../../ui/BottomButtonAll";

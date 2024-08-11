@@ -1,76 +1,46 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 import styled from "styled-components";
 
-// Container for the table
-const TableContainer = styled.div`
-  display: grid;
-  gap: 1px;
+const StyledTable = styled.table`
+  min-width: 100%;
   border: 1px solid var(--color-grey-200);
-  overflow-x: auto; /* Add horizontal scrolling for small screens */
 
-  @media (max-width: 768px) {
-    /* grid-template-columns: 1fr auto; Single column layout on small screens */
-  }
+  border-collapse: collapse;
+  
 `;
 
-// Header section of the table
-const TableHeader = styled.div`
-  display: grid;
-  grid-template-columns: ${(prop) => prop.column};
+const Thead = styled.thead`
   background-color: var(--color-grey-200);
-  color: var(--color-grey-600);
-  padding: 10px;
-  gap: 0.5em;
+`;
+
+const Th = styled.th`
+  padding: 1.5rem;
   text-align: center;
-
-  @media (max-width: 768px) {
-    font-size: 0.8rem; /* Smaller font size on mobile */
-  }
+  /* font-size: 0.875rem; */
+  font-weight: 500;
+  color: var(--color-grey-800);
 `;
 
-// Row in the table
-const StyledRow = styled.div`
-  display: grid;
-  grid-template-columns: ${(prop) => prop.column};
-  gap: 1em;
-  align-items: center;
-  padding: 10px;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-  @media (max-width: 768px) {
-    padding: 5px; /* Reduce padding for mobile */
-    font-size: 1em !important;
-  }
-`;
-
-const TableBody = styled.div`
-  height: 60dvh;
+const Tbody = styled.tbody`
+  background-color: var(--color-grey-50);
+  /* height: 60dvh; */
   overflow-y: scroll;
   scrollbar-width: none;
-`;
 
-const TableHeaderItem = styled.div`
-  text-transform: uppercase;
-  font-size: 1.3rem;
-  font-weight: 800;
-
-  @media (max-width: 768px) {
-    /* font-size: .9rem; Smaller font size on mobile */
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 `;
+// const Body = styled.div`
+
+// `
 
 const Empty = styled.p`
   font-size: 1.6rem;
   font-weight: 500;
   text-align: center;
   margin: 2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 768px) {
     font-size: 1.2rem; /* Smaller font size on mobile */
@@ -78,43 +48,39 @@ const Empty = styled.p`
   }
 `;
 
+
 const TableContext = createContext();
 
-export default function Table({ children, column }) {
+export default function Table({ children }) {
   return (
-    <TableContext.Provider value={{ column }}>
-      <TableContainer column={column}>{children}</TableContainer>
+    <TableContext.Provider value={{}}>
+      <StyledTable>{children}</StyledTable>
     </TableContext.Provider>
   );
 }
 
 function Header({ data }) {
-  const { column } = useContext(TableContext);
-
   return (
-    <TableHeader column={column}>
-      {data?.map((ele) => (
-        <TableHeaderItem key={ele}>{ele}</TableHeaderItem>
-      ))}
-    </TableHeader>
-  );
-}
-
-function Row({ children }) {
-  const { column } = useContext(TableContext);
-  return (
-    <StyledRow role="row" column={column}>
-      {children}
-    </StyledRow>
+    <Thead>
+      <tr>
+        {data?.map((ele) => (
+          <Th key={ele}>{ele}</Th>
+        ))}
+      </tr>
+    </Thead>
   );
 }
 
 function Body({ data, render }) {
   if (!data?.length) return <Empty>No data to show at the moment</Empty>;
 
-  return <TableBody>{data?.map(render)}</TableBody>;
+  return <Tbody>{data?.map(render)}</Tbody>;
 }
 
-Table.Header = Header;
+function Row({ children }) {
+  return <tr>{children}</tr>;
+}
+
 Table.Row = Row;
 Table.Body = Body;
+Table.Header = Header;

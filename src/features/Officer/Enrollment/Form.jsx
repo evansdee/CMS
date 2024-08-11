@@ -11,9 +11,9 @@ const StyledForm = styled.form`
   padding: 2.4rem 4rem;
   overflow: hidden;
 
-  > div {
+  /* > div {
     padding: 0 1em;
-  }
+  } */
 
   @media (max-width: 768px) {
     padding: 1.6rem 2rem; /* Adjust padding for mobile */

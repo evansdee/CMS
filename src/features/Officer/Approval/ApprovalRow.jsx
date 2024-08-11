@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import {} from "react";
-import Table from "../../../ui/Table";
+import Table from "../../../ui/Table-v1";
 import styled, { css } from "styled-components";
 import ButtonIcon from "../../../ui/ButtonIcon";
 import Modal from "../../../ui/Modal";

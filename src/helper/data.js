@@ -97,7 +97,6 @@ const sessArr = [
 const fake = [
   {
     lid: nanoid(),
-    gsm: Math.random() * 100,
     amount: 55000,
     address: "lorem nigga",
     bank: "AMJU bank",
@@ -117,7 +116,6 @@ const fake = [
     photo: "two.jpg",
   },
   {
-    gsm: Math.random() * 100,
     lid: nanoid(),
 
     amount: 120000,
@@ -126,11 +124,12 @@ const fake = [
     country: "Nigeria",
     courseCode: "ISPS",
     codeAlt: "11",
-    courseName: "INTERNATIONAL SHIP & PORT FACILITIES (ISPS) SECURITY AWARENESS",
+    courseName:
+      "INTERNATIONAL SHIP & PORT FACILITIES (ISPS) SECURITY AWARENESS",
     dob: "12-Apr-2000",
     email: "youremail@lover.com",
     enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
-    isRenewal:true,
+    isRenewal: true,
     fullName: "Wex Daniel Adenikinju",
     marital: "Married",
     means: "NationalId",
@@ -140,7 +139,6 @@ const fake = [
     photo: "two.jpg",
   },
   {
-    gsm: Math.random() * 100,
     lid: nanoid(),
 
     amount: 80000,
@@ -172,7 +170,8 @@ const fake = [
     country: "Nigeria",
     courseCode: "PSCR",
     codeAlt: "31",
-    courseName: "PROFICIENCY IN SURVIVAL CRAFT, RESCUE BOATS AND FAST RESCUE BOATS",
+    courseName:
+      "PROFICIENCY IN SURVIVAL CRAFT, RESCUE BOATS AND FAST RESCUE BOATS",
     dob: "12-Apr-2000",
     email: "youremail@lover.com",
     enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
