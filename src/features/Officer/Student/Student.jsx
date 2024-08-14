@@ -1,6 +1,5 @@
+/* eslint-disable react/prop-types */
 import {} from "react";
-import { useStudent } from "../Enrollment/useEnrollment";
-import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Form from "../Enrollment/Form";
 import styled from "styled-components";
@@ -14,15 +13,14 @@ import { useUpdateEnrollment } from "../Approval/useUpdateEnrollment";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
 import SpinnerMini from "../../../ui/SpinnerMini";
-import ButtonIcon from "../../../ui/ButtonIcon";
-import { FaBackspace } from "react-icons/fa";
 
 const Container = styled(Flex)`
   /* align-items: center; */
   justify-content: center;
-  margin: 3em auto;
+  /* margin: 3em auto; */
   position: relative;
-
+  width: 80dvw;
+  height: 80dvh;
 
   @media (max-width: 768px) {
     margin: 1em 0;
@@ -41,26 +39,19 @@ const EditForm = styled.div`
     align-items: initial;
     gap: 2em;
   }
-  .back {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 `;
 
-export default function Student() {
-  const { id } = useParams();
+export default function Student({ studentToEdit: data = {}, onCloseModal }) {
   const { mutate, isPending } = useUpdateEnrollment();
-  const { data, isLoading } = useStudent(parseInt(id, 10));
-  const navigate = useNavigate();
+
+  const { id, ...editValues } = data;
+  const isEditStudent = Boolean(id);
 
   const { register, handleSubmit } = useForm({
-    defaultValues: data,
+    defaultValues: isEditStudent && editValues,
   });
 
-  if (isLoading) return <p>loading</p>;
-
-  const { photo, fullName, dob } = data;
+  const { photo, fullName, dob } = editValues;
 
   function onSubmit(data) {
     const photo = typeof data.photo === "string" ? data.photo : data.photo[0];
@@ -79,7 +70,7 @@ export default function Student() {
       {
         onSuccess: () => {
           toast.success("Updated Successfully");
-          navigate("/dashboard/student");
+          onCloseModal?.();
         },
       }
     );
@@ -139,11 +130,6 @@ export default function Student() {
                 </Label>
               </Form.FormSingleRow>
               <Button>{isPending ? <SpinnerMini /> : "Save Changes"}</Button>
-            </div>
-            <div className="back">
-              <ButtonIcon onClick={()=>navigate(-1)}>
-                <FaBackspace />
-              </ButtonIcon>
             </div>
           </EditForm>
         </Form>

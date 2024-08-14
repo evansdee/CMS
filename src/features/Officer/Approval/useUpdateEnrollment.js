@@ -9,6 +9,7 @@ export function useUpdateEnrollment() {
       createEditEnrollment(newEnrollment, id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["enrollment"] });
+      queryClient.invalidateQueries({ queryKey: ["student"] });
     },
     onError: () => toast.error("failed to approve"),
   });

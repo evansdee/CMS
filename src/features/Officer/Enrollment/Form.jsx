@@ -52,16 +52,16 @@ const FormContext = createContext();
 export default function Form({ children, onSubmit }) {
   return (
     <FormContext.Provider value={{}}>
-      <StyledForm onSubmit={onSubmit}>{children}</StyledForm>;
+      <StyledForm onSubmit={onSubmit}>{children}</StyledForm>
     </FormContext.Provider>
   );
 }
 
 function FormMultipleRow({ children }) {
-  return <StyledFormMultiple len={children.length}>{children}</StyledFormMultiple>;
+  return <StyledFormMultiple len={children.length}>{children}</StyledFormMultiple>
 }
 function FormSingleRow({ children }) {
-  return <StyledFormSingle>{children}</StyledFormSingle>;
+  return <StyledFormSingle>{children}</StyledFormSingle>
 }
 
 Form.FormMultipleRow = FormMultipleRow;

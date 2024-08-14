@@ -132,16 +132,5 @@ export async function updateAllEnrollmentSignature(objects, value) {
   return updateData;
 }
 
-export async function getStudent(id) {
-  const { data, error } = await supabase
-    .from("enrolled")
-    .select('*')
-    .eq("id", id)
-    .single();
-
-    if(error) throw new Error("Failed to fetch student")
-
-      return data
-}
 
 

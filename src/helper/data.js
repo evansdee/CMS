@@ -1,6 +1,22 @@
 import { format } from "date-fns";
 import { nanoid } from "nanoid";
 
+const months = [
+  { value: "", label: "All Months" },
+  { value: "1", label: "January" },
+  { value: "2", label: "February" },
+  { value: "3", label: "March" },
+  { value: "4", label: "April" },
+  { value: "5", label: "May" },
+  { value: "6", label: "June" },
+  { value: "7", label: "July" },
+  { value: "8", label: "August" },
+  { value: "9", label: "September" },
+  { value: "10", label: "October" },
+  { value: "11", label: "November" },
+  { value: "12", label: "December" },
+];
+
 const sessArr = [
   {
     id: 1,
@@ -104,7 +120,7 @@ const fake = [
     courseCode: "STCW",
     codeAlt: "1-4",
     courseName: "STCW BASIC SAFETY TRAINING",
-    dob: "12-Apr-2000",
+    dob: "2000-04-12",
     email: "youremail@lover.com",
     enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
     fullName: "Evans Diegbe Diegbe",
@@ -126,7 +142,7 @@ const fake = [
     codeAlt: "11",
     courseName:
       "INTERNATIONAL SHIP & PORT FACILITIES (ISPS) SECURITY AWARENESS",
-    dob: "12-Apr-2000",
+    dob: "2000-04-12",
     email: "youremail@lover.com",
     enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
     isRenewal: true,
@@ -148,7 +164,7 @@ const fake = [
     courseCode: "EDH",
     codeAlt: "6",
     courseName: "EFFICIENT DECK HAND",
-    dob: "12-Apr-2000",
+    dob: "2000-04-12",
     email: "youremail@lover.com",
     enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
 
@@ -172,7 +188,7 @@ const fake = [
     codeAlt: "31",
     courseName:
       "PROFICIENCY IN SURVIVAL CRAFT, RESCUE BOATS AND FAST RESCUE BOATS",
-    dob: "12-Apr-2000",
+    dob: "2000-04-12",
     email: "youremail@lover.com",
     enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
 
@@ -195,7 +211,7 @@ const fake = [
     courseCode: "MOTM",
     codeAlt: "7",
     courseName: "MOTORMAN",
-    dob: "12-Apr-2000",
+    dob: "2000-04-12",
     email: "youremail@lover.com",
     enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
 
@@ -218,7 +234,7 @@ const fake = [
     courseCode: "ARPA",
     codeAlt: "25",
     courseName: "APPA/RADAR OPERATION",
-    dob: "12-Apr-2000",
+    dob: "2000-04-12",
     email: "youremail@lover.com",
     enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
 
@@ -237,4 +253,4 @@ const fakeData = fake.map((ele, i) => ({
   gender: `${i % 2 === 0 ? "Male" : "Female"}`,
 }));
 
-export { sessArr, fakeData };
+export { sessArr, fakeData,months };

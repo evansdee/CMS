@@ -29,7 +29,7 @@ export default function StudentPage() {
         <StudentSearch search={search} setSearch={setSearch} />
       </Row>
       <Main>
-        <StudentList search={search} />
+        <StudentList search={search} setSearch={setSearch}/>
       </Main>
     </StyledContainer>
   );

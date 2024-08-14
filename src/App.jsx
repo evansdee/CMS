@@ -25,6 +25,7 @@ import ToggleProvider from "./hook/useMenuToggle";
 import Approval from "./pages/Approval";
 import Signature from "./pages/Signature";
 import Student from "./features/Officer/Student/Student";
+import ReportDataProvider from "./features/Officer/Report/ReportDataContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -56,11 +57,13 @@ function App() {
                     element={
                       <ProtectedRoute>
                         <EnrollmentsContext>
-                          <EnrollmentListContext>
-                            <RoleSideBarContent>
-                              <Applayout />
-                            </RoleSideBarContent>
-                          </EnrollmentListContext>
+                          <ReportDataProvider>
+                            <EnrollmentListContext>
+                              <RoleSideBarContent>
+                                <Applayout />
+                              </RoleSideBarContent>
+                            </EnrollmentListContext>
+                          </ReportDataProvider>
                         </EnrollmentsContext>
                       </ProtectedRoute>
                     }

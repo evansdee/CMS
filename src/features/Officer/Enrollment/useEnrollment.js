@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { createEditEnrollment, getEnrollment, getStudent, updateAllEnrollmentData } from "../../../service/apiEnrollment";
+import { createEditEnrollment, getEnrollment, updateAllEnrollmentData } from "../../../service/apiEnrollment";
 
 export function useAddEnrollment() {
   const queryClient = useQueryClient();
@@ -43,11 +43,3 @@ export function useAddAllEnrollment(){
   return {  mutate, isPending };
 }
 
-export function useStudent(id){
-  const {data,isLoading} = useQuery({
-    queryKey:['student',id],
-    queryFn:()=>getStudent(id),
-  })
-  
-  return {data,isLoading}
-}
