@@ -9,7 +9,7 @@ const CertificateContainer = styled.div`
   width: 7.9in; /* Adjusted width to fit within A4 */
   height: 11.2in; /* Adjusted height to maintain aspect ratio and fit A4 */
   background-image: url("https://qtubihsbqxewhrenphaz.supabase.co/storage/v1/object/public/asset/ert.png");
-  background-size: cover;
+  background-size: 8in;
   background-position: center;
   background-repeat: no-repeat;
   margin: 0 auto;
@@ -29,6 +29,7 @@ const TextOverlay = styled.div`
   font-size: 12pt;
   font-family: "Times New Roman", Times, serif;
   color: #000;
+  cursor: move;
 
   &.certNo {
     top: 340px;
@@ -59,6 +60,8 @@ const TextOverlay = styled.div`
 `;
 const QROverlay = styled.div`
   position: absolute;
+  cursor: move;
+
 `;
 
 const Certificate = ({

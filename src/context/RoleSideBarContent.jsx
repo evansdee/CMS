@@ -6,7 +6,6 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { MdApproval, MdDisplaySettings } from "react-icons/md";
 import { TfiTimer } from "react-icons/tfi";
 import { HiDocumentAdd } from "react-icons/hi";
-import Spinner from "../ui/Spinner";
 import { FcApproval } from "react-icons/fc";
 
 const RoleContext = createContext();
@@ -14,8 +13,8 @@ const linkArr = [
   { label: "home", icon: HiHome, role: "all" },
   { label: "session", icon: TfiTimer, role: "office" },
   { label: "enrollment", icon: HiDocumentAdd, role: "office" },
-  { label: "student", icon: PiStudentDuotone, role: "office" },
-  { label: "report", icon: TbReportAnalytics, role: "office" },
+  { label: "student", icon: PiStudentDuotone, role: "office cert" },
+  { label: "report", icon: TbReportAnalytics, role: "office cert" },
   { label: "approval", icon: FcApproval, role: "madam" },
   { label: "signature", icon: MdApproval, role: "ceo" },
   { label: "certificate", icon: PiCertificate, role: "cert" },

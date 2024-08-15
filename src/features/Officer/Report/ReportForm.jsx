@@ -15,8 +15,7 @@ const Container = styled.div`
 `
 
 export default function ReportForm() {
-  const {  search, handleFilter, handleInput, years } =
-    useReportData();
+  const {  search, handleFilter, handleInput, years } = useReportData();
 
   return (
     <Container>

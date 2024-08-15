@@ -33,7 +33,7 @@ const Tbody = styled.tbody`
 
 // `
 
-const Empty = styled.p`
+const Empty = styled.tbody`
   font-size: 1.6rem;
   font-weight: 500;
   text-align: center;
@@ -72,7 +72,7 @@ function Header({ data }) {
 }
 
 function Body({ data, render }) {
-  if (!data?.length) return <Empty>No data to show at the moment</Empty>;
+  if (!data?.length) return <Empty><tr> No data to show at the moment</tr></Empty>;
 
   return <Tbody>{data?.map(render)}</Tbody>;
 }

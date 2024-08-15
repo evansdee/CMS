@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   createContext,
   useCallback,
@@ -37,7 +38,7 @@ const [search, setSearch] = useState(initialSearchState);
   }
 
   const approveList = useMemo(() => {
-    return enrollment.filter((ele) => ele.status && ele.isSignature !== null);
+    return enrollment?.filter((ele) => ele.status && ele.isSignature !== null);
   }, [enrollment]);
   const handleFilter = useCallback(() => {
     if (!search.month || !search.year || !search.selectedCourse) return null;

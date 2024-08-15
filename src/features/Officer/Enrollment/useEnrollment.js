@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { createEditEnrollment, getEnrollment, updateAllEnrollmentData } from "../../../service/apiEnrollment";
+import { createEditEnrollment, getCertificate, getEnrollment, updateAllEnrollmentData } from "../../../service/apiEnrollment";
 
 export function useAddEnrollment() {
   const queryClient = useQueryClient();
@@ -43,3 +43,13 @@ export function useAddAllEnrollment(){
   return {  mutate, isPending };
 }
 
+
+export function useCertificate(id){
+  const {data,isLoading} = useQuery({
+    queryKey:['certificate',id],
+    queryFn:()=>getCertificate(id)
+
+  })
+
+  return {data,isLoading}
+}

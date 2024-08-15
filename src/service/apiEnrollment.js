@@ -132,5 +132,10 @@ export async function updateAllEnrollmentSignature(objects, value) {
   return updateData;
 }
 
+export async function getCertificate(id) {
+  const { data, error } = await supabase.from("enrolled").select("*").eq("id", id).single();
 
+  if (error) throw new Error("Failed to fetch certificate");
 
+  return data;
+}

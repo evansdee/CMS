@@ -26,6 +26,10 @@ import Approval from "./pages/Approval";
 import Signature from "./pages/Signature";
 import Student from "./features/Officer/Student/Student";
 import ReportDataProvider from "./features/Officer/Report/ReportDataContext";
+import CertificatePage from "./pages/CertificatePage";
+import CertificateList from "./features/Officer/Certificate/CertificateList";
+import CertificateSearch from "./features/Officer/Certificate/CertificateSearch";
+import CertificatePrint from "./features/Officer/Certificate/CertificatePrint";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -77,10 +81,16 @@ function App() {
                       <Route path="home" element={<Home />} />
                       <Route path="session" element={<Session />} />
                       <Route path="student" element={<StudentPage />} />
-                      <Route path="student/:id" element={<Student />} />
                       <Route path="report" element={<Report />} />
                       <Route path="enrollment" element={<Enrollment />} />
                       <Route path="settings" element={<Setting />} />
+                      <Route path="certificate" element={<CertificatePage />}>
+                        <Route index element={<Navigate replace to="list" />} />
+                        <Route path="list" element={<CertificateList />} />
+                        <Route path="search" element={<CertificateSearch />} />
+                      </Route>
+                      <Route path="certificate/:id" element={<CertificatePrint />} />
+
                       <Route path="approval" element={<Approval />} />
                       <Route path="signature" element={<Signature />} />
                     </Route>

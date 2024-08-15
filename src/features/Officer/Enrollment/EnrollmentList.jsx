@@ -16,7 +16,7 @@ export default function EnrollmentList() {
   const { enrollArr, setEnroll } = useLocalEnroll();
   const { mutate, isPending } = useAddAllEnrollment();
 
-  const filteredData = filterDataFromOneDayAgo(enrollment);
+   const filteredData = filterDataFromOneDayAgo(enrollment);
   let data =
     enrollArr.length > 0
       ? enrollArr
@@ -65,3 +65,4 @@ export default function EnrollmentList() {
     </>
   );
 }
+
