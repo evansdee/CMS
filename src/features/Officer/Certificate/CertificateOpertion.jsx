@@ -33,7 +33,7 @@ export default function CertificateOperations() {
 
   useEffect(()=>{
     if(location.pathname.includes('list')) setActive(true)
-    else setActive(false)
+    if(location.pathname.includes('search')) setActive(false)
   },[location.pathname])
 
   function handleClick(value, url) {

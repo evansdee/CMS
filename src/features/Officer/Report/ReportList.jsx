@@ -2,8 +2,15 @@ import Table from "../../../ui/Table";
 import * as XLSX from "xlsx";
 import { useReportData } from "./ReportDataContext";
 import ReportRow from "./ReportRow";
+import Flex from "../../../ui/Flex";
+import Image from "../../../ui/Image";
+import Lstat from "../../../assets/stat-light-mode.png"
+import Dstat from "../../../assets/stat-dark-mode.png"
+import { useDarkMode } from "../../../hook/DarkModeToggle";
 
 export default function ReportList() {
+  const {isDark} = useDarkMode()
+
   const { filteredData } = useReportData();
   const tableData = filteredData.map(
     (
@@ -79,7 +86,15 @@ export default function ReportList() {
     XLSX.writeFile(wb, "TableData.xlsx");
   };
 
-  //   console.log(tableData);
+  if (!filteredData?.length)
+    return (
+      <Flex align='center' justify='center'>
+        <Image
+          width="30%"
+          src={isDark ? Dstat : Lstat}
+        />
+      </Flex>
+    );
 
   return (
     <>

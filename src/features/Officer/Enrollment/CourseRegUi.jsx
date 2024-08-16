@@ -1,16 +1,12 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
-import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
 import Label from "../../../ui/Label";
 import Select from "../../../ui/Select";
-import Form from "./Form";
 import Heading from "../../../ui/Heading";
+import Form from "./Form";
 
-const Work = styled.div`
-  grid-row: auto;
-  align-self: flex-end;
-`;
+
 
 export default function CourseRegUi({
   register,

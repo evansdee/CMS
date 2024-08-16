@@ -11,12 +11,12 @@ import { FcApproval } from "react-icons/fc";
 const RoleContext = createContext();
 const linkArr = [
   { label: "home", icon: HiHome, role: "all" },
-  { label: "session", icon: TfiTimer, role: "office" },
-  { label: "enrollment", icon: HiDocumentAdd, role: "office" },
+  { label: "session", icon: TfiTimer, role: "office cert" },
+  { label: "enrollment", icon: HiDocumentAdd, role: "office cert" },
   { label: "student", icon: PiStudentDuotone, role: "office cert" },
   { label: "report", icon: TbReportAnalytics, role: "office cert" },
   { label: "approval", icon: FcApproval, role: "madam" },
-  { label: "signature", icon: MdApproval, role: "ceo" },
+  { label: "signature", icon: MdApproval, role: "ceo madam" },
   { label: "certificate", icon: PiCertificate, role: "cert" },
   { label: "settings", icon: MdDisplaySettings, role: "all" },
 ];

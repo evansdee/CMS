@@ -46,7 +46,7 @@ export default function EditLocalEnrollment({
               codeAlt: data.codeAlt,
               courseCode:data.courseCode,
               firstName,middleName,lastName,
-              amount: data.isRenewal ? data.renewAmount : data.newAmount
+              amount: data.isRenewal  ? data.renewAmount : data.newAmount
             }
           : ele
       )

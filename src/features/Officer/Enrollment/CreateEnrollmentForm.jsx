@@ -43,18 +43,6 @@ export default function CreateEnrollmentForm() {
       means: ["NationalIdCard"][0],
       gender: ["Male"][0],
       country: ["Nigeria"][0],
-
-      // FOR TEST PURPOSES
-      // firstName: "Evans",
-      // middleName: "EmuoboNuvie",
-      // lastName: "Diegbe",
-
-      // dob: "2024-04-12",
-      // photo: "two.jpg",
-      // address: "jfff",
-      // gsm: "ddkd",
-      // courseName: ["EFFICIENT DECK HAND"][0],
-      // bank: ["AMJU bank"][0],
     },
   });
 
@@ -64,7 +52,7 @@ export default function CreateEnrollmentForm() {
 
   useEffect(() => {
     mutate(selectedCountry);
-  }, [selectedCountry, mutate]);
+  }, [selectedCountry]);
 
   const selectedCourseName = watch("courseName");
   const bnk = watch("bank");
@@ -74,14 +62,14 @@ export default function CreateEnrollmentForm() {
       ele.courseName.includes(selectedCourseName)
     );
     if (x) {
-      setValue("courseCode", x.courseCode);
-      setValue("codeAlt", x.codeAlt);
-      setValue("startDate", x.startDate);
-      setValue("endDate", x.endDate);
-      setValue("newAmount", x.newAmount);
-      setValue("renewAmount", x.renewAmount);
+      if (getValues("courseCode") !== x.courseCode) setValue("courseCode", x.courseCode);
+      if (getValues("codeAlt") !== x.codeAlt) setValue("codeAlt", x.codeAlt);
+      if (getValues("startDate") !== x.startDate) setValue("startDate", x.startDate);
+      if (getValues("endDate") !== x.endDate) setValue("endDate", x.endDate);
+      if (getValues("newAmount") !== x.newAmount) setValue("newAmount", x.newAmount);
+      if (getValues("renewAmount") !== x.renewAmount) setValue("renewAmount", x.renewAmount);
     }
-  }, [activeSession, setValue, selectedCourseName]);
+  }, [activeSession, setValue, selectedCourseName, getValues]);
 
   const { country } = useCountry();
   const { enrollArr: value, setEnroll } = useLocalEnroll();

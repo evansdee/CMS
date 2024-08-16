@@ -5,8 +5,13 @@ import Table from "../../../ui/Table";
 import StudentRow from "./StudentRow";
 import Image from "../../../ui/Image";
 import Flex from "../../../ui/Flex";
+import LStu from "../../../assets/student-light-mode.svg"
+import DStu from "../../../assets/student-dark-mode.png"
+import { useDarkMode } from "../../../hook/DarkModeToggle";
 
 export default function StudentList({ search,setSearch }) {
+  const {isDark} = useDarkMode()
+
   const { data } = useGetEnrollment();
   const txt = search.toLowerCase();
 
@@ -28,14 +33,16 @@ export default function StudentList({ search,setSearch }) {
       : [];
   }, [data, search, txt]);
 
+
+
   console.log(filteredData)
 
   if (!filteredData?.length)
     return (
       <Flex align='center' justify='center'>
         <Image
-          width="40%"
-          src="https://qtubihsbqxewhrenphaz.supabase.co/storage/v1/object/public/asset/urban-no-data-found-3.png"
+          width="30%"
+          src={isDark ? DStu: LStu}
         />
       </Flex>
     );
