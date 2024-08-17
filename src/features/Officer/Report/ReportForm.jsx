@@ -2,9 +2,10 @@ import {} from "react";
 import { useReportData } from "./ReportDataContext";
 import Label from "../../../ui/Label";
 import Select from "../../../ui/Select";
-import { months, sessArr } from "../../../helper/data";
+import { months } from "../../../helper/data";
 import Button from "../../../ui/Button";
 import styled from "styled-components";
+import { useSession } from "../Session/useSession";
 
 const Container = styled.div`
     display: flex;
@@ -15,6 +16,7 @@ const Container = styled.div`
 `
 
 export default function ReportForm() {
+  const {data:session} = useSession()
   const {  search, handleFilter, handleInput, years } = useReportData();
 
   return (
@@ -47,9 +49,9 @@ export default function ReportForm() {
             onChange={handleInput}
           >
             <option value="">All Courses</option>
-            {sessArr.map((ele) => (
-              <option key={ele.id} value={ele.course}>
-                {ele.course}
+            {session?.map((ele) => (
+              <option key={ele.id} value={ele.courseName}>
+                {ele.courseName}
               </option>
             ))}
             {/* Add more courses as needed */}

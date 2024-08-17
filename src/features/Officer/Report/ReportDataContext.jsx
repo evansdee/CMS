@@ -18,10 +18,9 @@ export default function ReportDataProvider({ children }) {
     month: "",
     year: "",
     selectedCourse: "",
-};
+  };
 
-const [search, setSearch] = useState(initialSearchState);
-
+  const [search, setSearch] = useState(initialSearchState);
 
   const years = useMemo(() => {
     const currentYear = new Date().getFullYear();
@@ -40,6 +39,9 @@ const [search, setSearch] = useState(initialSearchState);
   const approveList = useMemo(() => {
     return enrollment?.filter((ele) => ele.status && ele.isSignature !== null);
   }, [enrollment]);
+
+  // console.log(approveList,years,enrollment)
+
   const handleFilter = useCallback(() => {
     if (!search.month || !search.year || !search.selectedCourse) return null;
 

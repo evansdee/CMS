@@ -17,148 +17,6 @@ const months = [
   { value: "12", label: "December" },
 ];
 
-const sessArr = [
-  {
-    id: 1,
-    course: "APPA/RADAR OPERATION",
-    code: "ARPA",
-    codeAlt: "25",
-    newAmount: 55000,
-    renewAmount: 45000,
-  },
-  {
-    id: 2,
-    course: "MOTORMAN",
-    code: "MOTM",
-    codeAlt: "7",
-    newAmount: 65000,
-    renewAmount: false,
-  },
-  {
-    id: 3,
-    course: "EFFICIENT DECK HAND",
-    code: "EDH",
-    codeAlt: "6",
-    newAmount: 65000,
-    renewAmount: false,
-  },
-  {
-    id: 4,
-    batch: "068",
-    course: "RADAR/ARPA MANAGEMENT LEVEL",
-    code: "RADAR",
-    codeAlt: "90",
-    newAmount: 55000,
-    renewAmount: 45000,
-  },
-  {
-    id: 5,
-    course: "INTERNATIONAL SHIP & PORT FACILITIES (ISPS) SECURITY AWARENESS",
-    code: "ISPS",
-    codeAlt: "11",
-    newAmount: 70000,
-    renewAmount: false,
-  },
-  {
-    id: 6,
-    course: "BASIC OIL, CHEMICAL AND LIQUEFIED GAS TANKER CARGO OPERATIONS",
-    code: "OTF",
-    codeAlt: "5",
-    newAmount: 65000,
-    renewAmount: 35000,
-  },
-  {
-    id: 7,
-    course:
-      "PROFICIENCY IN SURVIVAL CRAFT & RESCUE BOATS (OTHER THAN FAST RESCUE BOATS)",
-    code: "PSCR",
-    codeAlt: "15",
-    newAmount: 120000,
-    renewAmount: false,
-  },
-  {
-    id: 595,
-    course: "PROFICIENCY IN SURVIVAL CRAFT, RESCUE BOATS AND FAST RESCUE BOATS",
-    code: "PSCR",
-    codeAlt: "31",
-    newAmount: 140000,
-    renewAmount: false,
-  },
-  {
-    id: 8,
-    course: "Advanced Fire Fighting Certificate",
-    code: "ADFF",
-    codeAlt: "8",
-    newAmount: 70000,
-    renewAmount: 35000,
-  },
-  {
-    id: 9,
-    course: "GMDSS RADIO OPERATORS",
-    code: "GMDSS",
-    codeAlt: "155",
-    newAmount: 350000,
-    renewAmount: 250000,
-  },
-  {
-    id: 10,
-    course: "STCW BASIC SAFETY TRAINING",
-    code: "STCW",
-    codeAlt: "1-4",
-    newAmount: 65000,
-    renewAmount: 50000,
-  },
-  {
-    id: 11,
-    course: "Helms",
-    code: "Helms",
-    codeAlt: "1-4",
-    newAmount: 150000,
-    renewAmount: false,
-  },
-  {
-    id: 12,
-    course: "Medicare",
-    code: "med",
-    codeAlt: "1-4",
-    newAmount: 70000,
-    renewAmount: false,
-  },
-  {
-    id: 13,
-    course: "ECDIS",
-    code: "ecids",
-    codeAlt: "1-4",
-    newAmount: 250000,
-    renewAmount: false,
-  },
-  {
-    id: 14,
-    course: "Medical first aid",
-    code: "aid",
-    codeAlt: "1-4",
-    newAmount: 70000,
-    renewAmount: false,
-  },
-  {
-    id: 15,
-    course: "ism",
-    code: "ism",
-    codeAlt: "1-4",
-    newAmount: 70000,
-    renewAmount: false,
-  },
-  {
-    id: 16,
-    course: "BRM",
-    code: "brm",
-    codeAlt: "1-4",
-    newAmount: 120000,
-    renewAmount: false,
-  },
- 
-];
-
 const fake = [
   {
     lid: nanoid(),
@@ -183,7 +41,7 @@ const fake = [
   {
     lid: nanoid(),
 
-    amount: 120000,
+    amount: 70000,
     address: "lorem nigga",
     bank: "AMJU bank",
     country: "Nigeria",
@@ -206,7 +64,7 @@ const fake = [
   {
     lid: nanoid(),
 
-    amount: 80000,
+    amount: 65000,
     address: "lorem nigga",
     bank: "AMJU bank",
     country: "Nigeria",
@@ -229,7 +87,7 @@ const fake = [
     gsm: Math.random() * 100,
     lid: nanoid(),
 
-    amount: 45000,
+    amount: 140000,
     address: "lorem nigga",
     bank: "AMJU bank",
     country: "Nigeria",
@@ -253,7 +111,7 @@ const fake = [
     gsm: Math.random() * 100,
     lid: nanoid(),
 
-    amount: 55000,
+    amount: 65000,
     address: "lorem nigga",
     bank: "AMJU bank",
     country: "Nigeria",
@@ -276,11 +134,11 @@ const fake = [
     gsm: Math.random() * 100,
     lid: nanoid(),
 
-    amount: 120000,
+    amount: 140000,
     address: "lorem nigga",
     bank: "AMJU bank",
     country: "Nigeria",
-    courseCode: "ARPA",
+    courseCode: "RADAR",
     codeAlt: "25",
     courseName: "APPA/RADAR OPERATION",
     dob: "2000-04-12",
@@ -302,4 +160,4 @@ const fakeData = fake.map((ele, i) => ({
   gender: `${i % 2 === 0 ? "Male" : "Female"}`,
 }));
 
-export { sessArr, fakeData,months };
+export {  fakeData,months };

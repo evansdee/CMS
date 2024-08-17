@@ -11,15 +11,15 @@ import Modal from "../../../ui/Modal";
 import Menus from "../../../ui/Menus";
 import Table from "../../../ui/Table";
 import Td from "../../../ui/TableRow";
-
+import SpinnerMini from "../../../ui/SpinnerMini";
 
 export default function EnrollmentRow({ enroll }) {
   const { mutate, isPending } = useAddEnrollment();
   const { lid, fullName, courseName, enrollDate, bank, status, amount } =
     enroll;
 
-
   const { enrollArr: arr, setEnroll } = useLocalEnroll();
+  // if (isPending) return <Spinner />;
 
   function handleDelete(lid) {
     setEnroll((p) => p.filter((ele) => ele.lid !== lid));
@@ -57,7 +57,7 @@ export default function EnrollmentRow({ enroll }) {
         {!status && (
           <Td>
             <Modal>
-              <Menus.Menu>
+             {isPending ? <SpinnerMini/>: <Menus.Menu>
                 <Menus.Toggle id={lid} />
 
                 <Menus.List id={lid}>
@@ -91,7 +91,7 @@ export default function EnrollmentRow({ enroll }) {
                 <Modal.Window name="editLocal">
                   <EditLocalEnrollment enroll={enroll} setEnroll={setEnroll} />
                 </Modal.Window>
-              </Menus.Menu>
+              </Menus.Menu>}
             </Modal>
           </Td>
         )}

@@ -13,14 +13,14 @@ export async function createEditEnrollment(newEnrollment, id) {
     ? newEnrollment.photo
     : `${supabaseUrl}/storage/v1/object/public/passport/${imageName}`;
 
-  let query = supabase.from("enrolled");
+  let query = supabase.from("enrollment");
 
   if (!id) query = query.insert([{ ...newEnrollment, photo: imagePath }]);
   if (id)
     query = query.update({ ...newEnrollment, photo: imagePath }).eq("id", id);
 
   const { data, error } = await query.select().single();
-  if (error) throw new Error("Student not Enrolled");
+  if (error) throw new Error("Student not enrollment");
   // 2. Upload image
   if (hasImagePath) return data;
 
@@ -30,7 +30,7 @@ export async function createEditEnrollment(newEnrollment, id) {
 
   // 3. Delete the cabin IF there was an error uplaoding image
   if (storageError) {
-    await supabase.from("enrolled").delete().eq("id", data.id);
+    await supabase.from("enrollment").delete().eq("id", data.id);
     console.error(storageError);
     throw new Error(
       "Cabin image could not be uploaded and the cabin was not created"
@@ -41,14 +41,14 @@ export async function createEditEnrollment(newEnrollment, id) {
 }
 
 export async function getEnrollment() {
-  const { data, error } = await supabase.from("enrolled").select("*");
+  const { data, error } = await supabase.from("enrollment").select("*");
   if (error) throw new Error("Failed to fetch data");
 
   return data;
 }
 
 export async function deleteEnrollment(id) {
-  const { data, error } = await supabase.from("enrolled").delete().eq("id", id);
+  const { data, error } = await supabase.from("enrollment").delete().eq("id", id);
 
   if (error) throw new Error("Couldnt decline");
 
@@ -75,7 +75,7 @@ export async function updateAllEnrollmentData(objects) {
 
       // 3. Delete the cabin IF there was an error uplaoding image
       if (photoError) {
-        await supabase.from("enrolled").delete().eq("id", data.id);
+        await supabase.from("enrollment").delete().eq("id", data.id);
         console.error(photoError);
         throw new Error(
           "Student image could not be uploaded and the cabin was not created"
@@ -83,7 +83,7 @@ export async function updateAllEnrollmentData(objects) {
       }
 
       // Insert data into the table with the photo URL
-      const { data, error } = await supabase.from("enrolled").insert({
+      const { data, error } = await supabase.from("enrollment").insert({
         ...object,
         photo: imagePath,
       });
@@ -104,7 +104,7 @@ export async function updateAllEnrollmentStatus(objects) {
     objects.map(async (object) => {
       const { id } = object;
       const { data, error } = await supabase
-        .from("enrolled")
+        .from("enrollment")
         .update({ ...object })
         .eq("id", id)
         .select();
@@ -120,7 +120,7 @@ export async function updateAllEnrollmentSignature(objects, value) {
     objects?.map(async (object) => {
       const { id } = object;
       const { data, error } = await supabase
-        .from("enrolled")
+        .from("enrollment")
         .update({ ...object, isSignature: value })
         .eq("id", id)
         .select();
@@ -133,7 +133,7 @@ export async function updateAllEnrollmentSignature(objects, value) {
 }
 
 export async function getCertificate(id) {
-  const { data, error } = await supabase.from("enrolled").select("*").eq("id", id).single();
+  const { data, error } = await supabase.from("enrollment").select("*").eq("id", id).single();
 
   if (error) throw new Error("Failed to fetch certificate");
 

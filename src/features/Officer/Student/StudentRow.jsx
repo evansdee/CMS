@@ -12,7 +12,7 @@ import Student from "./Student";
 export default function StudentRow({ student, setSearch }) {
   const { firstName, middleName, lastName, dob, gsm, enrollDate } = student;
 
-  console.log(dob);
+  // console.log(dob);
   return (
     <>
       <Table.Row>

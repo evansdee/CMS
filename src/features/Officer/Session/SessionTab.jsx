@@ -13,7 +13,7 @@ const StyledSessionTab = styled.div`
   /* padding: 1.5em; */
 `;
 
-const Bottom = styled.div`
+export const Bottom = styled.div`
   position: absolute;
   right: 5%;
   bottom: 5%;

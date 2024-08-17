@@ -5,7 +5,10 @@ import styled, { css } from "styled-components";
 import ButtonIcon from "../../../ui/ButtonIcon";
 import Modal from "../../../ui/Modal";
 import { CiViewList } from "react-icons/ci";
-import EnrollmentView from "./ApprovalView";
+import ApprovalView from "./ApprovalView";
+import { useUpdateEnrollment } from "./useUpdateEnrollment";
+import SpinnerMini from "../../../ui/SpinnerMini";
+
 
 
 const GridCell = styled.div`
@@ -32,6 +35,8 @@ const GridCell = styled.div`
 `;
 
 export default function EnrollmentRow({ enroll }) {
+const { mutate: updateStudent,isPending } = useUpdateEnrollment();
+
   const {  fullName, courseName, enrollDate, status } = enroll;
 
   return (
@@ -49,12 +54,12 @@ export default function EnrollmentRow({ enroll }) {
             <Modal>
               <ButtonIcon>
                 <Modal.Open opens="editLocal">
-                  <CiViewList />
+                  {isPending ? <SpinnerMini/>:<CiViewList />}
                 </Modal.Open>
               </ButtonIcon>
 
               <Modal.Window name="editLocal">
-                <EnrollmentView data={enroll} />
+                <ApprovalView data={enroll} updateStudent={updateStudent}/>
               </Modal.Window>
             </Modal>
           </GridCell>

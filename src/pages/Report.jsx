@@ -9,7 +9,7 @@ const StyledContainer = styled.div`
 
 const Main = styled.div`
   overflow-x: auto;
-  scrollbar-width:none;
+  scrollbar-width: none;
   margin: 1em 0 0;
 `;
 export default function Report() {
@@ -17,8 +17,7 @@ export default function Report() {
     <StyledContainer>
       <ReportForm />
       <Main>
-
-      <ReportList />
+        <ReportList />
       </Main>
     </StyledContainer>
   );

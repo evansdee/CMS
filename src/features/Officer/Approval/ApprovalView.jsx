@@ -8,7 +8,6 @@ import { format } from "date-fns";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import Button from "../../../ui/Button";
 import { useUpdateEnrollment } from "./useUpdateEnrollment";
-import { useCount, useUpdateCourseCount } from "../Enrollment/useCourseCount";
 import { useDeleteEnrollment } from "./useDeleteEnrollment";
 import { RiBankFill } from "react-icons/ri";
 import { formatToNaira } from "../../../helper/helper";
@@ -18,11 +17,11 @@ import { AiFillHeart, AiOutlineUser } from "react-icons/ai";
 import { MdNumbers, MdOutlineEmail } from "react-icons/md";
 import { IoIdCardOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
+import { useCourse, useUpdateCourseCount } from "../Enrollment/useCourse";
 
-export default function EnrollmentView({ data, onCloseModal }) {
+export default function ApprovalView({ data, onCloseModal,updateStudent }) {
   const { updateCount } = useUpdateCourseCount();
-  const { data: countList } = useCount();
-  const { mutate: updateStudent } = useUpdateEnrollment();
+  const { data: countList } = useCourse();
   const mutate = useDeleteEnrollment();
   const {
     id,
@@ -46,7 +45,7 @@ export default function EnrollmentView({ data, onCloseModal }) {
   } = data;
 
   function handleUpdate() {
-    const count = countList?.filter((ele) => ele.codeAlt === codeAlt)[0];
+    const count = countList?.find((ele) => ele.codeAlt === codeAlt && ele.courseCode === courseCode);
 
     let newObj = {
       newEnrollment: {
@@ -60,11 +59,11 @@ export default function EnrollmentView({ data, onCloseModal }) {
       id: id,
     };
 
-    console.log(newObj);
-    updateStudent(newObj,{onSuccess:(data)=>toast.success(`${data.fullName} has been approved`)})
+    // console.log(newObj);
+    updateStudent(newObj)
     updateCount({
       item: { ...count, count: count.count + 1 },
-      countId: count.codeAlt,
+      countId: count.courseName,
     });
     onCloseModal?.();
   }
@@ -73,6 +72,7 @@ export default function EnrollmentView({ data, onCloseModal }) {
     mutate(id);
     onCloseModal?.();
   }
+
 
   return (
     <GridContainer>

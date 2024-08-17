@@ -20,16 +20,16 @@ import Login from "./pages/Login";
 import NoPage from "./pages/NoPage";
 import RoleSideBarContent from "./context/RoleSideBarContent";
 import EnrollmentListContext from "./hook/EnrollmentListContext";
-import EnrollmentsContext from "./hook/EnrollmentsContext";
 import ToggleProvider from "./hook/useMenuToggle";
 import Approval from "./pages/Approval";
 import Signature from "./pages/Signature";
-import Student from "./features/Officer/Student/Student";
 import ReportDataProvider from "./features/Officer/Report/ReportDataContext";
 import CertificatePage from "./pages/CertificatePage";
 import CertificateList from "./features/Officer/Certificate/CertificateList";
 import CertificateSearch from "./features/Officer/Certificate/CertificateSearch";
 import CertificatePrint from "./features/Officer/Certificate/CertificatePrint";
+import CoursePage from "./pages/CoursePage";
+import CourseValidation from "./pages/CourseApproval";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,15 +60,13 @@ function App() {
                     // path="/applayout"
                     element={
                       <ProtectedRoute>
-                        <EnrollmentsContext>
+                        <RoleSideBarContent>
                           <ReportDataProvider>
                             <EnrollmentListContext>
-                              <RoleSideBarContent>
-                                <Applayout />
-                              </RoleSideBarContent>
+                              <Applayout />
                             </EnrollmentListContext>
                           </ReportDataProvider>
-                        </EnrollmentsContext>
+                        </RoleSideBarContent>
                       </ProtectedRoute>
                     }
                   >
@@ -80,6 +78,7 @@ function App() {
                       <Route index element={<Navigate replace to="home" />} />
                       <Route path="home" element={<Home />} />
                       <Route path="session" element={<Session />} />
+                      <Route path="course" element={<CoursePage />} />
                       <Route path="student" element={<StudentPage />} />
                       <Route path="report" element={<Report />} />
                       <Route path="enrollment" element={<Enrollment />} />
@@ -89,9 +88,13 @@ function App() {
                         <Route path="list" element={<CertificateList />} />
                         <Route path="search" element={<CertificateSearch />} />
                       </Route>
-                      <Route path="certificate/:id" element={<CertificatePrint />} />
+                      <Route
+                        path="certificate/:id"
+                        element={<CertificatePrint />}
+                      />
 
                       <Route path="approval" element={<Approval />} />
+                      <Route path="validation" element={<CourseValidation />} />
                       <Route path="signature" element={<Signature />} />
                     </Route>
                   </Route>

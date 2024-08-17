@@ -33,10 +33,9 @@ export default function EnrollmentList() {
     );
     setEnroll([]);
   }
-  // console.log(filteredData);
   return (
     <>
-      <div>
+      {/* <div> */}
         <Menus>
           <Table >
             <Table.Header
@@ -58,7 +57,7 @@ export default function EnrollmentList() {
             />
           </Table>
         </Menus>
-      </div>
+      {/* </div> */}
       {enrollArr.length > 1 && (
         <BottomButtonAll onClick={handleEnroll}>Enroll All</BottomButtonAll>
       )}

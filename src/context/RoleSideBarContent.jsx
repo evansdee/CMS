@@ -3,14 +3,17 @@ import { useUser } from "../features/authentication/useUser";
 import { HiHome } from "react-icons/hi2";
 import { PiCertificate, PiStudentDuotone } from "react-icons/pi";
 import { TbReportAnalytics } from "react-icons/tb";
-import { MdApproval, MdDisplaySettings } from "react-icons/md";
+import { MdApproval, MdDisplaySettings, MdOutlineApproval } from "react-icons/md";
 import { TfiTimer } from "react-icons/tfi";
 import { HiDocumentAdd } from "react-icons/hi";
 import { FcApproval } from "react-icons/fc";
+import { FaBookBookmark } from "react-icons/fa6";
 
 const RoleContext = createContext();
 const linkArr = [
   { label: "home", icon: HiHome, role: "all" },
+  { label: "course", icon: FaBookBookmark, role: "madam cert" },
+  { label: "validation", icon: MdOutlineApproval, role: "madam" },
   { label: "session", icon: TfiTimer, role: "office cert" },
   { label: "enrollment", icon: HiDocumentAdd, role: "office cert" },
   { label: "student", icon: PiStudentDuotone, role: "office cert" },
@@ -35,7 +38,7 @@ export default function RoleSideBarContent({ children }) {
 export function useRoleCheck(){
     const context = useContext(RoleContext)
 
-    if(!context) throw new Error('nigga')
+    if(!context) throw new Error('sidebar role error')
 
     return context
 }

@@ -1,7 +1,7 @@
 import supabase from "./supabase";
 
 export async function getSession() {
-  let { data, error } = await supabase.from("session_course").select("*");
+  let { data, error } = await supabase.from("session").select("*");
 
   if (error) throw new Error("Failed to fetch Courses");
 
@@ -9,7 +9,7 @@ export async function getSession() {
 }
 
 export async function createEditSession(newSession, id) {
-  let query = supabase.from("session_course");
+  let query = supabase.from("session");
 
   if (!id) query = query.insert([newSession]);
   if (id) query = query.update({ ...newSession }).eq("id", id);
@@ -22,7 +22,7 @@ export async function createEditSession(newSession, id) {
 
 export async function deleteSession(id) {
   const { data,error } = await supabase
-    .from("session_course")
+    .from("session")
     .delete()
     .eq("id", id);
 

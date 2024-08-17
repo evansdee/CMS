@@ -1,36 +1,27 @@
-import { useLocalEnrollments } from "../../../hook/EnrollmentsContext";
-import { useEffect } from "react";
 import Spinner from "../../../ui/Spinner";
 import Table from "../../../ui/Table-v1";
 import { useGetEnrollment } from "../Enrollment/useEnrollment";
 import EnrollmentRow from "./ApprovalRow";
-import { useCount, useUpdateCourseCount } from "../Enrollment/useCourseCount";
+import { useCourse, useUpdateCourseCount } from "../Enrollment/useCourse";
 import { format } from "date-fns";
 import { useUpdateAllStatus } from "./useUpdateAllStatus";
 import BottomButtonAll from "../../../ui/BottomButtonAll";
+import toast from "react-hot-toast";
 
 export default function EnrollmentTable() {
   const { data: enrollment, isLoading } = useGetEnrollment();
-  const { data:enroll, setData } = useLocalEnrollments();
   const { updateCount } = useUpdateCourseCount();
-  const { data: countList } = useCount();
+  const { data: countList } = useCourse();
   const {mutate,isPending} = useUpdateAllStatus()
-
-
-  
-  useEffect(() => {
-    if (enrollment?.length > 0) setData([...enrollment]);
-    else setData([])
-  }, [setData, enrollment]); 
   
   
-  const activeEnrollment = enroll.filter(ele=>(!ele.status))
+  const activeEnrollment = enrollment?.filter(ele=>(!ele.status))
   if (isLoading || isPending) return <Spinner />;
 
   async function handleSubmitAll() {
     const updatePromises = activeEnrollment.map(async (ele) => {
       const { codeAlt, courseCode } = ele;
-      const count = countList?.find((item) => item.codeAlt === codeAlt);
+      const count = countList?.find((item) => item.codeAlt === codeAlt && item.courseCode === courseCode);
   
       const newData = {
         ...ele,
@@ -44,7 +35,7 @@ export default function EnrollmentTable() {
       // Perform the update operation for count
       await updateCount({
         item: { ...count, count: count.count + 1 },
-        countId: count.codeAlt,
+        countId: count.courseName,
       });
   
       // Return newData for further processing if needed
@@ -56,8 +47,7 @@ export default function EnrollmentTable() {
   
     // Do something with the results if needed
     mutate(results)
-    console.log(results);
-    setData([])
+    // console.log(results);
   }
   
 

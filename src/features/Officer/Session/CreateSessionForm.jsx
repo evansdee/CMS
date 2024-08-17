@@ -2,7 +2,6 @@
 import Input from "../../../ui/Input";
 import FormRow from "../../../ui/FormRow";
 import Select from "../../../ui/Select";
-import { sessArr } from "../../../helper/data";
 import Button from "../../../ui/Button";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
@@ -10,12 +9,19 @@ import Form from "../../../ui/Form";
 import { useCreateEditSession } from "./useCreateEditSession";
 import { isAfter } from "date-fns";
 import { useEditSession } from "./useEditSession";
+import { useCourse } from "../Enrollment/useCourse";
 
 export default function CreateSessionForm({
   sessionToEdit = {},
   onCloseModal,
 }) {
-  const courses = sessArr.filter((ele) => ele.course);
+  const { data: sessionArr } = useCourse();
+
+  const session = sessionArr.sort((a, b) => {
+    if (a.courseName.toLowerCase() < b.courseName.toLowerCase()) return -1;
+    if (a.courseName.toLowerCase() > b.courseName.toLowerCase()) return 1;
+    return 0;
+  });
 
   const { mutate, isPending: isLoading } = useCreateEditSession();
   const { editSession, isEditing } = useEditSession();
@@ -30,8 +36,8 @@ export default function CreateSessionForm({
       defaultValues: isEditSession
         ? editValues
         : {
-            courseName: courses[0].course,
-            courseCode: courses[0].code,
+            courseName: session[0].courseName,
+            courseCode: session[0].courseCode,
             startDate: "2024-08-01",
             endDate: "2024-08-05",
           },
@@ -42,14 +48,16 @@ export default function CreateSessionForm({
   const selectedCourseName = watch("courseName");
 
   useEffect(() => {
-    const x = courses.find((ele) => ele.course.includes(selectedCourseName));
+    const x = session.find((ele) =>
+      ele.courseName.includes(selectedCourseName)
+    );
     if (x) {
-      setValue("courseCode", x.code);
+      setValue("courseCode", x.courseCode);
       setValue("codeAlt", x.codeAlt);
       setValue("newAmount", x.newAmount);
       setValue("renewAmount", x.renewAmount);
     }
-  }, [courses, setValue, selectedCourseName]);
+  }, [session, setValue, selectedCourseName]);
 
   function onSubmit(data) {
     if (isEditSession) {
@@ -73,7 +81,7 @@ export default function CreateSessionForm({
           },
         }
       );
-      console.log(data);
+      // console.log(data);
     }
   }
 
@@ -91,9 +99,9 @@ export default function CreateSessionForm({
           {...register("courseName", { required: "This field is needeed" })}
           type="white"
         >
-          {courses?.map((ele) => (
-            <option key={ele.course} value={ele.course}>
-              {ele.course}
+          {session?.map((ele) => (
+            <option key={ele.courseName} value={ele.courseName}>
+              {ele.courseName}
             </option>
           ))}
         </Select>
@@ -121,7 +129,7 @@ export default function CreateSessionForm({
             checked={isChecked}
             disabled={isWorking}
             onChange={() => setIsChecked((p) => !p)}
-            id='active'
+            id="active"
           />
         </FormRow>
       )}
