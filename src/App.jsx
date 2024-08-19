@@ -88,17 +88,18 @@ function App() {
                         <Route path="list" element={<CertificateList />} />
                         <Route path="search" element={<CertificateSearch />} />
                       </Route>
-                      <Route
-                        path="certificate/:id"
-                        element={<CertificatePrint />}
-                      />
-
+                    
                       <Route path="approval" element={<Approval />} />
                       <Route path="validation" element={<CourseValidation />} />
                       <Route path="signature" element={<Signature />} />
                     </Route>
                   </Route>
                   <Route path="test" element={<Test />} />
+                  <Route
+                        path="certificatePrint/:id"
+                        element={<CertificatePrint />}
+                      />
+
                   <Route path="*" element={<NoPage />} />
                 </Routes>
               </BrowserRouter>

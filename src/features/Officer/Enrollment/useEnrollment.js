@@ -45,11 +45,11 @@ export function useAddAllEnrollment(){
 
 
 export function useCertificate(id){
-  const {data,isLoading} = useQuery({
+  const {data,isLoading,error} = useQuery({
     queryKey:['certificate',id],
     queryFn:()=>getCertificate(id)
 
   })
 
-  return {data,isLoading}
+  return {data,isLoading,error}
 }

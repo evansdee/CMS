@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function CertificateRow({ cert }) {
   const navigate = useNavigate();
-  const { id, fullName, courseName, enrollDate, certificateNo, status } = cert;
+  const { id, fullName, courseName, enrollDate, certificateNo } = cert;
 
   return (
     <>
@@ -19,7 +19,7 @@ export default function CertificateRow({ cert }) {
         <Td>-</Td>
 
         <Td>
-          <ButtonIcon onClick={() => navigate(`/dashboard/certificate/${id}`)}>
+          <ButtonIcon onClick={() => navigate(`/certificatePrint/${id}`)}>
             <BsPrinter />
           </ButtonIcon>
         </Td>

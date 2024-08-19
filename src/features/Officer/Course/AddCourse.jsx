@@ -7,6 +7,7 @@ import FileInput from "../../../ui/FileInput";
 import Button from "../../../ui/Button";
 import { useAddCourse } from "../Enrollment/useCourse";
 import SpinnerMini from "../../../ui/SpinnerMini";
+import Select from "../../../ui/Select";
 
 export default function AddCourse({ onCloseModal }) {
   const { mutate, isPending } = useAddCourse();
@@ -17,6 +18,7 @@ export default function AddCourse({ onCloseModal }) {
       codeAlt: "419",
       newAmount: 34560,
       renewAmount: 98760,
+      size: "long",
     },
   });
   const { errors } = formState;
@@ -92,6 +94,13 @@ export default function AddCourse({ onCloseModal }) {
             },
           })}
         />
+      </FormRow>
+
+      <FormRow label="Size">
+        <Select {...register("size", { required: "This field is required" })}>
+          <option value="short">Short</option>
+          <option value="long">Long</option>
+        </Select>
       </FormRow>
       <br />
       <Button>{isPending ? <SpinnerMini /> : "Add Course"}</Button>

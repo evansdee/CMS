@@ -6,54 +6,54 @@ import QRCode from 'qrcode.react';
 
 const CertificateContainer = styled.div`
   position: relative;
-  width: 7.9in; /* Adjusted width to fit within A4 */
-  height: 11.2in; /* Adjusted height to maintain aspect ratio and fit A4 */
-  background-image: url("https://qtubihsbqxewhrenphaz.supabase.co/storage/v1/object/public/asset/ert.png");
-  background-size: 8in;
+  width: 8.27in; /* A4 width in inches */
+  height: 11.69in; /* A4 height in inches  divide by 2 for smaller certdd*/
+  /* background-image: url('../asset/'); */
+  background-image: url("https://qtubihsbqxewhrenphaz.supabase.co/storage/v1/object/public/certificates/STCW.png");
+  background-size: contain; /* Ensure the image covers the entire container */
   background-position: center;
   background-repeat: no-repeat;
   margin: 0 auto;
-  /* padding: 20mm; */
   box-sizing: border-box;
 
   @media print {
-    width: 100%;
-    /* height: auto; */
-    background-size: contain;
+    max-width: 100%;
+    background-size: contain; /* Ensure the image covers the entire container in print mode */
     page-break-inside: avoid; /* Prevent page breaks inside the certificate */
   }
 `;
 
 const TextOverlay = styled.div`
   position: absolute;
-  font-size: 12pt;
+  /* font-size: 12pt; */
   font-family: "Times New Roman", Times, serif;
   color: #000;
   cursor: move;
 
   &.certNo {
-    top: 340px;
-    left: 100px;
+    /* top: 340px;
+    left: 100px; */
+    font-size: ${prop=>`${prop.cert}px`};
   }
 
   &.name {
-    top: 380px;
-    left: 300px;
+    /* top: 0;
+    left: 0; */
   }
 
   &.nationality {
-    top: 420px;
-    right: 100px;
+    /* top: 420px;
+    right: 100px; */
   }
 
   &.dateOfBirth {
-    top: 460px;
-    left: 300px;
+    /* top: 460px;
+    left: 300px; */
   }
 
   &.dateOfIssue {
-    top: 500px;
-    right: 100px;
+    /* top: 500px;
+    right: 100px; */
   }
 
   /* Add more classes for other fields as needed */
@@ -61,7 +61,6 @@ const TextOverlay = styled.div`
 const QROverlay = styled.div`
   position: absolute;
   cursor: move;
-
 `;
 
 const Certificate = ({
@@ -70,16 +69,23 @@ const Certificate = ({
   nationality = "nigeria",
   dateOfBirth = "nigga",
   dateOfIssue = "12/33/344",
-  isSig=false
+  isSig=false,
+  state
 }) => {
+
+   /* map though the data using object.keys so you have to chagne the names obviously
+   */
+  const {certNo:cert,qrCode:qr} = state
+
+  console.log(typeof(qr))
   const [positions, setPositions] = useState({
-    certNo: { x: 100, y: 340 },
-    name: { x: 300, y: 380 },
-    nationality: { x: 400, y: 420 },
-    dateOfBirth: { x: 300, y: 460 },
-    dateOfIssue: { x: 400, y: 500 },
-    qrCode: { x: 600, y: 800 },
-    isSig: { x: 500, y: 400 },
+    certNo: { x: 0, y: 100 },
+    name: { x: 0, y: 20 },
+    nationality: { x: 0, y: 40 },
+    dateOfBirth: { x: 0, y: 60 },
+    dateOfIssue: { x: 0, y: 80 },
+    qrCode: { x: 0, y: 150 },
+    isSig: { x: 0, y: 220 },
   });
 
   const handleDrag = (e, data, key) => {
@@ -96,7 +102,7 @@ const Certificate = ({
         position={positions.certNo}
         onStop={(e, data) => handleDrag(e, data, "certNo")}
       >
-        <TextOverlay>{certNo}</TextOverlay>
+        <TextOverlay cert={cert} className='certNo'>{certNo}</TextOverlay>
       </Draggable>
 
       <Draggable
@@ -139,7 +145,7 @@ const Certificate = ({
         <QROverlay
         //   style={{ left: positions.qrCode.x, top: positions.qrCode.y }}
         >
-          <QRCode value={qrCodeUrl} size={100} />
+          <QRCode value={qrCodeUrl} size={parseInt(qr)} />
         </QROverlay>
       </Draggable>
     </CertificateContainer>

@@ -7,7 +7,7 @@ export default function CourseList() {
   const { data } = useCourse();
 
   const approved = data?.filter(ele=>(ele.isApproved))
-  const courses = approved.sort((a, b) => {
+  const courses = approved?.sort((a, b) => {
     if (a.courseName.toLowerCase() < b.courseName.toLowerCase()) return -1;
     if (a.courseName.toLowerCase() > b.courseName.toLowerCase()) return 1;
     return 0;

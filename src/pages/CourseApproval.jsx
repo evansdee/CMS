@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import { useView } from "../hook/useView";
@@ -22,10 +21,9 @@ export default function CourseApproval() {
     <StyledContainer>
       <Row type={!isView ? "vertical" : "horizontal"}>
         <Heading as={isView ? "h2" : "h3"}>Courses Approval 👌</Heading>
-      
       </Row>
       <Main>
-        <CourseApprovalList/>
+        <CourseApprovalList />
       </Main>
     </StyledContainer>
   );
