@@ -8,7 +8,7 @@ export function useUpdateEnrollment() {
     mutationFn: ({ newEnrollment, id }) =>
       createEditEnrollment(newEnrollment, id),
     onSuccess: (data) => {
-      toast.success(`${data.fullName} has been Approved Successfully`)
+      // toast.success(`${data.fullName} has been Approved Successfully`)
       queryClient.invalidateQueries({ queryKey: ["enrollment"] });
       queryClient.invalidateQueries({ queryKey: ["student"] });
     },

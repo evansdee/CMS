@@ -13,3 +13,33 @@ body {
   line-height: 1.5;
   font-size: 1.6rem;
 }
+@font-face {
+  font-family: 'STALKER2';
+  src: url('./assets/font/STALKER2.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BRITANIC';
+  src: url('./assets/font/BRITANIC.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'CINDYBOB';
+  src: url('./assets/font/CINDYBOB_0.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ARIAL BLACK';
+  src: url('./assets/font/ariblk.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Arial Rounded MT Bold';
+  src: url('./assets/font/ARLRDBD.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

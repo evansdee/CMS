@@ -1,4 +1,4 @@
-import Certificate from "../features/Officer/Templates/PSCB";
+import Certificate from "../features/Officer/Templates/Certificate";
 
 
 

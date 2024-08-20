@@ -5,7 +5,7 @@ import Select from "../../../ui/Select";
 import { months } from "../../../helper/data";
 import Button from "../../../ui/Button";
 import styled from "styled-components";
-import { useSession } from "../Session/useSession";
+import { useCourse } from "../Enrollment/useCourse";
 
 const Container = styled.div`
     display: flex;
@@ -16,7 +16,7 @@ const Container = styled.div`
 `
 
 export default function ReportForm() {
-  const {data:session} = useSession()
+  const {data:session} = useCourse()
   const {  search, handleFilter, handleInput, years } = useReportData();
 
   return (

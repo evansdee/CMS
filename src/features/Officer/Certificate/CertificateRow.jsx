@@ -7,6 +7,14 @@ import { useNavigate } from "react-router-dom";
 
 export default function CertificateRow({ cert }) {
   const navigate = useNavigate();
+
+
+  
+  function handlePrint(){
+    const url = `/certificatePrint/${id}`
+     
+    window.open(window.location.origin+url,'_blank')
+  }
   const { id, fullName, courseName, enrollDate, certificateNo } = cert;
 
   return (
@@ -19,7 +27,7 @@ export default function CertificateRow({ cert }) {
         <Td>-</Td>
 
         <Td>
-          <ButtonIcon onClick={() => navigate(`/certificatePrint/${id}`)}>
+          <ButtonIcon onClick={handlePrint}>
             <BsPrinter />
           </ButtonIcon>
         </Td>

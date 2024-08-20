@@ -4,12 +4,13 @@ import styled from "styled-components";
 import Label from "../../../ui/Label";
 import Input from "../../../ui/Input";
 import ButtonIcon from "../../../ui/ButtonIcon";
-import { FaLock, FaLockOpen, FaPrint } from "react-icons/fa";
+import { FaPrint } from "react-icons/fa";
+import {FaAnchorCircleCheck,FaAnchorCircleXmark   } from "react-icons/fa6";
 import Flex from "../../../ui/Flex";
 
 const Container = styled.div`
-  position: absolute;
-
+  position: fixed;
+  /* top: 5%; */
   width: 20%;
   @media print {
     display: none;
@@ -24,17 +25,18 @@ const Btn = styled(ButtonIcon)``;
 export default function CertificatePanel({ state, handleInput }) {
   const [active, setActive] = useState(false);
 
-  const { qrCode, ...rest } = state;
+  const { qrCode,img, ...rest } = state;
   const data = Object.keys(rest);
 
   return (
     <Container>
       <Flex justify="center" align="center" direction="column" gap=".5em">
-        <ButtonIcon onClick={()=>window.print()}>
+        <ButtonIcon onClick={()=>window.print()} variation='danger'>
+            
             <FaPrint/>
         </ButtonIcon>
         <Btn onClick={() => setActive((p) => !p)}>
-          {active ? <FaLockOpen /> : <FaLock />}
+          {active ? <FaAnchorCircleXmark  /> : <FaAnchorCircleCheck  />}
         </Btn>
         {active && (
           <Panel>
@@ -44,8 +46,8 @@ export default function CertificatePanel({ state, handleInput }) {
                   name={ele}
                   value={state[ele]}
                   type="range"
-                  min="20"
-                  max="40"
+                  min="10"
+                  max="50"
                   onChange={handleInput}
                 />
               </Label>
@@ -57,6 +59,16 @@ export default function CertificatePanel({ state, handleInput }) {
                 type="range"
                 min="50"
                 max="150"
+                onChange={handleInput}
+              />
+            </Label>
+            <Label label={`Photo-${img}`}>
+              <Input
+                name="img"
+                value={img}
+                type="range"
+                min="10"
+                max="100"
                 onChange={handleInput}
               />
             </Label>

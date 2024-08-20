@@ -6,7 +6,7 @@ export async function addUpdateCourse(newCourse, id) {
     ""
   );
 
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/certificates/${imageName}`;
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/certificates/${imageName.trim()}`;
 
   let query = supabase.from("course");
 
@@ -40,6 +40,16 @@ export async function updateCourseCount({ item, countId }) {
     .select();
 
   if (error) throw new Error("Failed to update course");
+  return data;
+}
+export async function deleteCourse(id) {
+  const { data, error } = await supabase
+    .from("course")
+    .delete()
+    .eq("id", id)
+    .select();
+
+  if (error) throw new Error("Failed to delete course");
   return data;
 }
 

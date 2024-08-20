@@ -24,7 +24,7 @@ function Sidebar({close}) {
     <StyledSidebar>
       <Logo />
      <SideBarList close={close}/>
-    {user?.user_metadata.role ==='office' && <FakeData/>}
+    {user?.user_metadata.role ==='office' ||'cert' && <FakeData/>}
     </StyledSidebar>
   );
 }

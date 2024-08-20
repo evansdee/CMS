@@ -22,9 +22,9 @@ export default function EnrollmentTable() {
     const updatePromises = activeEnrollment.map(async (ele) => {
       const { codeAlt, courseCode } = ele;
       const count = countList?.find((item) => item.codeAlt === codeAlt && item.courseCode === courseCode);
-  
+  // console.log(count.courseCode)
       const newData = {
-        ...ele,
+        ...ele, 
         status: true,
         certificateNo: `JINSR/${courseCode}/${codeAlt}/${count?.count}/${format(
           new Date(),

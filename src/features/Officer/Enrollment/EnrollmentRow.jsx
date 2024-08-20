@@ -33,8 +33,12 @@ export default function EnrollmentRow({ enroll }) {
 
   function handleSubmit(id) {
     const { lid, ...enr } = enroll;
-    mutate({ ...enr });
-    setEnroll((p) => p.filter((ele) => ele.lid !== id));
+    mutate({ ...enr },{
+      onSuccess:()=>{
+
+        setEnroll((p) => p.filter((ele) => ele.lid !== id));
+      }
+    });
   }
   return (
     <>

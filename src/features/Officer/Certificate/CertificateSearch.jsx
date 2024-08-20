@@ -21,7 +21,7 @@ export default function CertificateSearch() {
   const filterData = useMemo(() => {
     if (search.length >= 3) {
       return data?.filter(
-        ({ fullName, gsm }) => fullName.toLowerCase().includes(search) || gsm?.includes(search)
+        ({ fullName, gsm }) => fullName.toLowerCase().includes(search.toLowerCase()) || gsm?.includes(search)
       );
     }
     

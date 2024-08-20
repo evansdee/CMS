@@ -4,17 +4,18 @@ import { useCertificate } from "../Enrollment/useEnrollment";
 import Spinner from "../../../ui/Spinner";
 import { useCourse } from "../Enrollment/useCourse";
 import CertificatePanel from "./CertificatePanel";
-import Certificate from "../Templates/PSCB";
+import Certificate from "../Templates/Certificate";
 import ErrorFallback from "../../../ui/ErrorFallback";
 
 const initialState = {
-  certNo: 10,
-  name: 10,
-  country: 10,
-  dob: 10,
-  doi: 10,
-  fromToDate: 10,
-  qrCode: 50,
+  certNo: 14,
+  name: 40,
+  country: 20,
+  dob: 20,
+  doi: 20,
+  fromToDate: 16,
+  qrCode: 80,
+  img:40
 };
 
 function certificateReducer(state, action) {
@@ -26,6 +27,7 @@ function certificateReducer(state, action) {
     case "doi":
     case "fromToDate":
     case "qrCode":
+    case "img":
       return {
         ...state,
         [action.type]: action.payload,
@@ -58,7 +60,7 @@ export default function CertificatePrint() {
   return (
     <>
       <CertificatePanel state={state} handleInput={handleInputChange} />
-      <Certificate  state={state}/>
+      <Certificate  state={state} cert={cert} data={data}/>
     </>
   );
 }
