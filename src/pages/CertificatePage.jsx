@@ -6,6 +6,7 @@ import Row from "../ui/Row";
 import { useView } from "../hook/useView";
 import { Outlet } from "react-router-dom";
 import CertificateOperations from "../features/Officer/Certificate/CertificateOpertion";
+import CertificateFilterOperations from "../features/Officer/Certificate/CertificateFilterOperations";
 
 const StyledContainer = styled.div`
   padding: 0 2em;
@@ -20,12 +21,15 @@ const Main = styled.div`
 export default function StudentPage() {
 
   const { isView } = useView();
+  const [activeBtn, setActive] = useState(true);
+
 
   return (
     <StyledContainer>
       <Row type={!isView ? "vertical" : "horizontal"}>
         <Heading as={isView ? "h2" : "h3"}>Certificate Marvel 🤯🖨</Heading>
-        <CertificateOperations/>
+        <CertificateFilterOperations active={activeBtn}/>
+        <CertificateOperations activeBtn={activeBtn} setActive={setActive}/>
       </Row>
       <Main>
         <Outlet/>

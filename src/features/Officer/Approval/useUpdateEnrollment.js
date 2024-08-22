@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export function useUpdateEnrollment() {
   const queryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending,error } = useMutation({
     mutationFn: ({ newEnrollment, id }) =>
       createEditEnrollment(newEnrollment, id),
     onSuccess: (data) => {
@@ -16,5 +16,5 @@ export function useUpdateEnrollment() {
     onError: () => toast.error("failed to approve"),
   });
 
-  return { mutate, isPending };
+  return { mutate, isPending,error };
 }

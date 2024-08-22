@@ -1,4 +1,4 @@
-import { format, isSameDay, parse, subDays } from 'date-fns';
+import { format, isSameDay, parse, subDays,startOfDay, endOfDay, isWithinInterval } from 'date-fns';
 import { isAfter } from "date-fns";
 
 export function isCurrentDayGreaterThanEndDate(endDate) {
@@ -49,6 +49,36 @@ export function filterDataFromOneDayAgo(data) {
     const parsedDate = parseDate(item.enrollDate);
     if (parsedDate) {
       return isSameDay(parsedDate, new Date());
+    } else {
+      return false;
+    }
+  });
+}
+
+
+
+export function filterDataFromLastThreeDays(data) {
+  return data?.filter(item => {
+    const parsedDate = parseDate(item.enrollDate);
+    if (parsedDate) {
+      const threeDaysAgo = startOfDay(subDays(new Date(), 2)); // Start of the day 2 days ago
+      const today = new Date(); // Now (includes the whole current day)
+      
+      return isWithinInterval(parsedDate, { start: threeDaysAgo, end: today });
+    } else {
+      return false;
+    }
+  });
+}
+
+export function filterDataFromSevenDays(data) {
+  return data?.filter(item => {
+    const parsedDate = parseDate(item.enrollDate);
+    if (parsedDate) {
+      const threeDaysAgo = startOfDay(subDays(new Date(), 6)); 
+      const today = new Date(); 
+      
+      return isWithinInterval(parsedDate, { start: threeDaysAgo, end: today });
     } else {
       return false;
     }

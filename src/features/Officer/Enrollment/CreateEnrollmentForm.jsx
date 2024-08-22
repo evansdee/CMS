@@ -18,13 +18,14 @@ import toast from "react-hot-toast";
 import { format } from "date-fns";
 import { nanoid } from "nanoid";
 import { useView } from "../../../hook/useView";
+import ErrorFallback from "../../../ui/ErrorFallback";
 
 const StyledContainer = styled.div``;
 export default function CreateEnrollmentForm() {
-  const {isView} = useView()
+  const { isView } = useView();
   const navigate = useNavigate();
   const [isStay, setIsStay] = useState(false);
-  const { data: session } = useSession();
+  const { data: session,error } = useSession();
 
   const activeSession = session?.filter((ele) => ele.active);
   const { mutate, data: state, isLoading } = useStateApi();
@@ -43,6 +44,15 @@ export default function CreateEnrollmentForm() {
       means: ["NationalIdCard"][0],
       gender: ["Male"][0],
       country: ["Nigeria"][0],
+      firstName: "Cat",
+      middleName: "Dog",
+      lastName: "Goat",
+      dob: "2024-01-01",
+      address: "nvinvk",
+      gsm: "4747474",
+      bank: ["Zenith Bank"][0],
+      courseName: ["EFFICIENT DECK HAND"][0],
+      state: ["Delta State"][0],
     },
   });
 
@@ -62,31 +72,49 @@ export default function CreateEnrollmentForm() {
       ele.courseName.includes(selectedCourseName)
     );
     if (x) {
-      if (getValues("courseCode") !== x.courseCode) setValue("courseCode", x.courseCode);
+      if (getValues("courseCode") !== x.courseCode)
+        setValue("courseCode", x.courseCode);
       if (getValues("codeAlt") !== x.codeAlt) setValue("codeAlt", x.codeAlt);
-      if (getValues("startDate") !== x.startDate) setValue("startDate", x.startDate);
+      if (getValues("startDate") !== x.startDate)
+        setValue("startDate", x.startDate);
       if (getValues("endDate") !== x.endDate) setValue("endDate", x.endDate);
-      if (getValues("newAmount") !== x.newAmount) setValue("newAmount", x.newAmount);
-      if (getValues("renewAmount") !== x.renewAmount) setValue("renewAmount", x.renewAmount);
+      if (getValues("newAmount") !== x.newAmount)
+        setValue("newAmount", x.newAmount);
+      if (getValues("renewAmount") !== x.renewAmount)
+        setValue("renewAmount", x.renewAmount);
     }
   }, [activeSession, setValue, selectedCourseName, getValues]);
 
   const { country } = useCountry();
   const { enrollArr: value, setEnroll } = useLocalEnroll();
 
+  function calculateAmount({ newAmount, renewAmount }, isRenewal) {
+    const newA = Number(newAmount);
+    const ren = Number(renewAmount);
+    console.log(typeof newAmount, typeof renewAmount, isRenewal);
+    if (isRenewal) {
+      return ren === 0 ? newA : ren;
+    } else {
+      return newA;
+    }
+  }
+
+  console.log(value);
+
+  if (error) return <ErrorFallback error={error} />;
+
   function onSubmit(data) {
-  
     const image = data.photo[0];
 
-    const {newAmount,renewAmount,...newObject} = data
+    const { newAmount, renewAmount, ...newObject } = data;
     let newObj = {
       ...newObject,
       fullName: `${data.firstName} ${data.middleName} ${data.lastName}`,
       photo: image,
       status: false,
-      enrollDate: format(new Date(),'dd MMMM yy, hh:mm aaa'),
-      amount: data.isRenewal ? renewAmount : newAmount,
-      lid:nanoid()
+      enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
+      amount: calculateAmount({ newAmount, renewAmount }, data.isRenewal),
+      lid: nanoid(),
       // enrollDate: new Date().toISOString(),
     };
 
@@ -144,7 +172,12 @@ export default function CreateEnrollmentForm() {
           </Form.FormMultipleRow>
         </div>
 
-        <Flex justify="space-between" align="center" direction={!isView ? "column" : 'row'} gap='1em'>
+        <Flex
+          justify="space-between"
+          align="center"
+          direction={!isView ? "column" : "row"}
+          gap="1em"
+        >
           <label>
             <Flex gap=".5em" align="center">
               <input

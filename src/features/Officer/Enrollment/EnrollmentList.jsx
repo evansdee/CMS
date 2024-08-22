@@ -1,20 +1,15 @@
+/* eslint-disable react/prop-types */
 import {} from "react";
 // import Table from "../../../ui/Table";
-import { useLocalEnroll } from "../../../hook/EnrollmentListContext";
 import EnrollmentRow from "./EnrollmentRow";
-import { useAddAllEnrollment, useGetEnrollment } from "./useEnrollment";
 import { filterDataFromOneDayAgo } from "../../../helper/helper";
 import Menus from "../../../ui/Menus";
 import Spinner from "../../../ui/Spinner";
-import BottomButtonAll from "../../../ui/BottomButtonAll";
 import Table from "../../../ui/Table";
 
 
-export default function EnrollmentList() {
-  const { data: enrollment } = useGetEnrollment();
-
-  const { enrollArr, setEnroll } = useLocalEnroll();
-  const { mutate, isPending } = useAddAllEnrollment();
+export default function EnrollmentList({enrollArr,enrollment,isPending}) {
+ 
 
    const filteredData = filterDataFromOneDayAgo(enrollment);
   let data =
@@ -24,15 +19,7 @@ export default function EnrollmentList() {
 
   if (isPending) return <Spinner />;
 
-  function handleEnroll() {
-    mutate(
-      enrollArr.map((ele) => {
-        const { lid, ...allEle } = ele;
-        return allEle;
-      })
-    );
-    setEnroll([]);
-  }
+ 
   return (
     <>
       {/* <div> */}
@@ -58,9 +45,7 @@ export default function EnrollmentList() {
           </Table>
         </Menus>
       {/* </div> */}
-      {enrollArr.length > 1 && (
-        <BottomButtonAll onClick={handleEnroll}>Enroll All</BottomButtonAll>
-      )}
+  
     </>
   );
 }

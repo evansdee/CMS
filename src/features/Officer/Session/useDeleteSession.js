@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export function useDeleteSession() {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending,error } = useMutation({
     mutationFn: deleteSession,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["session"] });
@@ -14,5 +14,5 @@ export function useDeleteSession() {
     onError: () => toast.error("Failed to delete"),
   });
 
-  return { mutate, isPending };
+  return { mutate, isPending,error };
 }

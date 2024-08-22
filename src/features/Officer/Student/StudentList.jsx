@@ -5,14 +5,16 @@ import Table from "../../../ui/Table";
 import StudentRow from "./StudentRow";
 import Image from "../../../ui/Image";
 import Flex from "../../../ui/Flex";
-import LStu from "../../../assets/student-light-mode.svg"
-import DStu from "../../../assets/student-dark-mode.png"
+import LStu from "../../../assets/student-light-mode.svg";
+import DStu from "../../../assets/student-dark-mode.png";
 import { useDarkMode } from "../../../hook/DarkModeToggle";
+import Spinner from "../../../ui/Spinner";
+import ErrorFallback from "../../../ui/ErrorFallback";
 
-export default function StudentList({ search,setSearch }) {
-  const {isDark} = useDarkMode()
+export default function StudentList({ search, setSearch }) {
+  const { isDark } = useDarkMode();
 
-  const { data } = useGetEnrollment();
+  const { data, error, isLoading } = useGetEnrollment();
   const txt = search.toLowerCase();
 
   const filteredData = useMemo(() => {
@@ -33,17 +35,15 @@ export default function StudentList({ search,setSearch }) {
       : [];
   }, [data, search, txt]);
 
+  if (isLoading) return <Spinner />;
+  if (error) return <ErrorFallback error={error} />;
 
-
-  console.log(filteredData)
+  console.log(filteredData);
 
   if (!filteredData?.length)
     return (
-      <Flex align='center' justify='center'>
-        <Image
-          width="30%"
-          src={isDark ? DStu: LStu}
-        />
+      <Flex align="center" justify="center">
+        <Image width="30%" src={isDark ? DStu : LStu} />
       </Flex>
     );
   return (
@@ -62,7 +62,9 @@ export default function StudentList({ search,setSearch }) {
         />
         <Table.Body
           data={filteredData}
-          render={(ele) => <StudentRow key={ele.id} student={ele} setSearch={setSearch}/>}
+          render={(ele) => (
+            <StudentRow key={ele.id} student={ele} setSearch={setSearch} />
+          )}
         />
       </Table>
     </div>

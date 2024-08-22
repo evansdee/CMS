@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export function useCreateEditSession() {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending ,error} = useMutation({
     mutationFn: createEditSession,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["session"] });
@@ -13,5 +13,5 @@ export function useCreateEditSession() {
     },
   });
 
-  return { mutate, isPending };
+  return { mutate, isPending, error};
 }

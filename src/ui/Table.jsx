@@ -5,9 +5,8 @@ import styled from "styled-components";
 const StyledTable = styled.table`
   min-width: 100%;
   border: 1px solid var(--color-grey-200);
-
+  /* overflow-x: auto; */
   border-collapse: collapse;
-  
 `;
 
 const Thead = styled.thead`
@@ -27,7 +26,6 @@ const Tbody = styled.tbody`
   /* height: 60dvh; */
   overflow-y: scroll;
   scrollbar-width: none;
-
 `;
 // const Body = styled.div`
 
@@ -47,7 +45,6 @@ const Empty = styled.tbody`
     margin: 1.5rem; /* Adjust margin for mobile */
   }
 `;
-
 
 const TableContext = createContext();
 
@@ -72,7 +69,12 @@ function Header({ data }) {
 }
 
 function Body({ data, render }) {
-  if (!data?.length) return <Empty><tr> No data to show at the moment</tr></Empty>;
+  if (!data?.length)
+    return (
+      <Empty>
+        <tr> No data to show at the moment</tr>
+      </Empty>
+    );
 
   return <Tbody>{data?.map(render)}</Tbody>;
 }

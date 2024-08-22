@@ -8,17 +8,17 @@ import {
 import toast from "react-hot-toast";
 
 export function useCourse() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["course"],
     queryFn: getCourse,
   });
 
-  return { data, isLoading };
+  return { data, isLoading, error };
 }
 
 export function useAddCourse() {
   const queryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending, error } = useMutation({
     mutationFn: addUpdateCourse,
     onSuccess: () => {
       toast.success("Course Awaiting Validation");
@@ -26,7 +26,7 @@ export function useAddCourse() {
     },
   });
 
-  return { mutate, isPending };
+  return { mutate, isPending, error };
 }
 
 export function useUpdateCourseCount() {
@@ -35,17 +35,22 @@ export function useUpdateCourseCount() {
     mutate: updateCount,
     data,
     isPending: isCounting,
+    error,
   } = useMutation({
     mutationFn: updateCourseCount,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["count"] }),
   });
 
-  return { data, updateCount, isCounting };
+  return { data, updateCount, isCounting, error };
 }
 
 export function useDeleteCourse() {
   const queryClient = useQueryClient();
-  const { mutate, isPending: isDeleting } = useMutation({
+  const {
+    mutate,
+    isPending: isDeleting,
+    error,
+  } = useMutation({
     mutationFn: deleteCourse,
     onSuccess: () => {
       toast.success("Deleted Successfully");
@@ -53,12 +58,12 @@ export function useDeleteCourse() {
     },
   });
 
-  return { mutate, isDeleting };
+  return { mutate, isDeleting, error };
 }
 
 export function useUpdateCourse() {
   const queryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending, error } = useMutation({
     mutationFn: ({ newCourse, id }) => addUpdateCourse(newCourse, id),
     onSuccess: (data) => {
       toast.success(`${data.courseCode} has been Approved Successfully`);
@@ -68,5 +73,5 @@ export function useUpdateCourse() {
     onError: () => toast.error("failed to approve"),
   });
 
-  return { mutate, isPending };
+  return { mutate, isPending, error };
 }

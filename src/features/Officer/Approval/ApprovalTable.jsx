@@ -7,16 +7,19 @@ import { format } from "date-fns";
 import { useUpdateAllStatus } from "./useUpdateAllStatus";
 import BottomButtonAll from "../../../ui/BottomButtonAll";
 import toast from "react-hot-toast";
+import ErrorFallback from "../../../ui/ErrorFallback";
 
 export default function EnrollmentTable() {
-  const { data: enrollment, isLoading } = useGetEnrollment();
+  const { data: enrollment, isLoading,error } = useGetEnrollment();
   const { updateCount } = useUpdateCourseCount();
   const { data: countList } = useCourse();
-  const {mutate,isPending} = useUpdateAllStatus()
+  const {mutate,isPending,error:studentError} = useUpdateAllStatus()
   
   
   const activeEnrollment = enrollment?.filter(ele=>(!ele.status))
   if (isLoading || isPending) return <Spinner />;
+
+  if (error || studentError) return <ErrorFallback error={error ||studentError} />;
 
   async function handleSubmitAll() {
     const updatePromises = activeEnrollment.map(async (ele) => {

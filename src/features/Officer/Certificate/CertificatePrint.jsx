@@ -8,12 +8,12 @@ import Certificate from "../Templates/Certificate";
 import ErrorFallback from "../../../ui/ErrorFallback";
 
 const initialState = {
-  certNo: 14,
-  name: 40,
-  country: 20,
-  dob: 20,
-  doi: 20,
-  fromToDate: 16,
+  certNo: 25,
+  name: 30,
+  country: 25,
+  dob: 25,
+  doi: 25,
+  fromToDate: 25,
   qrCode: 80,
   img:40
 };
@@ -56,7 +56,7 @@ export default function CertificatePrint() {
     (ele) => ele.courseCode === data.courseCode && ele.codeAlt === data.codeAlt
   );
 
-  // console.log(cert);
+  console.log(cert);
   return (
     <>
       <CertificatePanel state={state} handleInput={handleInputChange} />

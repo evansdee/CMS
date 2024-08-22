@@ -6,7 +6,7 @@ import { createEditSession } from "../../../service/apiSession";
 export function useEditSession() {
   const queryClient = useQueryClient();
 
-  const { mutate: editSession, isPending: isEditing } = useMutation({
+  const { mutate: editSession, isPending: isEditing,error } = useMutation({
     mutationFn: ({ newSession, id }) => createEditSession(newSession, id),
     onSuccess: (data) => {
       toast.success(`${data?.courseName} Session successfully edited`);
@@ -15,5 +15,5 @@ export function useEditSession() {
     onError: (err) => toast.error(err.message),
   });
 
-  return { isEditing, editSession };
+  return { isEditing, editSession,error };
 }

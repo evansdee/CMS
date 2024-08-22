@@ -18,10 +18,11 @@ import { MdNumbers, MdOutlineEmail } from "react-icons/md";
 import { IoIdCardOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { useCourse, useUpdateCourseCount } from "../Enrollment/useCourse";
+import ErrorFallback from "../../../ui/ErrorFallback";
 
-export default function ApprovalView({ data, onCloseModal,updateStudent }) {
+export default function ApprovalView({ data, onCloseModal, updateStudent }) {
   const { updateCount } = useUpdateCourseCount();
-  const { data: countList } = useCourse();
+  const { data: countList, error } = useCourse();
   const mutate = useDeleteEnrollment();
   const {
     id,
@@ -41,11 +42,13 @@ export default function ApprovalView({ data, onCloseModal,updateStudent }) {
     gsm,
     email,
     means,
-    meansId
+    meansId,
   } = data;
 
   function handleUpdate() {
-    const count = countList?.find((ele) => ele.codeAlt === codeAlt && ele.courseCode === courseCode);
+    const count = countList?.find(
+      (ele) => ele.codeAlt === codeAlt && ele.courseCode === courseCode
+    );
 
     let newObj = {
       newEnrollment: {
@@ -60,7 +63,7 @@ export default function ApprovalView({ data, onCloseModal,updateStudent }) {
     };
 
     // console.log(newObj);
-    updateStudent(newObj)
+    updateStudent(newObj);
     updateCount({
       item: { ...count, count: count.count + 1 },
       countId: count.courseName,
@@ -72,7 +75,7 @@ export default function ApprovalView({ data, onCloseModal,updateStudent }) {
     mutate(id);
     onCloseModal?.();
   }
-
+  if (error) return <ErrorFallback error={error} />;
 
   return (
     <GridContainer>
@@ -140,25 +143,29 @@ export default function ApprovalView({ data, onCloseModal,updateStudent }) {
         </div>
         <div>
           <Flex align="center" gap=".5em">
-            {marital.toLowerCase() === 'single' ? <AiOutlineUser />:<AiFillHeart />}
+            {marital.toLowerCase() === "single" ? (
+              <AiOutlineUser />
+            ) : (
+              <AiFillHeart />
+            )}
             <span>{marital}</span>
           </Flex>
         </div>
       </GridItem>
       <GridItem className="item3">
-      <div>
+        <div>
           <Flex align="center" gap=".5em">
             <FaRegAddressCard />
             <span>{address}</span>
           </Flex>
         </div>
-      <div>
+        <div>
           <Flex align="center" gap=".5em">
             <FaPhone />
             <span>{gsm}</span>
           </Flex>
         </div>
-      <div>
+        <div>
           <Flex align="center" gap=".5em">
             <MdOutlineEmail />
             <span>{email}</span>
@@ -166,15 +173,15 @@ export default function ApprovalView({ data, onCloseModal,updateStudent }) {
         </div>
       </GridItem>
       <GridItem className="item5">
-      <div>
+        <div>
           <Flex align="center" gap=".5em">
-            <IoIdCardOutline  />
+            <IoIdCardOutline />
             <span>{means}</span>
           </Flex>
         </div>
-      <div>
+        <div>
           <Flex align="center" gap=".5em">
-            <MdNumbers  />
+            <MdNumbers />
             <span>{meansId}</span>
           </Flex>
         </div>

@@ -8,9 +8,10 @@ import Button from "../../../ui/Button";
 import { useAddCourse } from "../Enrollment/useCourse";
 import SpinnerMini from "../../../ui/SpinnerMini";
 import Select from "../../../ui/Select";
+import ErrorFallback from "../../../ui/ErrorFallback";
 
 export default function AddCourse({ onCloseModal }) {
-  const { mutate, isPending } = useAddCourse();
+  const { mutate, isPending,error } = useAddCourse();
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {
       courseName: "HELMS",
@@ -22,6 +23,8 @@ export default function AddCourse({ onCloseModal }) {
     },
   });
   const { errors } = formState;
+  if (error) return <ErrorFallback error={error} />;
+
 
   function onSubmit(data) {
     const newCourse = {

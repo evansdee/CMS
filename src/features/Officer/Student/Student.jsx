@@ -42,7 +42,7 @@ const EditForm = styled.div`
 `;
 
 export default function Student({ studentToEdit: data = {}, onCloseModal }) {
-  const { mutate, isPending } = useUpdateEnrollment();
+  const { mutate, isPending,error } = useUpdateEnrollment();
 
   const { id, ...editValues } = data;
   const isEditStudent = Boolean(id);

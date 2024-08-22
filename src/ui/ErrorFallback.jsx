@@ -37,7 +37,7 @@ export default function ErrorFallback({error}) {
   return (
     <StyledErrorFallback>
       <Box>
-        <Heading as='h2'> Something went wrong 😂</Heading>
+        <Heading as='h2'> Something went wrong 😂 {error}</Heading>
       </Box>
     </StyledErrorFallback>
   )

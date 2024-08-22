@@ -8,10 +8,9 @@ import { family } from "../../../helper/data";
 
 const CertificateContainer = styled.div`
   position: relative;
-  /* background-color: red; */
-  width: 8.27in; /* A4 width in inches */
+  width: 8.07in; /* A4 width in inches */
   height: ${(prop) =>
-    prop.size === "short" ? "5.845in" : "11.69in"}; /* A4 height in inches */
+    prop.size === "short" ? "5.445in" : "11.69in"}; /* A4 height in inches */
   background-image: url(${(prop) => `${prop.certImg}`});
   background-size: contain;
   overflow: hidden;
@@ -19,12 +18,11 @@ const CertificateContainer = styled.div`
   background-repeat: no-repeat;
   margin: 0 auto;
   box-sizing: border-box;
-
   @media print {
     max-width: 100%;
-
     background-size: contain;
     page-break-inside: avoid;
+    /* margin: 0 5em; */
   }
 `;
 
@@ -45,7 +43,7 @@ const TextOverlay = styled.div`
       #28282b;
     padding: 0;
     line-height: 0.7em;
-    text-transform:upperCase;
+    text-transform: upperCase;
   }
   &.endDate,
   &.startDate {
@@ -78,12 +76,15 @@ const Certificate = ({ state, cert, data }) => {
   const qrCodeUrl = `https://verification.joemarineng.com/${data.id}`;
   console.log(data);
 
-  const fm = family.find((ele) => ele.id === data.courseCode ||  {
-    // id:'MOTM',
-    mainFamily:'BRITANIC',
-    otherFamily:'Cindybob',
-    normal:'Arial'
-  });
+  const fm = family.find(
+    (ele) =>
+      ele.id === data.courseCode || {
+        // id:'MOTM',
+        mainFamily: "BRITANIC",
+        otherFamily: "Cindybob",
+        normal: "Arial",
+      }
+  );
   const fields = [
     {
       key: "certNo",
@@ -117,21 +118,18 @@ const Certificate = ({ state, cert, data }) => {
       ),
       fontSize: state.doi,
       position: size === "short" ? { x: 656, y: 479 } : { x: 0, y: 20 },
-
     },
     {
       key: "startDate",
       text: format(parseISO(data.startDate), "dd MMM yy"),
       fontSize: state.fromToDate,
       position: size === "short" ? { x: 404, y: 393 } : { x: 0, y: 20 },
-
     },
     {
       key: "endDate",
       text: format(parseISO(data.endDate), "dd MMM yy"),
       fontSize: state.fromToDate,
       position: size === "short" ? { x: 539, y: 393 } : { x: 0, y: 20 },
-
     },
     {
       key: "isSignature",

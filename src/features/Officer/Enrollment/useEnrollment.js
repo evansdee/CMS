@@ -19,12 +19,12 @@ export function useAddEnrollment() {
 
 
 export function useGetEnrollment(){
-const {data,isLoading} = useQuery({
+const {data,isLoading,error} = useQuery({
   queryKey:['enrollment'],
   queryFn:getEnrollment,
 })
 
-return {data,isLoading}
+return {data,isLoading,error}
 
 }
 

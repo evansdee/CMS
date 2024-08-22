@@ -16,7 +16,13 @@ const Container = styled.div`
 `
 
 export default function ReportForm() {
-  const {data:session} = useCourse()
+  const {data} = useCourse()
+
+  const session = data?.sort((a, b) => {
+    if (a.courseName.toLowerCase() < b.courseName.toLowerCase()) return -1;
+    if (a.courseName.toLowerCase() > b.courseName.toLowerCase()) return 1;
+    return 0;
+  });
   const {  search, handleFilter, handleInput, years } = useReportData();
 
   return (

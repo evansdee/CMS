@@ -14,7 +14,7 @@ export default function StudentSearch({ search, setSearch }) {
     <SearchOperation>
       <Input
         type="text"
-        placeholder="Search by Name, Certfiicate No or Phone No"
+        placeholder="Search by Name, Course Code or Phone No"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
