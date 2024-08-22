@@ -85,6 +85,7 @@ const Certificate = ({ state, cert, data }) => {
         normal: "Arial",
       }
   );
+  
   const fields = [
     {
       key: "certNo",

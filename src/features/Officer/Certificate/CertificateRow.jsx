@@ -4,6 +4,7 @@ import ButtonIcon from "../../../ui/ButtonIcon";
 import Table from "../../../ui/Table";
 import Td from "../../../ui/TableRow";
 import { useNavigate } from "react-router-dom";
+import { MdOutlinePrint, MdOutlinePrintDisabled } from "react-icons/md";
 
 export default function CertificateRow({ cert }) {
   const navigate = useNavigate();
@@ -13,7 +14,8 @@ export default function CertificateRow({ cert }) {
 
     window.open(window.location.origin + url, "_blank");
   }
-  const { id, fullName, courseName, enrollDate, certificateNo } = cert;
+  const { id, fullName, courseName, enrollDate, certificateNo, printStatus } =
+    cert;
 
   return (
     <>
@@ -22,7 +24,15 @@ export default function CertificateRow({ cert }) {
         <Td>{courseName}</Td>
         <Td>{certificateNo}</Td>
         <Td>{enrollDate}</Td>
-        <Td>-</Td>
+        <Td
+          style={{
+            color: `${
+              printStatus ? "var(--color-green-700)" : "var(--color-red-700)"
+            }`,
+          }}
+        >
+          {printStatus ? <MdOutlinePrint /> : <MdOutlinePrintDisabled />}
+        </Td>
 
         <Td>
           <ButtonIcon onClick={handlePrint}>

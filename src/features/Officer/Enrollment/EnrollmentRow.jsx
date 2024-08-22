@@ -61,7 +61,7 @@ export default function EnrollmentRow({ enroll }) {
         {!status && (
           <Td>
             <Modal>
-             {isPending ? <SpinnerMini/>: <Menus.Menu>
+             {isPending ? <SpinnerMini/>: <Menus.Menu disabled={isPending}>
                 <Menus.Toggle id={lid} />
 
                 <Menus.List id={lid}>

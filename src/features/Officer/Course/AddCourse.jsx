@@ -11,7 +11,7 @@ import Select from "../../../ui/Select";
 import ErrorFallback from "../../../ui/ErrorFallback";
 
 export default function AddCourse({ onCloseModal }) {
-  const { mutate, isPending,error } = useAddCourse();
+  const { mutate, isPending, error } = useAddCourse();
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {
       courseName: "HELMS",
@@ -24,7 +24,6 @@ export default function AddCourse({ onCloseModal }) {
   });
   const { errors } = formState;
   if (error) return <ErrorFallback error={error} />;
-
 
   function onSubmit(data) {
     const newCourse = {
@@ -41,7 +40,7 @@ export default function AddCourse({ onCloseModal }) {
     // onCloseModal?.()
   }
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} type="modal">
       <FormRow label="Certificate Template">
         <FileInput
           type="file"

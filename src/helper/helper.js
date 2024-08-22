@@ -57,26 +57,12 @@ export function filterDataFromOneDayAgo(data) {
 
 
 
-export function filterDataFromLastThreeDays(data) {
+export function filterDataFromLastDays(data,value) {
   return data?.filter(item => {
     const parsedDate = parseDate(item.enrollDate);
     if (parsedDate) {
-      const threeDaysAgo = startOfDay(subDays(new Date(), 2)); // Start of the day 2 days ago
+      const threeDaysAgo = startOfDay(subDays(new Date(), value)); // Start of the day 2 days ago
       const today = new Date(); // Now (includes the whole current day)
-      
-      return isWithinInterval(parsedDate, { start: threeDaysAgo, end: today });
-    } else {
-      return false;
-    }
-  });
-}
-
-export function filterDataFromSevenDays(data) {
-  return data?.filter(item => {
-    const parsedDate = parseDate(item.enrollDate);
-    if (parsedDate) {
-      const threeDaysAgo = startOfDay(subDays(new Date(), 6)); 
-      const today = new Date(); 
       
       return isWithinInterval(parsedDate, { start: threeDaysAgo, end: today });
     } else {

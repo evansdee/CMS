@@ -3,8 +3,7 @@ import Table from "../../../ui/Table";
 import { useGetEnrollment } from "../Enrollment/useEnrollment";
 import {
   filterDataFromOneDayAgo,
-  filterDataFromLastThreeDays,
-  filterDataFromSevenDays,
+  filterDataFromLastDays,
 } from "../../../helper/helper";
 import CertificateRow from "./CertificateRow";
 import Spinner from "../../../ui/Spinner";
@@ -15,14 +14,15 @@ import LightCert from "../../../assets/cert-light-mode.png";
 import { useDarkMode } from "../../../hook/DarkModeToggle";
 import { useSearchParams } from "react-router-dom";
 import ErrorFallback from "../../../ui/ErrorFallback";
+import { parse } from "date-fns";
 
 export default function CertificateList() {
   const { isDark } = useDarkMode();
 
-  const { data: enrollment, isLoading,error } = useGetEnrollment();
+  const { data: enrollment, isLoading, error } = useGetEnrollment();
   const today = filterDataFromOneDayAgo(enrollment);
-  const three = filterDataFromLastThreeDays(enrollment);
-  const seven = filterDataFromSevenDays(enrollment);
+  const three = filterDataFromLastDays(enrollment,2);
+  const seven = filterDataFromLastDays(enrollment,6);
 
   const [searchParams] = useSearchParams();
 
@@ -33,7 +33,6 @@ export default function CertificateList() {
 
   if (isLoading) return <Spinner />;
   if (error) return <ErrorFallback error={error} />;
-
 
   function handleFilter(arr) {
     const data = arr.filter(
@@ -46,6 +45,17 @@ export default function CertificateList() {
   if (filterValue === "today") filterArray = handleFilter(today);
   if (filterValue === "3") filterArray = handleFilter(three);
   if (filterValue === "7") filterArray = handleFilter(seven);
+
+  function sortByEnrollDate(arr) {
+    return arr.sort((a, b) => {
+      const dateA = parse(a.enrollDate, "dd MMMM yy, hh:mm a", new Date());
+      const dateB = parse(b.enrollDate, "dd MMMM yy, hh:mm a", new Date());
+
+      return dateB - dateA; // For ascending order, or dateB - dateA for descending order
+    });
+  }
+
+  filterArray = sortByEnrollDate(filterArray)
 
   if (!filterArray?.length)
     return (

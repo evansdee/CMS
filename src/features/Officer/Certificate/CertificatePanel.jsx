@@ -1,12 +1,15 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Label from "../../../ui/Label";
 import Input from "../../../ui/Input";
 import ButtonIcon from "../../../ui/ButtonIcon";
 import { FaPrint } from "react-icons/fa";
-import {FaAnchorCircleCheck,FaAnchorCircleXmark   } from "react-icons/fa6";
+import { FaAnchorCircleCheck, FaAnchorCircleXmark } from "react-icons/fa6";
 import Flex from "../../../ui/Flex";
+import { useUpdateEnrollment } from "../Approval/useUpdateEnrollment";
+import SpinnerMini from "../../../ui/SpinnerMini";
+import ErrorFallback from "../../../ui/ErrorFallback";
 
 const Container = styled.div`
   position: fixed;
@@ -22,21 +25,39 @@ const Panel = styled.div`
   border-radius: 20px;
 `;
 const Btn = styled(ButtonIcon)``;
-export default function CertificatePanel({ state, handleInput }) {
+export default function CertificatePanel({ state, handleInput, data: enroll }) {
+  const { mutate, isPending, error } = useUpdateEnrollment();
   const [active, setActive] = useState(false);
 
-  const { qrCode,img, ...rest } = state;
+  useEffect(() => {
+    const handleAfterPrint = () => {
+      if (enroll.printStatus) return;
+
+      mutate({
+        newEnrollment: { ...enroll, printStatus: true },
+        id: enroll.id,
+      });
+      console.log("Print dialog closed.");
+    };
+
+    window.addEventListener("afterprint", handleAfterPrint);
+
+    return () => {
+      window.removeEventListener("afterprint", handleAfterPrint);
+    };
+  }, []);
+  const { qrCode, img, ...rest } = state;
   const data = Object.keys(rest);
 
+  if(error) return <ErrorFallback error={error}/>
   return (
     <Container>
       <Flex justify="center" align="center" direction="column" gap=".5em">
-        <ButtonIcon onClick={()=>window.print()} variation='danger'>
-            
-            <FaPrint/>
+        <ButtonIcon onClick={() => window.print()} variation="danger">
+          {isPending ? <SpinnerMini/>:<FaPrint />}
         </ButtonIcon>
         <Btn onClick={() => setActive((p) => !p)}>
-          {active ? <FaAnchorCircleXmark  /> : <FaAnchorCircleCheck  />}
+          {active ? <FaAnchorCircleXmark /> : <FaAnchorCircleCheck />}
         </Btn>
         {active && (
           <Panel>

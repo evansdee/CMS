@@ -29,7 +29,7 @@ export default function StudentList({ search, setSearch }) {
           .filter(
             (ele) =>
               ele.fullName.toLowerCase().includes(txt) ||
-              ele.certificateNo.toLowerCase().includes(txt)
+              ele.courseCode.toLowerCase().includes(txt)
             // ele.gsm.toLowerCase().includes(txt)
           )
       : [];

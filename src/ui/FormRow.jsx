@@ -4,9 +4,9 @@ const StyledFormRow = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 20rem 1fr;
-  gap: 2.4rem;
+  gap: 2rem;
 
-  padding: 1.2rem 0;
+  padding:1.2rem 0;
 
   &:first-child {
     padding-top: 0;
@@ -23,7 +23,7 @@ const StyledFormRow = styled.div`
   &:has(button) {
     display: flex;
     justify-content: flex-end;
-    gap: 1.2rem;
+    gap: 1rem;
   }
 `;
 

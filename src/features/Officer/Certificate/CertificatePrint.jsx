@@ -53,13 +53,13 @@ export default function CertificatePrint() {
   if(error) return <ErrorFallback error={error}/>
 
   const cert = courses?.find(
-    (ele) => ele.courseCode === data.courseCode && ele.codeAlt === data.codeAlt
+    (ele) => ele.courseName === data.courseName
   );
 
-  console.log(cert);
+  console.log(data);
   return (
     <>
-      <CertificatePanel state={state} handleInput={handleInputChange} />
+      <CertificatePanel state={state} handleInput={handleInputChange} data={data}/>
       <Certificate  state={state} cert={cert} data={data}/>
     </>
   );
