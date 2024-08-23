@@ -96,7 +96,7 @@ function App() {
                   </Route>
                   <Route path="test" element={<Test />} />
                   <Route
-                        path="certificatePrint/:id"
+                        path="certificateprint/:id"
                         element={<CertificatePrint />}
                       />
 

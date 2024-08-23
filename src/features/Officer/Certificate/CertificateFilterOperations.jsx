@@ -3,7 +3,7 @@ import Filter from "../../../ui/Filter";
 
 export default function CertificateFilterOperations({ active }) {
 
-    console.log(active)
+    // console.log(active)
   return (
     <>
       {active && (

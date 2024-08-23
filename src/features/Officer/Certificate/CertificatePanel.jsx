@@ -37,7 +37,7 @@ export default function CertificatePanel({ state, handleInput, data: enroll }) {
         newEnrollment: { ...enroll, printStatus: true },
         id: enroll.id,
       });
-      console.log("Print dialog closed.");
+      // console.log("Print dialog closed.");
     };
 
     window.addEventListener("afterprint", handleAfterPrint);
@@ -45,7 +45,7 @@ export default function CertificatePanel({ state, handleInput, data: enroll }) {
     return () => {
       window.removeEventListener("afterprint", handleAfterPrint);
     };
-  }, []);
+  }, [enroll,mutate]);
   const { qrCode, img, ...rest } = state;
   const data = Object.keys(rest);
 

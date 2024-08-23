@@ -19,9 +19,7 @@ const Main = styled.div`
   margin: 1em 0 0;
 `;
 export const Bottom = styled.div`
-  /* position: absolute;
-  right: 5%;
-  bottom: 5%; */
+ 
 `;
 export default function Session() {
   const { isView } = useView();

@@ -15,7 +15,7 @@ export default function SignatureTable() {
     (ele) => ele.isSignature === null && ele.status
   );
 
-  console.log(activeSignature);
+  // console.log(activeSignature);
 
   function handleAll(arr, value) {
     mutate(

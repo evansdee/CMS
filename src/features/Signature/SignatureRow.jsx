@@ -9,7 +9,6 @@ import Table from "../../ui/Table-v1";
 import ButtonIcon from "../../ui/ButtonIcon";
 import { useUpdateEnrollment } from "../Officer/Approval/useUpdateEnrollment";
 
-
 const GridCell = styled.div`
   padding: 0 0.5rem;
 
@@ -35,8 +34,7 @@ const GridCell = styled.div`
 
 export default function SignatureRow({ enroll }) {
   const { id, fullName, certificateNo } = enroll;
-  const { mutate: updateStudent,isPending } = useUpdateEnrollment();
-
+  const { mutate: updateStudent, isPending } = useUpdateEnrollment();
 
   function handleApprove() {
     const newObj = {
@@ -47,22 +45,25 @@ export default function SignatureRow({ enroll }) {
       id: id,
     };
 
-    console.log(newObj)
-    updateStudent(newObj,{onSuccess:()=>toast.success(`Signature Approved`)})
+    // console.log(newObj);
+    updateStudent(newObj, {
+      onSuccess: () => toast.success(`Signature Approved`),
+    });
   }
 
-  function handleDissapprove(){
+  function handleDissapprove() {
     const newObj = {
-        newEnrollment: {
-          ...enroll,
-          isSignature: false,
-        },
-        id: id,
-      };
-  
-      console.log(newObj)
-    updateStudent(newObj,{onSuccess:()=>toast.success(`Signature Dissapproved`)})
+      newEnrollment: {
+        ...enroll,
+        isSignature: false,
+      },
+      id: id,
+    };
 
+    console.log(newObj);
+    updateStudent(newObj, {
+      onSuccess: () => toast.success(`Signature Dissapproved`),
+    });
   }
 
   return (
@@ -72,15 +73,18 @@ export default function SignatureRow({ enroll }) {
         <GridCell>{certificateNo}</GridCell>
 
         <GridCell>
-        { isPending ? <SpinnerMini/> : <>
-        <ButtonIcon onClick={handleApprove}>
-            <FcApprove />
-          </ButtonIcon>
-          <ButtonIcon onClick={handleDissapprove}>
-            <FcDisapprove />
-          </ButtonIcon>
-        </>
-          }
+          {isPending ? (
+            <SpinnerMini />
+          ) : (
+            <>
+              <ButtonIcon onClick={handleApprove}>
+                <FcApprove />
+              </ButtonIcon>
+              <ButtonIcon onClick={handleDissapprove}>
+                <FcDisapprove />
+              </ButtonIcon>
+            </>
+          )}
         </GridCell>
       </Table.Row>
     </>

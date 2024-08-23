@@ -10,7 +10,7 @@ export default function CertificateRow({ cert }) {
   const navigate = useNavigate();
 
   function handlePrint() {
-    const url = `/certificatePrint/${id}`;
+    const url = `/certificateprint/${id}`;
 
     window.open(window.location.origin + url, "_blank");
   }

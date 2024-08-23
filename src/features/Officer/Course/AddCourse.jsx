@@ -34,7 +34,7 @@ export default function AddCourse({ onCloseModal }) {
       isApproved: false,
       certImg: data.certImg[0],
     };
-    console.log(newCourse);
+    // console.log(newCourse);
 
     mutate(newCourse, { onSuccess: () => onCloseModal?.() });
     // onCloseModal?.()

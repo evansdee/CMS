@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Heading from "./Heading";
+import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 
 const StyledErrorFallback = styled.main`
@@ -34,11 +36,13 @@ const Box = styled.div`
 
 
 export default function ErrorFallback({error}) {
+  const navigate = useNavigate()
   return (
     <StyledErrorFallback>
       <Box>
         <Heading as='h2'> Something went wrong 😂 {error}</Heading>
-      </Box>
+      </Box><br />
+      <Button onClick={()=>navigate(-1)}>Go back</Button>
     </StyledErrorFallback>
   )
 }

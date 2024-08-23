@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LoginUi from "../features/authentication/LoginUi";
 
@@ -11,17 +10,6 @@ const StyledLogin = styled.div`
   position: relative;
 
 
-  &::after{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-grey-700);
-    opacity: .6;
-    z-index: 1;
-  }
 `;
 
 export default function Login() {

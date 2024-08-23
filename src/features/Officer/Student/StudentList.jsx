@@ -38,7 +38,7 @@ export default function StudentList({ search, setSearch }) {
   if (isLoading) return <Spinner />;
   if (error) return <ErrorFallback error={error} />;
 
-  console.log(filteredData);
+  // console.log(filteredData);
 
   if (!filteredData?.length)
     return (

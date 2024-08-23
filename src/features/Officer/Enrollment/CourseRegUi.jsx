@@ -1,12 +1,9 @@
-/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import Input from "../../../ui/Input";
 import Label from "../../../ui/Label";
 import Select from "../../../ui/Select";
 import Heading from "../../../ui/Heading";
 import Form from "./Form";
-
-
 
 export default function CourseRegUi({
   register,
@@ -20,7 +17,9 @@ export default function CourseRegUi({
       <div>
         <Form.FormMultipleRow>
           <Label label="Course" error={errors?.courseName?.message}>
-            <Select {...register("courseName",{required:'No Course Selected'})}>
+            <Select
+              {...register("courseName", { required: "No Course Selected" })}
+            >
               <option value="">Select Course</option>
               {activeSession?.map((ele) => (
                 <option key={ele.id} value={ele.courseName}>
@@ -33,8 +32,8 @@ export default function CourseRegUi({
             <Input type="checkbox" {...register("isRenewal")} />
             <Input type="hidden" {...register("courseCode")} />
           </Label>
-          <Label label="Bank"  error={errors?.bank?.message}>
-            <Select {...register("bank",{required:'Field required'})}>
+          <Label label="Bank" error={errors?.bank?.message}>
+            <Select {...register("bank", { required: "Field required" })}>
               <option value="">Select Bank</option>
               {["AMJU bank", "Zenith Bank"]?.map((ele) => (
                 <option key={ele} value={ele}>
@@ -75,7 +74,7 @@ const Cell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   &:nth-child(-n + 3) {
     background-color: var(--color-grey-200); /* Example styling */
     padding: 10px;
@@ -84,7 +83,7 @@ const Cell = styled.div`
       padding: 8px; /* Adjust padding for mobile */
     }
   }
-  
+
   &:nth-child(n + 4) {
     font-size: 0.9em;
 

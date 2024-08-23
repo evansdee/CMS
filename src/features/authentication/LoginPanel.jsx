@@ -19,7 +19,7 @@ const StyledNav = styled(NavLink)`
 
   &:active {
     color: white;
-    background-color: #007bff;
+    background-color: var(--color-icon);
   }
   .active{
     color: red;

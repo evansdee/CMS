@@ -6,6 +6,7 @@ import { formatToNaira } from "../../helper/helper";
 import { HiOutlineBanknotes } from "react-icons/hi2";
 import { useCourse } from "../Officer/Enrollment/useCourse";
 import { FaBookOpenReader } from "react-icons/fa6";
+import { RiRefund2Fill } from "react-icons/ri";
 
 export default function Stats({ data }) {
 
@@ -40,7 +41,7 @@ export default function Stats({ data }) {
       <Stat
         title={"Renewal"}
         color={"yellow"}
-         icon={<FaBookOpenReader />}
+         icon={<RiRefund2Fill />}
          value={renew?.length}
       />
     </>

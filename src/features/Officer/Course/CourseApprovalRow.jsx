@@ -12,18 +12,17 @@ import { HiOutlineTrash } from "react-icons/hi2";
 
 export default function CourseApprovalRow({ course }) {
   const { mutate, isPending } = useUpdateCourse();
-  const { mutate:dell, isDeleting } = useDeleteCourse();
-
+  const { mutate: dell, isDeleting } = useDeleteCourse();
 
   const { id, courseName, courseCode, codeAlt, newAmount } = course;
 
-  console.log(id)
+  // console.log(id);
   function handleApprove() {
     mutate({ newCourse: { ...course, isApproved: true }, id });
   }
 
-  function handleDelete(){
-    dell(id)
+  function handleDelete() {
+    dell(id);
   }
   return (
     <Table.Row>
@@ -38,7 +37,7 @@ export default function CourseApprovalRow({ course }) {
             <ButtonIcon onClick={handleApprove}>
               <FaBookOpenReader />
             </ButtonIcon>
-            <ButtonIcon variation='danger' onClick={handleDelete}>
+            <ButtonIcon variation="danger" onClick={handleDelete}>
               <HiOutlineTrash />
             </ButtonIcon>
           </>

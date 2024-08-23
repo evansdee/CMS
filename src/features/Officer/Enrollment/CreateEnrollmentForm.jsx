@@ -25,7 +25,7 @@ export default function CreateEnrollmentForm() {
   const { isView } = useView();
   const navigate = useNavigate();
   const [isStay, setIsStay] = useState(false);
-  const { data: session,error } = useSession();
+  const { data: session, error } = useSession();
 
   const activeSession = session?.filter((ele) => ele.active);
   const { mutate, data: state, isLoading } = useStateApi();
@@ -99,7 +99,7 @@ export default function CreateEnrollmentForm() {
     }
   }
 
-  console.log(value);
+  // console.log(value);
 
   if (error) return <ErrorFallback error={error} />;
 
@@ -115,6 +115,7 @@ export default function CreateEnrollmentForm() {
       enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
       amount: calculateAmount({ newAmount, renewAmount }, data.isRenewal),
       lid: nanoid(),
+      printStatus:false
       // enrollDate: new Date().toISOString(),
     };
 

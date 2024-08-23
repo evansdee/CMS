@@ -6,6 +6,7 @@ import { useLogin } from "./useLogin";
 import SpinnerMini from "../../ui/SpinnerMini";
 import toast from "react-hot-toast";
 import LoginPanel from "./LoginPanel";
+import ErrorFallback from "../../ui/ErrorFallback";
 
 const StyledLogin = styled.div`
   display: flex;
@@ -22,20 +23,24 @@ const StyledLogin = styled.div`
   }
 `;
 
+
 export default function LoginUi() {
   const [email, setEmail] = useState("certificateofficer@joemarineng.com");
   const [password, setPassword] = useState("12345678");
 
-  const {login,isLoading,error} = useLogin()
+  const {login,isLoading,isError} = useLogin()
 
-  if(error) return <p>{error.message} something went wrong</p>
+  // if(error) return <ErrorFallback error={error.message}/>
 
   function handleSubmut(e){
     e.preventDefault()
     if(!email) return
-    login({email,password},{onError:()=>{
-      toast.error("Check your Network")
-    }})
+    login({email,password})
+
+    if(isError){
+      setEmail('')
+      setPassword('')
+    }
   }
 
   return (

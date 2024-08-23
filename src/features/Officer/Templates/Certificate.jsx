@@ -74,7 +74,7 @@ const Certificate = ({ state, cert, data }) => {
   const { certImg, size } = cert;
   // console.log(cert);
   const qrCodeUrl = `https://verification.joemarineng.com/${data.id}`;
-  console.log(data);
+  // console.log(data);
 
   const fm = family.find(
     (ele) =>

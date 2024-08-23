@@ -31,7 +31,7 @@ export async function createEditEnrollment(newEnrollment, id) {
   // 3. Delete the cabin IF there was an error uplaoding image
   if (storageError) {
     await supabase.from("enrollment").delete().eq("id", data.id);
-    console.error(storageError);
+    // console.error(storageError);
     throw new Error(
       "Cabin image could not be uploaded and the cabin was not created"
     );
@@ -76,7 +76,7 @@ export async function updateAllEnrollmentData(objects) {
       // 3. Delete the cabin IF there was an error uplaoding image
       if (photoError) {
         await supabase.from("enrollment").delete().eq("id", data.id);
-        console.error(photoError);
+        // console.error(photoError);
         throw new Error(
           "Student image could not be uploaded and the cabin was not created"
         );

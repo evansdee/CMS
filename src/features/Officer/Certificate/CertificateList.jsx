@@ -27,7 +27,7 @@ export default function CertificateList() {
   const [searchParams] = useSearchParams();
 
   const filterValue = searchParams.get("date") || "today";
-  console.log(three, seven, today);
+  // console.log(three, seven, today);
 
   let filterArray;
 

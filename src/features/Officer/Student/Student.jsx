@@ -57,7 +57,7 @@ export default function Student({ studentToEdit: data = {}, onCloseModal }) {
     const photo = typeof data.photo === "string" ? data.photo : data.photo[0];
     const { firstName, middleName, lastName } = data;
 
-    console.log(data);
+    // console.log(data);
     mutate(
       {
         newEnrollment: {

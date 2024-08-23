@@ -589,7 +589,8 @@ const fakeData = fake.map((ele, i) => {
     middleName: second,
     lastName: third,
     startDate:'2024-06-12',
-    endDate:"2024-05-10"
+    endDate:"2024-05-10",
+    printStatus:false
   };
 });
 

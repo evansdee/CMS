@@ -6,8 +6,6 @@ export async function getCountry() {
   return data;
 }
 
-
-
 export async function upDateState(country) {
   const res = await fetch(
     "https://countriesnow.space/api/v0.1/countries/states",

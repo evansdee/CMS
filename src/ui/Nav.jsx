@@ -11,6 +11,7 @@ import Sidebar from "./Sidebar";
 import { useMenuToggle } from "../hook/useMenuToggle";
 import { FaAnchorCircleCheck } from "react-icons/fa6";
 import { BiSolidShip } from "react-icons/bi";
+import { role } from "../features/authentication/useLogin";
 
 const StyledNav = styled.nav`
   background-color: var(--color-grey-0);
@@ -51,31 +52,12 @@ export default function Nav() {
     if (isView) setIsSideToggle(false);
   }, [isView, setIsSideToggle]);
 
-  const role = [
-    {
-      role: "madam",
-      title: "Exective Director",
-    },
-    {
-      role: "ceo",
-      title: "Ceo",
-    },
-    {
-      role: "cert",
-      title: "Certificate Admin",
-    },
-    {
-      role: "office",
-      title: "Certificate Officer",
-    },
-  ];
-
   return (
     <>
       <StyledNav view={isView}>
         <Flex justify="space-between" align="center">
           {isView ? (
-            <Heading as="h2">Certificate Management System</Heading>
+            <Heading as="h2">CMS</Heading>
           ) : (
             <ButtonIcon onClick={() => setIsSideToggle((p) => !p)}>
               {isSideToggle ? <FaAnchorCircleCheck /> : <BiSolidShip />}
@@ -86,8 +68,8 @@ export default function Nav() {
             <Flex align="center" gap=".5em">
               <p>
                 {
-                  role.filter((ele) => ele.role === user?.user_metadata.role)[0].title
-                    
+                  role.filter((ele) => ele.role === user?.user_metadata.role)[0]
+                    .title
                 }
               </p>
               <DarkMode />
