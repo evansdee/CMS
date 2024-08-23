@@ -7,6 +7,7 @@ import Image from "../../../ui/Image";
 import Lstat from "../../../assets/stat-light-mode.png"
 import Dstat from "../../../assets/stat-dark-mode.png"
 import { useDarkMode } from "../../../hook/DarkModeToggle";
+import BottomButtonAll from "../../../ui/BottomButtonAll";
 
 export default function ReportList() {
   const {isDark} = useDarkMode()
@@ -122,7 +123,7 @@ export default function ReportList() {
           )}
         />
       </Table>
-      <button onClick={handleExport}>Export to Excel</button>
+      <BottomButtonAll onClick={handleExport}>Export to Excel</BottomButtonAll>
     </>
   );
 }
