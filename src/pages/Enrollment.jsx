@@ -12,6 +12,7 @@ import {
   useGetEnrollment,
 } from "../features/Officer/Enrollment/useEnrollment";
 import { useLocalEnroll } from "../hook/EnrollmentListContext";
+import EnrollmentExistList from "../features/Officer/Enrollment/EnrollmentExistList";
 
 const StyledContainer = styled.div`
   padding: 0 2em;
@@ -44,14 +45,15 @@ export default function Enrollment() {
   }
   const { mutate, isPending } = useAddAllEnrollment();
 
+
   return (
     <StyledContainer>
       <Row type={!isView ? "vertical" : "horizontal"}>
         <Heading as={isView ? "h2" : "h3"}>Enrollment Baby😁</Heading>
-        <EnrollmentTableOperation />
-        {enrollArr.length > 1 && (
+        {enrollArr.length > 1 &&  value=== "list" && (
           <BottomButtonAll onClick={handleEnroll}>Enroll All</BottomButtonAll>
         )}
+        <EnrollmentTableOperation />
       </Row>
       <Main>
         {value === "form" && <CreateEnrollmentForm />}
@@ -62,6 +64,7 @@ export default function Enrollment() {
             enrollment={enrollment}
           />
         )}
+        {value === 'exist' && <EnrollmentExistList data={enrollment}/>} 
       </Main>
     </StyledContainer>
   );

@@ -2,15 +2,12 @@ import Table from "../../../ui/Table";
 import * as XLSX from "xlsx";
 import { useReportData } from "./ReportDataContext";
 import ReportRow from "./ReportRow";
-import Flex from "../../../ui/Flex";
-import Image from "../../../ui/Image";
 import Lstat from "../../../assets/stat-light-mode.png"
 import Dstat from "../../../assets/stat-dark-mode.png"
-import { useDarkMode } from "../../../hook/DarkModeToggle";
 import BottomButtonAll from "../../../ui/BottomButtonAll";
+import EmptyData from "../../../ui/EmptyData";
 
 export default function ReportList() {
-  const {isDark} = useDarkMode()
 
   const { filteredData } = useReportData();
   // console.log(filteredData)
@@ -88,15 +85,8 @@ export default function ReportList() {
     XLSX.writeFile(wb, "TableData.xlsx");
   };
 
-  if (!filteredData?.length)
-    return (
-      <Flex align='center' justify='center'>
-        <Image
-          width="30%"
-          src={isDark ? Dstat : Lstat}
-        />
-      </Flex>
-    );
+  if (!filteredData?.length) return <EmptyData  img1={Dstat} img2={Lstat} />;
+
 
   return (
     <>

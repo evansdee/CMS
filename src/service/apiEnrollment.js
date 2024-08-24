@@ -115,6 +115,7 @@ export async function updateAllEnrollmentStatus(objects) {
   );
   return updateData;
 }
+
 export async function updateAllEnrollmentSignature(objects, value) {
   const updateData = await Promise.all(
     objects?.map(async (object) => {

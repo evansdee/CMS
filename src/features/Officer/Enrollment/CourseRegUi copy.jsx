@@ -1,10 +1,10 @@
+import styled from "styled-components";
 import Input from "../../../ui/Input";
 import Label from "../../../ui/Label";
 import Select from "../../../ui/Select";
 import Heading from "../../../ui/Heading";
 import Form from "./Form";
-import Table from "../../../ui/Table";
-import Td from "../../../ui/TableRow";
+import { formatToNaira } from "../../../helper/helper";
 
 export default function CourseRegUi({
   register,
@@ -12,10 +12,11 @@ export default function CourseRegUi({
   getValues,
   bnk,
   errors,
-  watch,
+  watch
 }) {
-  const isRen = watch("isRenewal");
-  const reamount = watch("renewAmount");
+
+  const isRen = watch('isRenewal')
+  const reamount = watch("renewAmount")
   // const neamount = watch("newAmount")
 
   // const amount = isRen ? reamount : neamount
@@ -38,9 +39,9 @@ export default function CourseRegUi({
             </Select>
           </Label>
           {/* {reamount !== "0" && ( */}
-          <Label label="Course Renewal">
-            <Input type="checkbox" {...register("isRenewal")} />
-          </Label>
+            <Label label="Course Renewal">
+              <Input type="checkbox" {...register("isRenewal")} />
+            </Label>
           {/* )} */}
           <Label label="Bank" error={errors?.bank?.message}>
             <Select {...register("bank", { required: "Field required" })}>
@@ -56,31 +57,68 @@ export default function CourseRegUi({
       </div>
 
       {getValues().courseName && bnk && (
-        <TableComponent getValues={getValues} bnk={bnk} isRen={isRen} />
+        <TableComponent getValues={getValues} bnk={bnk} isRen={isRen}/>
       )}
     </>
   );
 }
 
-const TableComponent = ({ getValues, bnk, isRen }) => {
+const Table = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  text-align: center;
+  margin: 1em 0;
+  /* padding: 10px; */
+
+  @media (max-width: 768px) {
+    /* grid-template-columns: 1fr; Stack columns on mobile devices */
+    gap: 5px; /* Reduce gap for mobile devices */
+  }
+`;
+
+// Table cell
+const Cell = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* &:nth-child(-n + 3) {
+    background-color: var(--color-grey-200); /* Example styling */
+    padding: 5px;
+
+    @media (max-width: 768px) {
+      padding: 8px; /* Adjust padding for mobile */
+    }
+  } */
+
+  &:nth-child(n + 4) {
+    font-size: 0.9em;
+
+    @media (max-width: 768px) {
+      font-size: 0.8em; /* Adjust font size for mobile */
+    }
+  }
+`;
+
+const TableComponent = ({ getValues, bnk,isRen }) => {
+
   const data = ["Course Name", "Bank"];
   return (
-    <div className='table'>
-      <br />
+    <>
       <Heading as="h2">Selected Course</Heading>
 
       <Table>
-        <Table.Header data={data} />
-        <Table.Body
-          data={[getValues().courseName, bnk]}
-          render={(ele, i) => (
-            // <Table.Row key={i}>
-              <Td key={i}>{ele}</Td>
-            // </Table.Row>
-          )}
-        />
+        {data.map((ele) => (
+          <Cell key={ele}>
+            <Heading as="h3">{ele}</Heading>
+          </Cell>
+        ))}
+
+        <Cell>{getValues().courseName}</Cell>
+        <Cell>{bnk}</Cell>
+       
       </Table>
-      <br />
-    </div>
+    </>
   );
 };

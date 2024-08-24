@@ -8,27 +8,25 @@ const Main = styled.div`
   top: 5%;
   left: 5%;
   gap: 1em;
+  z-index: 2;
 `;
 const StyledNav = styled(NavLink)`
-
   text-decoration: none;
-  color: #fff;
+  color: var(--color-grey-100);
   background-color: var(--color-grey-800);
-  padding: 10px 20px;
+  padding: 10px;
   border-radius: 4px;
 
+  &:hover{
+    background-color: var(--color-grey-50);
+color: var(--color-grey-800);
+  }
+
   &:active {
-    color: white;
+    /* color: white; */
     background-color: var(--color-icon);
   }
-  .active{
-    color: red;
-  }
 
-
-  /* &:active {
-    color: green;
-  } */
 `;
 
 export default function LoginPanel({ email, pass }) {
@@ -52,17 +50,22 @@ export default function LoginPanel({ email, pass }) {
       >
         Log in as Certificate Admin
       </StyledNav>
-      <StyledNav  onClick={() => {
+      <StyledNav
+        onClick={() => {
           email("akpos@joemarineng.com");
           pass("12345678");
-        }}>Log in as Oga</StyledNav>
+        }}
+      >
+        Log in as Ceo
+      </StyledNav>
       <StyledNav
-      onClick={() => {
-        email("oyinpreye@joemarineng.com");
-        pass("12345678");
-      }}
-      >Log in as Madam</StyledNav>
+        onClick={() => {
+          email("oyinpreye@joemarineng.com");
+          pass("12345678");
+        }}
+      >
+        Log in as Executive Director
+      </StyledNav>
     </Main>
   );
 }
-

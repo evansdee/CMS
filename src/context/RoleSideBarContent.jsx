@@ -3,11 +3,11 @@ import { useUser } from "../features/authentication/useUser";
 import { HiHome } from "react-icons/hi2";
 import { PiCertificate, PiStudentDuotone } from "react-icons/pi";
 import { TbReportAnalytics } from "react-icons/tb";
-import { MdApproval, MdDisplaySettings, MdOutlineApproval } from "react-icons/md";
+import {  MdDisplaySettings, MdOutlineApproval } from "react-icons/md";
 import { TfiTimer } from "react-icons/tfi";
 import { HiDocumentAdd } from "react-icons/hi";
 import { FcApproval } from "react-icons/fc";
-import { FaBookBookmark } from "react-icons/fa6";
+import { FaBookBookmark, FaFileSignature } from "react-icons/fa6";
 
 const RoleContext = createContext();
 const linkArr = [
@@ -19,7 +19,7 @@ const linkArr = [
   { label: "student", icon: PiStudentDuotone, role: "office cert" },
   { label: "report", icon: TbReportAnalytics, role: "office cert" },
   { label: "approval", icon: FcApproval, role: "madam" },
-  { label: "signature", icon: MdApproval, role: "ceo madam" },
+  { label: "signature", icon: FaFileSignature, role: "ceo madam" },
   { label: "certificate", icon: PiCertificate, role: "cert" },
   { label: "settings", icon: MdDisplaySettings, role: "all" },
 ];

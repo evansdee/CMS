@@ -25,8 +25,10 @@ export default function EnrollmentRow({ enroll }) {
     setEnroll((p) => p.filter((ele) => ele.lid !== lid));
   }
 
+  // console.log(enroll)
   function handleDuplicate() {
     const dup = { ...enroll, lid: nanoid() };
+    // console.log(dup)
 
     setEnroll([...arr, dup]);
   }

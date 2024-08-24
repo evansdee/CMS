@@ -6,6 +6,9 @@ import { filterDataFromOneDayAgo } from "../../../helper/helper";
 import Menus from "../../../ui/Menus";
 import Spinner from "../../../ui/Spinner";
 import Table from "../../../ui/Table";
+import EnrollLight from "../../../assets/enroll-light.png";
+import EnrollDark from "../../../assets/enroll-dark.png";
+import EmptyData from "../../../ui/EmptyData";
 
 export default function EnrollmentList({ enrollArr, enrollment, isPending }) {
   const filteredData = filterDataFromOneDayAgo(enrollment);
@@ -17,6 +20,8 @@ export default function EnrollmentList({ enrollArr, enrollment, isPending }) {
         );
 
   if (isPending) return <Spinner />;
+
+  if(!data?.length) return <EmptyData img1={EnrollDark} img2={EnrollLight} />;
 
   return (
     <>

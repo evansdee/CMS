@@ -32,22 +32,36 @@ export default function EditLocalEnrollment({
     }
   }, [selectedCode, data, setValue]);
 
+  function calculateAmount({ newAmount, renewAmount }, isRenewal) {
+    const newA = Number(newAmount);
+    const ren = Number(renewAmount);
+    // console.log(typeof newAmount, typeof renewAmount, isRenewal);
+    if (isRenewal) {
+      return ren === 0 ? newA : ren;
+    } else {
+      return newA;
+    }
+  }
   function onSubmit(data) {
-
     const x = data.fullName.split(' ')
     const [firstName,middleName,lastName] = x
+    const {renewAmount,newAmount,...newData} = data
+
+    const newObj ={
+      ...newData,
+      fullName: data.fullName,
+      courseName: data.courseName,
+      codeAlt: data.codeAlt,
+      courseCode:data.courseCode,
+      firstName,middleName,lastName,
+      amount:calculateAmount({ newAmount, renewAmount }, data.isRenewal),
+    }
+console.log(newObj)
+
     setEnroll((p) =>
       p.map((ele) =>
         ele.lid === data.lid
-          ? {
-              ...ele,
-              fullName: data.fullName,
-              courseName: data.courseName,
-              codeAlt: data.codeAlt,
-              courseCode:data.courseCode,
-              firstName,middleName,lastName,
-              amount: data.isRenewal  ? data.renewAmount : data.newAmount
-            }
+          ? newObj
           : ele
       )
     );

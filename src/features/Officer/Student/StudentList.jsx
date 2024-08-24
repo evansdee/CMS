@@ -3,16 +3,13 @@ import { useMemo } from "react";
 import { useGetEnrollment } from "../Enrollment/useEnrollment";
 import Table from "../../../ui/Table";
 import StudentRow from "./StudentRow";
-import Image from "../../../ui/Image";
-import Flex from "../../../ui/Flex";
 import LStu from "../../../assets/student-light-mode.svg";
 import DStu from "../../../assets/student-dark-mode.png";
-import { useDarkMode } from "../../../hook/DarkModeToggle";
 import Spinner from "../../../ui/Spinner";
 import ErrorFallback from "../../../ui/ErrorFallback";
+import EmptyData from "../../../ui/EmptyData";
 
 export default function StudentList({ search, setSearch }) {
-  const { isDark } = useDarkMode();
 
   const { data, error, isLoading } = useGetEnrollment();
   const txt = search.toLowerCase();
@@ -40,12 +37,7 @@ export default function StudentList({ search, setSearch }) {
 
   // console.log(filteredData);
 
-  if (!filteredData?.length)
-    return (
-      <Flex align="center" justify="center">
-        <Image width="30%" src={isDark ? DStu : LStu} />
-      </Flex>
-    );
+  if (!filteredData?.length)return <EmptyData  img1={DStu} img2={LStu} />;
   return (
     <div>
       <Table>

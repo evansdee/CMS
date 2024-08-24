@@ -8,8 +8,8 @@ export default function EnrollmentTableOperation() {
         filterField={"enrollment"}
         options={[
           { value: "list", label: "Enrollment List" },
-          { value: "form", label: "Enrollment Form" },
-          { value: "nil", label: "With-discount" },
+          { value: "form", label: "Enroll New Student" },
+          { value: "exist", label: "Enroll Existing Student" },
         ]}
       />
     </TableOperations>

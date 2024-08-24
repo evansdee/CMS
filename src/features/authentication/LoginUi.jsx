@@ -7,64 +7,54 @@ import SpinnerMini from "../../ui/SpinnerMini";
 import toast from "react-hot-toast";
 import LoginPanel from "./LoginPanel";
 import ErrorFallback from "../../ui/ErrorFallback";
+import Form from "../../ui/Form";
+import FormRowVertical from "../../ui/FormRowVertical";
+import Input from "../../ui/Input";
 
-const StyledLogin = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100dvh;
-  position: relative;
-  z-index: 3;
-  form {
-    /* width: 60vw; */
-    padding: 2em;
-    background-color: var(--color-gray-100);
-    border-radius: 20px;
-  }
-`;
-
-
-export default function LoginUi() {
-  const [email, setEmail] = useState("certificateofficer@joemarineng.com");
-  const [password, setPassword] = useState("12345678");
-
-  const {login,isLoading,isError} = useLogin()
+export default function LoginUi({ email, password, setEmail, setPassword }) {
+  const { login, isLoading: isLogging, isError } = useLogin();
 
   // if(error) return <ErrorFallback error={error.message}/>
 
-  function handleSubmut(e){
-    e.preventDefault()
-    if(!email) return
-    login({email,password})
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!email) return;
+    login({ email, password });
 
-    if(isError){
-      setEmail('')
-      setPassword('')
+    if (isError) {
+      setEmail("");
+      setPassword("");
     }
   }
 
   return (
-    <StyledLogin>
-      <form onSubmit={handleSubmut}>
-        <InputField
-          placeholder={"Enter Email"}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={isLoading}
-        />
-        <InputField
-          placeholder={"Enter Password"}
-          type="password"
-          value={password}
-          disabled={isLoading}
-
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button variation="primary" size='medium' disabled={isLoading}>
-           {isLoading ? <SpinnerMini/>: 'Log in'}
-        </Button>
-      </form>
-      <LoginPanel email={setEmail} pass={setPassword}/>
-    </StyledLogin>
+    <>
+      <Form onSubmit={handleSubmit}>
+        <FormRowVertical label="Email address" orientation="vertical">
+          <Input
+            type="email"
+            id="email"
+            // This makes this form better for password managers
+            autoComplete="username"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </FormRowVertical>
+        <FormRowVertical label="Password" orientation="vertical">
+          <Input
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </FormRowVertical>
+        <FormRowVertical orientation="vertical">
+          <Button size="large" disabled={isLogging}>
+            {isLogging ? <SpinnerMini /> : "Login"}
+          </Button>
+        </FormRowVertical>
+      </Form>
+    </>
   );
 }

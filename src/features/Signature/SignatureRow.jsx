@@ -8,6 +8,7 @@ import SpinnerMini from "../../ui/SpinnerMini";
 import Table from "../../ui/Table-v1";
 import ButtonIcon from "../../ui/ButtonIcon";
 import { useUpdateEnrollment } from "../Officer/Approval/useUpdateEnrollment";
+import { PiSignatureBold } from "react-icons/pi";
 
 const GridCell = styled.div`
   padding: 0 0.5rem;
@@ -51,20 +52,20 @@ export default function SignatureRow({ enroll }) {
     });
   }
 
-  function handleDissapprove() {
-    const newObj = {
-      newEnrollment: {
-        ...enroll,
-        isSignature: false,
-      },
-      id: id,
-    };
+  // function handleDissapprove() {
+  //   const newObj = {
+  //     newEnrollment: {
+  //       ...enroll,
+  //       isSignature: false,
+  //     },
+  //     id: id,
+  //   };
 
-    console.log(newObj);
-    updateStudent(newObj, {
-      onSuccess: () => toast.success(`Signature Dissapproved`),
-    });
-  }
+  //   console.log(newObj);
+  //   updateStudent(newObj, {
+  //     onSuccess: () => toast.success(`Signature Dissapproved`),
+  //   });
+  // }
 
   return (
     <>
@@ -78,11 +79,11 @@ export default function SignatureRow({ enroll }) {
           ) : (
             <>
               <ButtonIcon onClick={handleApprove}>
-                <FcApprove />
+                <PiSignatureBold />
               </ButtonIcon>
-              <ButtonIcon onClick={handleDissapprove}>
+              {/* <ButtonIcon onClick={handleDissapprove}>
                 <FcDisapprove />
-              </ButtonIcon>
+              </ButtonIcon> */}
             </>
           )}
         </GridCell>

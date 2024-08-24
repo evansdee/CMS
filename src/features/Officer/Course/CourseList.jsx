@@ -3,6 +3,7 @@ import { useCourse } from "../Enrollment/useCourse";
 import CourseRow from "./CourseRow";
 import Table from "../../../ui/Table-v1";
 
+
 export default function CourseList() {
   const { data } = useCourse();
 
@@ -12,6 +13,7 @@ export default function CourseList() {
     if (a.courseName.toLowerCase() > b.courseName.toLowerCase()) return 1;
     return 0;
   });
+
 
   return (
     <>

@@ -91,7 +91,7 @@ export default function CreateEnrollmentForm() {
   function calculateAmount({ newAmount, renewAmount }, isRenewal) {
     const newA = Number(newAmount);
     const ren = Number(renewAmount);
-    console.log(typeof newAmount, typeof renewAmount, isRenewal);
+    // console.log(typeof newAmount, typeof renewAmount, isRenewal);
     if (isRenewal) {
       return ren === 0 ? newA : ren;
     } else {
@@ -115,9 +115,11 @@ export default function CreateEnrollmentForm() {
       enrollDate: format(new Date(), "dd MMMM yy, hh:mm aaa"),
       amount: calculateAmount({ newAmount, renewAmount }, data.isRenewal),
       lid: nanoid(),
-      printStatus:false
+      printStatus:false,
+      isSignature:null
       // enrollDate: new Date().toISOString(),
     };
+
 
     setEnroll([...value, newObj]);
     toast.success(`${data.firstName} has been added to the list`);
@@ -151,6 +153,7 @@ export default function CreateEnrollmentForm() {
           register={register}
           getValues={getValues}
           bnk={bnk}
+          watch={watch}
           errors={errors}
         />
         <Heading as="h2">Means of Identification</Heading>

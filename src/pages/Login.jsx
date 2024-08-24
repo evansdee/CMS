@@ -1,21 +1,50 @@
 import styled from "styled-components";
 import LoginUi from "../features/authentication/LoginUi";
+import Heading from "../ui/Heading";
+import { useState } from "react";
 
-const StyledLogin = styled.div`
-  background: url("https://qtubihsbqxewhrenphaz.supabase.co/storage/v1/object/public/asset/pexels-pixabay-327337.jpg")
-    no-repeat;
-    background-size: cover;
-  max-width: 100%;
-  height: 100vh;
+import LoginPanel from "../features/authentication/LoginPanel";
+import Logo from "../ui/CompanyLogo";
+
+const LoginLayout = styled.main`
   position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 48rem;
+  align-content: center;
+  justify-content: center;
+  gap: 3.2rem;
+  background-color: var(--color-grey-50);
 
-
+  &.log {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 2rem;
+  }
 `;
 
-export default function Login() {
+function Login() {
+  const [email, setEmail] = useState("certificateofficer@joemarineng.com");
+  const [password, setPassword] = useState("12345678");
   return (
-    <StyledLogin>
-      <LoginUi />
-    </StyledLogin>
+    <>
+      <LoginLayout>
+        <div className="log">
+          {/* <Logo /> */}
+          <Logo />
+
+          <LoginUi
+            email={email}
+            password={password}
+            setEmail={setEmail}
+            setPassword={setPassword}
+          />
+        </div>
+      </LoginLayout>
+      <LoginPanel email={setEmail} pass={setPassword} />
+    </>
   );
 }
+
+export default Login;
