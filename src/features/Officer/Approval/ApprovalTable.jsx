@@ -2,21 +2,17 @@ import Table from "../../../ui/Table-v1";
 import EnrollmentRow from "./ApprovalRow";
 import ErrorFallback from "../../../ui/ErrorFallback";
 import { useApproval } from "./useApproval";
-import Flex from "../../../ui/Flex";
-import Image from "../../../ui/Image";
-import { useDarkMode } from "../../../hook/DarkModeToggle";
 import DarkApp from "../../../assets/approval-dark.png";
 import LightApp from "../../../assets/approval-light.png";
 import EmptyData from "../../../ui/EmptyData";
 
 
 export default function EnrollmentTable() {
-  const {isDark} = useDarkMode()
-  const {  error, studentError, activeEnrollment } =
+  const {  error, activeEnrollment } =
     useApproval();
 
-  if (error || studentError)
-    return <ErrorFallback error={error || studentError} />;
+  if (error)
+    return <ErrorFallback error={error} />;
 
   //   const newData = activeEnrollment.map(ele=>{
   //     const {codeAlt,courseCode} = ele

@@ -33,24 +33,30 @@ export default function Enrollment() {
 
   const { enrollArr, setEnroll } = useLocalEnroll();
 
+  const { mutate, isPending, isError } = useAddAllEnrollment();
   const { isView } = useView();
+
   function handleEnroll() {
+    if (isError) return null;
     mutate(
       enrollArr.map((ele) => {
+        // eslint-disable-next-line no-unused-vars
         const { lid, ...allEle } = ele;
         return allEle;
-      })
+      }),
+      {
+        onSuccess: () => {
+          setEnroll([]);
+        },
+      }
     );
-    setEnroll([]);
   }
-  const { mutate, isPending } = useAddAllEnrollment();
-
 
   return (
     <StyledContainer>
       <Row type={!isView ? "vertical" : "horizontal"}>
         <Heading as={isView ? "h2" : "h3"}>Enrollment Baby😁</Heading>
-        {enrollArr.length > 1 &&  value=== "list" && (
+        {enrollArr.length > 1 && value === "list" && (
           <BottomButtonAll onClick={handleEnroll}>Enroll All</BottomButtonAll>
         )}
         <EnrollmentTableOperation />
@@ -64,7 +70,7 @@ export default function Enrollment() {
             enrollment={enrollment}
           />
         )}
-        {value === 'exist' && <EnrollmentExistList data={enrollment}/>} 
+        {value === "exist" && <EnrollmentExistList data={enrollment} />}
       </Main>
     </StyledContainer>
   );

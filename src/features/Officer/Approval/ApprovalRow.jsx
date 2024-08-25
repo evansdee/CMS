@@ -35,7 +35,7 @@ const GridCell = styled.div`
 `;
 
 export default function EnrollmentRow({ enroll }) {
-const { mutate: updateStudent,isPending } = useUpdateEnrollment();
+const { mutate: updateStudent,isPending,isError } = useUpdateEnrollment();
 
   const {  fullName, courseName, enrollDate, status } = enroll;
 
@@ -59,7 +59,7 @@ const { mutate: updateStudent,isPending } = useUpdateEnrollment();
               </ButtonIcon>
 
               <Modal.Window name="editLocal">
-                <ApprovalView data={enroll} updateStudent={updateStudent}/>
+                <ApprovalView error={isError} data={enroll} updateStudent={updateStudent}/>
               </Modal.Window>
             </Modal>
           </GridCell>

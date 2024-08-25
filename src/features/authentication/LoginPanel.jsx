@@ -9,7 +9,14 @@ const Main = styled.div`
   left: 5%;
   gap: 1em;
   z-index: 2;
+
+  @media (max-width: 768px) {
+    top: 2%;
+    left: 2%;
+    gap: 0.5em;
+  }
 `;
+
 const StyledNav = styled(NavLink)`
   text-decoration: none;
   color: var(--color-grey-100);
@@ -17,17 +24,21 @@ const StyledNav = styled(NavLink)`
   padding: 10px;
   border-radius: 4px;
 
-  &:hover{
+  &:hover {
     background-color: var(--color-grey-50);
-color: var(--color-grey-800);
+    color: var(--color-grey-800);
   }
 
   &:active {
-    /* color: white; */
     background-color: var(--color-icon);
   }
 
+  @media (max-width: 768px) {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
 `;
+
 
 export default function LoginPanel({ email, pass }) {
   return (

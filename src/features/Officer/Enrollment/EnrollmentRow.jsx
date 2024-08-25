@@ -14,7 +14,7 @@ import Td from "../../../ui/TableRow";
 import SpinnerMini from "../../../ui/SpinnerMini";
 
 export default function EnrollmentRow({ enroll }) {
-  const { mutate, isPending } = useAddEnrollment();
+  const { mutate, isPending, isError } = useAddEnrollment();
   const { lid, fullName, courseName, enrollDate, bank, status, amount } =
     enroll;
 
@@ -34,13 +34,18 @@ export default function EnrollmentRow({ enroll }) {
   }
 
   function handleSubmit(id) {
+    // eslint-disable-next-line no-unused-vars
     const { lid, ...enr } = enroll;
-    mutate({ ...enr },{
-      onSuccess:()=>{
 
-        setEnroll((p) => p.filter((ele) => ele.lid !== id));
+    if (isError) return null;
+    mutate(
+      { ...enr },
+      {
+        onSuccess: () => {
+          setEnroll((p) => p.filter((ele) => ele.lid !== id));
+        },
       }
-    });
+    );
   }
   return (
     <>
@@ -63,41 +68,48 @@ export default function EnrollmentRow({ enroll }) {
         {!status && (
           <Td>
             <Modal>
-             {isPending ? <SpinnerMini/>: <Menus.Menu disabled={isPending}>
-                <Menus.Toggle id={lid} />
+              {isPending ? (
+                <SpinnerMini />
+              ) : (
+                <Menus.Menu disabled={isPending}>
+                  <Menus.Toggle id={lid} />
 
-                <Menus.List id={lid}>
-                  <Modal.Open opens="editLocal">
-                    <Menus.Button icon={<FaEdit />}>Edit</Menus.Button>
-                  </Modal.Open>
+                  <Menus.List id={lid}>
+                    <Modal.Open opens="editLocal">
+                      <Menus.Button icon={<FaEdit />}>Edit</Menus.Button>
+                    </Modal.Open>
 
-                  <Menus.Button
-                    icon={<HiSquare2Stack />}
-                    onClick={() => handleDuplicate()}
-                  >
-                    Duplicate
-                  </Menus.Button>
+                    <Menus.Button
+                      icon={<HiSquare2Stack />}
+                      onClick={() => handleDuplicate()}
+                    >
+                      Duplicate
+                    </Menus.Button>
 
-                  <Menus.Button
-                    icon={<IoIosPaperPlane />}
-                    onClick={() => handleSubmit(lid)}
-                    disabled={isPending}
-                  >
-                    Enroll
-                  </Menus.Button>
-                  <Menus.Button
-                    icon={<HiOutlineTrash />}
-                    onClick={() => handleDelete(lid)}
-                    disabled={isPending}
-                  >
-                    Delete
-                  </Menus.Button>
-                </Menus.List>
+                    <Menus.Button
+                      icon={<IoIosPaperPlane />}
+                      onClick={() => handleSubmit(lid)}
+                      disabled={isPending}
+                    >
+                      Enroll
+                    </Menus.Button>
+                    <Menus.Button
+                      icon={<HiOutlineTrash />}
+                      onClick={() => handleDelete(lid)}
+                      disabled={isPending}
+                    >
+                      Delete
+                    </Menus.Button>
+                  </Menus.List>
 
-                <Modal.Window name="editLocal">
-                  <EditLocalEnrollment enroll={enroll} setEnroll={setEnroll} />
-                </Modal.Window>
-              </Menus.Menu>}
+                  <Modal.Window name="editLocal">
+                    <EditLocalEnrollment
+                      enroll={enroll}
+                      setEnroll={setEnroll}
+                    />
+                  </Modal.Window>
+                </Menus.Menu>
+              )}
             </Modal>
           </Td>
         )}

@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-import {} from "react";
 import { useForm } from "react-hook-form";
 import Form from "../Enrollment/Form";
 import styled from "styled-components";
@@ -42,7 +40,7 @@ const EditForm = styled.div`
 `;
 
 export default function Student({ studentToEdit: data = {}, onCloseModal }) {
-  const { mutate, isPending,error } = useUpdateEnrollment();
+  const { mutate, isPending,isError } = useUpdateEnrollment();
 
   const { id, ...editValues } = data;
   const isEditStudent = Boolean(id);
@@ -56,6 +54,11 @@ export default function Student({ studentToEdit: data = {}, onCloseModal }) {
   function onSubmit(data) {
     const photo = typeof data.photo === "string" ? data.photo : data.photo[0];
     const { firstName, middleName, lastName } = data;
+
+    if (isError) {
+      console.error("An error occurred. Unable to proceed with submission.");
+      return; // Exit the function if there is an error
+    }
 
     // console.log(data);
     mutate(

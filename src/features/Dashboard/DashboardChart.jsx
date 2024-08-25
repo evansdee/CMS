@@ -24,12 +24,26 @@ const StyledSalesChart = styled.div`
   gap: 2.4rem;
   width: 100%;
   height: 400px; /* Adjust height as needed */
-  /* Hack to change grid line colors */
+
   & .recharts-cartesian-grid-horizontal line,
   & .recharts-cartesian-grid-vertical line {
     stroke: var(--color-grey-300);
   }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    padding: 1.6rem;
+    height: 300px;
+    gap: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    height: 250px;
+    gap: 1rem;
+  }
 `;
+
 
 function DashoardChart({ data }) {
   const courseCount = data?.reduce((acc, course) => {
@@ -73,15 +87,6 @@ function DashoardChart({ data }) {
           <YAxis />
           <Tooltip />
           <Legend />
-
-          {/* {chartData.map((entry, index) => (
-              <Bar
-                key={entry.courseCode}
-                dataKey="count"
-                fill={colorMap[entry.courseCode] || "#8884d8"}
-                name={entry.courseCode}
-              />
-            ))} */}
 
           <Bar dataKey="count" name="Course Code" label={{ position: "top"}} fill={ranColor}>
             {chartData.map((entry, index) => (

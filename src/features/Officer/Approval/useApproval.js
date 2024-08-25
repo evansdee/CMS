@@ -5,14 +5,18 @@ import { useUpdateAllStatus } from "./useUpdateAllStatus";
 
 export function useApproval() {
   const { data: enrollment, isLoading, error } = useGetEnrollment();
-
-  const { mutate, isPending, error: studentError } = useUpdateAllStatus();
-
+  
   const activeEnrollment = enrollment?.filter((ele) => !ele.status);
+  
   const { updateCount } = useUpdateCourseCount();
   const { data: countList } = useCourse();
+  const { mutate, isPending, isError } = useUpdateAllStatus();
 
   async function handleSubmitAll() {
+    if (isError) {
+      console.error("An error occurred. Unable to proceed with submission.");
+      return; // Exit the function if there is an error
+    }
     const updatedEnrollments = [];
     const updatedCounts = {}; // Object to keep track of updated counts locally
 
@@ -76,7 +80,7 @@ export function useApproval() {
     isPending,
     isLoading,
     error,
-    studentError,
+    isError,
     activeEnrollment,
   };
 }

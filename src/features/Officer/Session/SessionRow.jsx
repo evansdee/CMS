@@ -31,7 +31,7 @@ const GridCell = styled.div`
 
 
 export default function SessionRow({ row }) {
-  const { mutate, isPending } = useDeleteSession();
+  const { mutate, isPending,isError } = useDeleteSession();
 
   const {id,courseName,startDate,endDate,active} = row
 
@@ -65,6 +65,7 @@ export default function SessionRow({ row }) {
                 resourceName={courseName}
                 onConfirm={() => mutate(id)}
                 disabled={isPending}
+                error={isError}
               />
             </Modal.Window>
             <Modal.Window name="editSession">

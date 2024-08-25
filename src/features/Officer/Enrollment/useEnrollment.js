@@ -10,7 +10,7 @@ import {
 export function useAddEnrollment() {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending,isError } = useMutation({
     mutationFn: createEditEnrollment,
     onSuccess: (data) => {
       toast.success(`${data?.firstName} has been enrolled successfully`);
@@ -19,7 +19,7 @@ export function useAddEnrollment() {
     onError: (err) => toast.error(err.message),
   });
 
-  return { mutate, isPending };
+  return { mutate, isPending,isError };
 }
 
 export function useGetEnrollment() {

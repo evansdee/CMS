@@ -22,7 +22,14 @@ const LoginLayout = styled.main`
     display: grid;
     gap: 2rem;
   }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 100%;
+    padding: 1rem;
+    gap: 1.6rem;
+  }
 `;
+
 
 function Login() {
   const [email, setEmail] = useState("certificateofficer@joemarineng.com");
@@ -30,7 +37,7 @@ function Login() {
   return (
     <>
       <LoginLayout>
-        <div className="log">
+        {/* <div className="log"> */}
           {/* <Logo /> */}
           <Logo />
 
@@ -40,7 +47,7 @@ function Login() {
             setEmail={setEmail}
             setPassword={setPassword}
           />
-        </div>
+        {/* </div> */}
       </LoginLayout>
       <LoginPanel email={setEmail} pass={setPassword} />
     </>

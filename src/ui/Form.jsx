@@ -18,11 +18,31 @@ const Form = styled.form`
       /* padding: 2.4rem 2rem; */
       width: 60rem;
     `}
-    
-  overflow:hidden;
-  /* margin:1em 0; */
+  
+  overflow: hidden;
   font-size: 1.4rem;
+
+  /* Mobile-specific styles */
+  @media (max-width: 768px) {
+    ${(props) =>
+      props.type === "regular" &&
+      css`
+        padding: 1.6rem 2rem;
+        width: 100%;
+        border-radius: var(--border-radius-sm);
+      `}
+
+    ${(props) =>
+      props.type === "modal" &&
+      css`
+        width: 100%;
+        padding: 1.6rem 1.2rem;
+      `}
+    
+    font-size: 1.2rem;
+  }
 `;
+
 
 Form.defaultProps = {
   type: "regular",

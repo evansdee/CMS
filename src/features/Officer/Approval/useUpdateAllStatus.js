@@ -4,7 +4,7 @@ import { updateAllEnrollmentStatus } from "../../../service/apiEnrollment";
 
 export function useUpdateAllStatus() {
   const queryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending ,isError} = useMutation({
     mutationFn: updateAllEnrollmentStatus,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["enrollment"] });
@@ -13,5 +13,5 @@ export function useUpdateAllStatus() {
     onError: () => toast.error("failed to approve all"),
   });
 
-  return { mutate, isPending };
+  return { mutate, isPending,isError };
 }

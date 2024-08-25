@@ -23,8 +23,8 @@ export default function CreateSessionForm({
     return 0;
   });
 
-  const { mutate, isPending: isLoading } = useCreateEditSession();
-  const { editSession, isEditing } = useEditSession();
+  const { mutate, isPending: isLoading,isError } = useCreateEditSession();
+  const { editSession, isEditing,isError:isEditError } = useEditSession();
 
   const isWorking = isLoading || isEditing;
   const { id: editId, ...editValues } = sessionToEdit;
@@ -60,6 +60,10 @@ export default function CreateSessionForm({
   }, [session, setValue, selectedCourseName]);
 
   function onSubmit(data) {
+    if (isError || isEditError) {
+      console.error("An error occurred. Unable to proceed with submission.");
+      return; // Exit the function if there is an error
+    }
     if (isEditSession) {
       editSession(
         { newSession: { ...data, active: isChecked }, id: editId },

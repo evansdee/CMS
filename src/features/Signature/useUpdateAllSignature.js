@@ -4,7 +4,7 @@ import { updateAllEnrollmentSignature } from "../../service/apiEnrollment";
 
 export function useUpdateAllSignature() {
   const queryClient = useQueryClient();
-  const { mutate, isPending,error } = useMutation({
+  const { mutate, isPending,isError } = useMutation({
     mutationFn: ({objects,value})=>updateAllEnrollmentSignature(objects,value),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["enrollment"] });
@@ -13,5 +13,5 @@ export function useUpdateAllSignature() {
     onError: () => toast.error("failed to approve all"),
   });
 
-  return { mutate, isPending,error };
+  return { mutate, isPending,isError };
 }
