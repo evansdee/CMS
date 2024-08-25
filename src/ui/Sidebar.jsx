@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Logo from "./Logo";
 import SideBarList from "./SideBarList";
 import FakeData from "../FakeData";
@@ -14,16 +14,19 @@ const StyledSidebar = styled.aside`
   flex-direction: column;
   /* align-items: center; */
   gap: 3.2rem;
+ 
+  width: ${prop=>prop.isView ? '60%' : ""};
+  
 `;
 
-function Sidebar({ close }) {
+function Sidebar({ close, isView }) {
   const { user } = useUser();
- 
+
   return (
-    <StyledSidebar >
+    <StyledSidebar isView={isView}>
       <Logo />
       <SideBarList close={close} />
-      {user?.user_metadata.role === "office" || ("cert" && <FakeData />)}
+      {user?.user_metadata.role === "office"  && <FakeData />}
     </StyledSidebar>
   );
 }

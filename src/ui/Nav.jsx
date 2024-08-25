@@ -26,14 +26,20 @@ const MenuIcon = styled.div`
   }
 `;
 const Side = styled.div`
-  border: 2px solid var(--color-grey-300);
+  /* border: 2px solid var(--color-grey-200); */
   height: 100dvh;
-  width: 50dvw;
+  width: 100dvw;
   position: fixed;
   top: 0;
   right: -150%;
-  background-color: var(--color-grey-0);
+  display: flex;
 
+  p{
+    width: 40%;
+    /* background-color: red; */
+  background-color: #28282bc1;
+
+  }
   z-index: 99;
   transition: right 0.8s;
   ${(prop) =>
@@ -80,7 +86,8 @@ export default function Nav() {
       </StyledNav>
       {/* {isSideToggle && view < 768 && ( */}
       <Side check={isSideToggle}>
-        <Sidebar close={setIsSideToggle} />
+        <p onClick={()=>setIsSideToggle(false)}></p>
+        <Sidebar close={setIsSideToggle} isView={isView}/>
       </Side>
       {/* )} */}
     </>

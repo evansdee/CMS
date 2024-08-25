@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { MdMoreTime } from "react-icons/md";
 import Row from "../ui/Row";
-import { useView } from "../hook/useView";
 import Heading from "../ui/Heading";
 import Modal from "../ui/Modal";
 import ButtonIcon from "../ui/ButtonIcon";
@@ -22,11 +21,10 @@ export const Bottom = styled.div`
  
 `;
 export default function Session() {
-  const { isView } = useView();
 
   return (
     <StyledSessionTab>
-      <Row type={!isView ? "vertical" : "horizontal"}>
+      <Row type={"horizontal"}>
         <Heading as="h3">Enrollment Session</Heading>
 
         <Modal>

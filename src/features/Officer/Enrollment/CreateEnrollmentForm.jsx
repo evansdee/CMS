@@ -20,7 +20,8 @@ import { nanoid } from "nanoid";
 import { useView } from "../../../hook/useView";
 import ErrorFallback from "../../../ui/ErrorFallback";
 
-const StyledContainer = styled.div``;
+const StyledContainer = styled.div`
+`;
 export default function CreateEnrollmentForm() {
   const { isView } = useView();
   const navigate = useNavigate();

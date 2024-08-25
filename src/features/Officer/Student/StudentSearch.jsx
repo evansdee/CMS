@@ -5,8 +5,8 @@ import styled from "styled-components";
 const SearchOperation = styled.div`
   /* flex: 1; */
   width: 30%;
-  @media(min-width:768){
-    width: 0%;
+  @media(max-width:768px){
+    width: 100%;
   }
 `;
 export default function StudentSearch({ search, setSearch }) {

@@ -13,6 +13,13 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     padding: 1em 0;
+    flex-wrap: wrap;
+
+    @media(max-width:768px){
+      gap: 1em;
+      padding: .5em 0;
+      /* color: red; */
+    }
 `
 
 export default function ReportForm() {

@@ -9,14 +9,12 @@ const StyledForm = styled.form`
   border: 1px solid var(--color-grey-200);
   border-radius: var(--border-radius-md);
   padding: 2.4rem 4rem;
-  overflow: hidden;
-
-  /* > div {
-    padding: 0 1em;
-  } */
-
+  /* overflow: hidden; */
+  
+  
   @media (max-width: 768px) {
-    padding: 1.6rem 2rem; /* Adjust padding for mobile */
+    overflow-y: auto;
+    padding: 1.4rem; /* Adjust padding for mobile */
     grid-template-rows: repeat(5, auto); /* Adjust row count if needed */
   }
 `;

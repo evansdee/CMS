@@ -10,6 +10,8 @@ const StyledFilter = styled.div`
   border-radius: var(--border-radius-sm);
   padding: 0.4rem;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
   gap: 0.4rem;
 `;
 
@@ -45,7 +47,7 @@ export default function Filter({ filterField, options = [] }) {
 
   function handleClick(value) {
     searchParams.set(filterField, value);
-    if(searchParams.get('page')) searchParams.set('page',1)
+    if (searchParams.get("page")) searchParams.set("page", 1);
     setSearchParam(searchParams);
   }
   return (
@@ -59,7 +61,6 @@ export default function Filter({ filterField, options = [] }) {
           {ele.label}
         </FilterButton>
       ))}
-     
     </StyledFilter>
   );
 }

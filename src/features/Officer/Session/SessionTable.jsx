@@ -7,7 +7,7 @@ import SessionRow from "./SessionRow";
 const StyledSessionTable = styled.div`
   width: 100%;
   /* padding: 0 2em 2em; */
-  height: 70dvh;
+  /* height: 70dvh; */
   overflow-y: scroll;
   scrollbar-width: none;
   margin-top: 1em;

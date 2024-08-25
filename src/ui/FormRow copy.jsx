@@ -8,11 +8,6 @@ const StyledFormRow = styled.div`
 
   padding:1.2rem 0;
 
-  @media(max-width:768px){
-    display: flex;
-    align-items: center;
-  }
-
   &:first-child {
     padding-top: 0;
   }
