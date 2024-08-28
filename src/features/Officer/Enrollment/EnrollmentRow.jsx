@@ -12,6 +12,7 @@ import Menus from "../../../ui/Menus";
 import Table from "../../../ui/Table";
 import Td from "../../../ui/TableRow";
 import SpinnerMini from "../../../ui/SpinnerMini";
+import toast from "react-hot-toast";
 
 export default function EnrollmentRow({ enroll }) {
   const { mutate, isPending, isError } = useAddEnrollment();
@@ -37,7 +38,10 @@ export default function EnrollmentRow({ enroll }) {
     // eslint-disable-next-line no-unused-vars
     const { lid, ...enr } = enroll;
 
-    if (isError) return null;
+    if (isError) {
+      toast.error("An error occurred. Please try again.");
+      return;
+    }
     mutate(
       { ...enr },
       {

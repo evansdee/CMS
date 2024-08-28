@@ -30,12 +30,14 @@ import CertificateSearch from "./features/Officer/Certificate/CertificateSearch"
 import CertificatePrint from "./features/Officer/Certificate/CertificatePrint";
 import CoursePage from "./pages/CoursePage";
 import CourseValidation from "./pages/CourseApproval";
+import ProtectedUser from "./ProtectedUser";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // staleTime: 60 * 1000,
       staleTime: 0,
+      retry: 2,
     },
   },
 });
@@ -88,17 +90,38 @@ function App() {
                         <Route path="list" element={<CertificateList />} />
                         <Route path="search" element={<CertificateSearch />} />
                       </Route>
-                    
-                      <Route path="approval" element={<Approval />} />
-                      <Route path="validation" element={<CourseValidation />} />
-                      <Route path="signature" element={<Signature />} />
+
+                      <Route
+                        path="approval"
+                        element={
+                          <ProtectedUser currentUser="madam">
+                            <Approval />
+                          </ProtectedUser>
+                        }
+                      />
+                      <Route
+                        path="validation"
+                        element={
+                          <ProtectedUser currentUser="madam">
+                            <CourseValidation />
+                          </ProtectedUser>
+                        }
+                      />
+                      <Route
+                        path="signature"
+                        element={
+                          <ProtectedUser currentUser="ceo">
+                            <Signature />
+                          </ProtectedUser>
+                        }
+                      />
                     </Route>
                   </Route>
                   <Route path="test" element={<Test />} />
                   <Route
-                        path="certificateprint/:id"
-                        element={<CertificatePrint />}
-                      />
+                    path="certificateprint/:id"
+                    element={<CertificatePrint />}
+                  />
 
                   <Route path="*" element={<NoPage />} />
                 </Routes>
@@ -107,6 +130,7 @@ function App() {
               <Toaster
                 position="top-center"
                 gutter={12}
+                closeButton={true}
                 containerStyle={{ margin: "8px" }}
                 toastOptions={{
                   success: {

@@ -1,7 +1,7 @@
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function createEditEnrollment(newEnrollment, id) {
-  console.log(newEnrollment.photo);
+  // console.log(newEnrollment.photo);
   const hasImagePath = newEnrollment.photo?.startsWith?.(supabaseUrl);
 
   const imageName = `${Math.random()}-${newEnrollment.photo.name}`.replaceAll(
@@ -20,7 +20,7 @@ export async function createEditEnrollment(newEnrollment, id) {
     query = query.update({ ...newEnrollment, photo: imagePath }).eq("id", id);
 
   const { data, error } = await query.select().single();
-  if (error) throw new Error("Student not enrollment");
+  if (error) throw new Error("Student not enrolled");
   // 2. Upload image
   if (hasImagePath) return data;
 
