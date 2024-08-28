@@ -20,11 +20,41 @@ const StyledContainer = styled.div`
 `;
 
 const Main = styled.div`
-  height: 70dvh;
-  overflow-y: scroll;
-  scrollbar-width: none;
+  /* height: 70dvh; */
+  overflow-y: hidden;
+  overflow-x: auto;
+  /* scrollbar-width: none; */
   margin: 1em 0 0;
+
+  &::-webkit-scrollbar {
+  width: 0; /* Hides the vertical scrollbar */
+  display: none; /* Optional: Hide scrollbar space */
+}
 `;
+// const Main = styled.div`
+//   /* height: 70dvh; */
+//   overflow-y: auto; /* Allows vertical scrolling */
+//   overflow-x: auto; /* Allows horizontal scrolling */
+//   margin: 1em 0 0;
+
+//   /* Hide vertical scrollbar */
+//   scrollbar-width: none; /* For Firefox */
+//   -ms-overflow-style: none; /* For Internet Explorer and Edge */
+
+//   &::-webkit-scrollbar {
+//     width: 0; /* Hides the vertical scrollbar in Chrome, Safari, and Opera */
+//     display: none; /* Hides scrollbar space */
+//   }
+
+//   /* Show horizontal scrollbar */
+//   &::-webkit-scrollbar:horizontal {
+//     height: 8px; /* Set the height for horizontal scrollbar */
+//     display: block; /* Ensures it displays */
+//   }
+
+ 
+// `;
+
 export default function Enrollment() {
   const [searchParams] = useSearchParams();
 

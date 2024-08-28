@@ -14,9 +14,16 @@ const StyledContainer = styled.div`
 `;
 
 const Main = styled.div`
-  overflow-x: auto;
-  scrollbar-width:none;
+  /* overflow-x: auto;
+  scrollbar-width:none; */
+  overflow-x: auto; /* Keep the horizontal scrollbar visible */
+  overflow-y: hidden; /* Hide the vertical scrollbar */
   margin: 1em 0 0;
+
+ &::-webkit-scrollbar {
+  width: 0; /* Hides the vertical scrollbar */
+  display: none; /* Optional: Hide scrollbar space */
+}
 `;
 export default function StudentPage() {
 
