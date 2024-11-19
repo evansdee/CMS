@@ -74,7 +74,7 @@ const Certificate = ({ state, cert, data }) => {
   const { certImg, size } = cert;
   // console.log(cert);
   const qrCodeUrl = `https://verification.joemarineng.com/${data.id}`;
-  // console.log(data);
+  console.log(data);
 
   const fm = family.find(
     (ele) =>
@@ -122,7 +122,7 @@ const Certificate = ({ state, cert, data }) => {
     },
     {
       key: "startDate",
-      text: format(parseISO(data.startDate), "dd MMM yy"),
+      text: format(parseISO(data.startDate), "dd MMM yy") || "",
       fontSize: state.fromToDate,
       position: size === "short" ? { x: 404, y: 393 } : { x: 0, y: 20 },
     },

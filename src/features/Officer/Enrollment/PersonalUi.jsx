@@ -86,7 +86,7 @@ export default function PersonalUi({
           </Label>
           <Label label="State of Origin" error={errors?.state?.message}>
             <Select
-              {...register("state", { required: "This field is required" })}
+              {...register("state")}
               disabled={isLoading}
             >
               <option value="">Select a state</option>

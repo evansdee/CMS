@@ -110,9 +110,9 @@ function App() {
                       <Route
                         path="signature"
                         element={
-                          <ProtectedUser currentUser="ceo">
+                          // <ProtectedUser currentUser="ceo">
                             <Signature />
-                          </ProtectedUser>
+                          // </ProtectedUser>
                         }
                       />
                     </Route>

@@ -43,7 +43,7 @@ export default function CourseRegUi({
           </Label>
           {/* )} */}
           <Label label="Bank" error={errors?.bank?.message}>
-            <Select {...register("bank", { required: "Field required" })}>
+            <Select {...register("bank")}>
               <option value="">Select Bank</option>
               {["AMJU bank", "Zenith Bank"]?.map((ele) => (
                 <option key={ele} value={ele}>

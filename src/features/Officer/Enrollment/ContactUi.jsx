@@ -11,16 +11,14 @@ export default function ContactUi({ register, data, errors }) {
         <Form.FormSingleRow>
           <Label label="Address" error={errors?.address?.message}>
             <Input
-              {...register("address", { required: "This field is required" })}
+              {...register("address")}
             />
           </Label>
         </Form.FormSingleRow>
         <Form.FormSingleRow>
           <Label label="State Reside in" error={errors?.stateReside?.message}>
             <Select
-              {...register("stateReside", {
-                required: "This field is required",
-              })}
+              {...register("stateReside")}
               disabled={data[1]}
             >
               <option value="">What state does the applicant reside in?</option>
@@ -35,7 +33,7 @@ export default function ContactUi({ register, data, errors }) {
         <Form.FormMultipleRow>
           <Label label="Phone Number" error={errors?.gsm?.message}>
             <Input
-              {...register("gsm", { required: "This field is required" })}
+              {...register("gsm")}
             />
           </Label>
           <Label label="Email Address">
