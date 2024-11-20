@@ -8,7 +8,7 @@ import Certificate from "../Templates/Certificate";
 import ErrorFallback from "../../../ui/ErrorFallback";
 
 const initialState = {
-  certNo: 25,
+  certNo: 14,
   name: 30,
   country: 25,
   dob: 25,

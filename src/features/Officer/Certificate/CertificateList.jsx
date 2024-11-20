@@ -46,16 +46,32 @@ export default function CertificateList() {
   if (filterValue === "3") filterArray = handleFilter(three);
   if (filterValue === "7") filterArray = handleFilter(seven);
 
-  function sortByEnrollDate(arr) {
-    return arr.sort((a, b) => {
-      const dateA = parse(a.enrollDate, "dd MMMM yy, hh:mm a", new Date());
-      const dateB = parse(b.enrollDate, "dd MMMM yy, hh:mm a", new Date());
 
-      return dateB - dateA; // For ascending order, or dateB - dateA for descending order
+  function sortByCertificateNumber(arr) {
+    return arr.sort((a, b) => {
+      const certA = extractCertificateNumber(a.certificateNo);
+      const certB = extractCertificateNumber(b.certificateNo);
+      
+      return certA - certB;  // For descending order, use certB - certA
     });
   }
+  
+  // Helper function to extract the numerical part from certificate number
+  function extractCertificateNumber(certNumber) {
+    const match = certNumber.match(/\d+/); // Extracts the first number from the string
+    return match ? parseInt(match[0], 10) : 0;  // Convert it to an integer, defaulting to 0 if no number found
+  }
 
-  filterArray = sortByEnrollDate(filterArray)
+  // function sortByEnrollDate(arr) {
+  //   return arr.sort((a, b) => {
+  //     const dateA = parse(a.enrollDate, "dd MMMM yy, hh:mm a", new Date());
+  //     const dateB = parse(b.enrollDate, "dd MMMM yy, hh:mm a", new Date());
+
+  //     return dateB - dateA; // For ascending order, or dateB - dateA for descending order
+  //   });
+  // }
+
+  filterArray = sortByCertificateNumber(filterArray)
 
   if (!filterArray?.length)
     return (

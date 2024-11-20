@@ -34,12 +34,11 @@ const TextOverlay = styled.div`
   font-size: ${(prop) => `${prop.size}px`};
 
   &.certNo {
-    font-family: ${(prop) => `"elephant",sanserif`};
-    // font-family: ${(prop) => `"${prop.fm.otherFamily}",sanserif`};
+    font-family: ${(prop) => `"${prop.fm.otherFamily}",sanserif`};
   }
 
   &.name {
-    font-family: ${(prop) => `"lucida calligraphy",sanserif`};
+    font-family: ${(prop) => `"${prop.fm.mainFamily}",sanserif`};
     border-bottom: 3px ${(prop) => (prop.fm.id === "EDH" ? "dotted" : "solid")}
       #28282b;
     padding: 0;
@@ -82,7 +81,7 @@ const Certificate = ({ state, cert, data }) => {
       ele.id === data.courseCode || {
         // id:'MOTM',
         mainFamily: "BRITANIC",
-        otherFamily: "elephant",
+        otherFamily: "Cindybob",
         normal: "Arial",
       }
   );
@@ -92,25 +91,25 @@ const Certificate = ({ state, cert, data }) => {
       key: "certNo",
       text: data.certificateNo,
       fontSize: state.certNo,
-      position: size === "short" ? { x: 129, y: 389 } : { x: 400, y: 400 },
+      position: size === "short" ? { x: 106, y: 384 } : { x: 400, y: 400 },
     },
     {
       key: "name",
       text: data.fullName,
       fontSize: state.name,
-      position: size === "short" ? { x: 230, y: 237 } : { x: 100, y: 100 },
+      position: size === "short" ? { x: 207, y: 217 } : { x: 100, y: 100 },
     },
     {
       key: "country",
       text: data.country,
       fontSize: state.country,
-      position: { x: 511, y: 827 },
+      position: { x: 0, y: 40 },
     },
     {
       key: "dob",
       text: data.dob,
       fontSize: state.dob,
-      position: { x: 511, y: 827 },
+      position: { x: 0, y: 60 },
     },
     {
       key: "doi",
@@ -119,34 +118,26 @@ const Certificate = ({ state, cert, data }) => {
         "dd MMM yyyy"
       ),
       fontSize: state.doi,
-      position: { x: 511, y: 827 },
+      position: size === "short" ? { x: 656, y: 479 } : { x: 0, y: 20 },
     },
     {
       key: "startDate",
       text: format(parseISO(data.startDate), "dd MMM yy") || "",
       fontSize: state.fromToDate,
-      position: { x: 511, y: 827 },
+      position: size === "short" ? { x: 404, y: 393 } : { x: 0, y: 20 },
     },
     {
       key: "endDate",
       text: format(parseISO(data.endDate), "dd MMM yy"),
       fontSize: state.fromToDate,
-      position: { x: 511, y: 827 },
+      position: size === "short" ? { x: 539, y: 393 } : { x: 0, y: 20 },
     },
     {
       key: "isSignature",
       text: data.isSignature && "Signature",
       fontSize: state.isSignature,
-      position: { x: 511, y: 827 },
+      position: { x: 0, y: 220 },
     },
-    {
-      key:"qrCode",
-      position: { x: 511, y: 827 },
-    },
-    {
-      key:"photo",
-      position: { x: 511, y: 827 },
-    }
   ];
 
   const [positions, setPositions] = useState(() =>

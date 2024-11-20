@@ -19,7 +19,7 @@ export default function PersonalUi({
           <FileInput
             type="file"
             accept="image/*"
-            {...register("photo", { required: "nigga enter" })}
+            {...register("photo")}
             error={errors?.photo?.message}
           />
           <p></p>
@@ -27,17 +27,17 @@ export default function PersonalUi({
         </Form.FormMultipleRow>
 
         <Form.FormMultipleRow>
-          <Label label="First Name" error={errors?.firstName?.message}>
+          <Label label="Last Name" error={errors?.lastName?.message}>
             <Input
-              {...register("firstName", { required: "This field is required" })}
+              {...register("lastName", { required: "This field is required" })}
             />
           </Label>
           <Label label="Middle Name" error={errors?.middleName?.message}>
             <Input {...register("middleName")} />
           </Label>
-          <Label label="Last Name" error={errors?.lastName?.message}>
+          <Label label="First Name" error={errors?.firstName?.message}>
             <Input
-              {...register("lastName", { required: "This field is required" })}
+              {...register("firstName", { required: "This field is required" })}
             />
           </Label>
         </Form.FormMultipleRow>

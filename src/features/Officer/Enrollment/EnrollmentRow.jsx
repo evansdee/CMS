@@ -15,7 +15,7 @@ import SpinnerMini from "../../../ui/SpinnerMini";
 import toast from "react-hot-toast";
 
 export default function EnrollmentRow({ enroll }) {
-  const { mutate, isPending, isError } = useAddEnrollment();
+  const { mutate, isPending, isError,error } = useAddEnrollment();
   const { lid, fullName, courseName, enrollDate, bank, status, amount } =
     enroll;
 
@@ -39,6 +39,7 @@ export default function EnrollmentRow({ enroll }) {
     const { lid, ...enr } = enroll;
 
     if (isError) {
+      console.log(error)
       toast.error("An error occurred. Please try again.");
       return;
     }

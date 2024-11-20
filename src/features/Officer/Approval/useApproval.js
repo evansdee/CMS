@@ -48,7 +48,7 @@ export function useApproval() {
       }
 
       // Generate the certificate number using the updated local count
-      const certificateNo = `JINSR/${courseCode}/${codeAlt}/${
+      const certificateNo = `JINSR/${courseCode}/${
         updatedCounts[countKey].count
       }/${format(new Date(), "yyyy")}`;
 

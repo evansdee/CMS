@@ -72,6 +72,12 @@ const family = [
     otherFamily:'Cindybob',
     normal:'Arial'
   },
+  {
+    id:"FED",
+    mainFamily:'chopinscript',
+    otherFamily:'"Elephant"',
+    normal:'Arial'
+  }
 ]
 
 const fake = [
