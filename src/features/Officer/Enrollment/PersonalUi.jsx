@@ -32,13 +32,14 @@ export default function PersonalUi({
               {...register("lastName", { required: "This field is required" })}
             />
           </Label>
-          <Label label="Middle Name" error={errors?.middleName?.message}>
-            <Input {...register("middleName")} />
-          </Label>
+         
           <Label label="First Name" error={errors?.firstName?.message}>
             <Input
               {...register("firstName", { required: "This field is required" })}
             />
+          </Label>
+          <Label label="Middle Name" error={errors?.middleName?.message}>
+            <Input {...register("middleName")} />
           </Label>
         </Form.FormMultipleRow>
         <Form.FormMultipleRow>

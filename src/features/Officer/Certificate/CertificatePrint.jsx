@@ -56,7 +56,7 @@ export default function CertificatePrint() {
     (ele) => ele.courseName === data.courseName
   );
 
-  console.log(data);
+  console.log(cert,"test");
   return (
     <>
       <CertificatePanel state={state} handleInput={handleInputChange} data={data}/>
