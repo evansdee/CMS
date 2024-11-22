@@ -44,7 +44,7 @@ export default function PersonalUi({
         <Form.FormMultipleRow>
           <Label label="Date of Birth" error={errors?.dob?.message}>
             <Input
-              {...register("dob", { required: "This field is required" })}
+              {...register("dob")}
               type="date"
             />
           </Label>
