@@ -8,12 +8,12 @@ import Certificate from "../Templates/Certificate";
 import ErrorFallback from "../../../ui/ErrorFallback";
 
 const initialState = {
-  certNo: 14,
+  certNo: 18,
   name: 30,
   country: 25,
   dob: 25,
-  doi: 25,
-  fromToDate: 25,
+  doi: 19,
+  fromToDate: 20,
   qrCode: 80,
   img:40
 };
