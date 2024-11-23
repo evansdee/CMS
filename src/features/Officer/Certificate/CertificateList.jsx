@@ -52,7 +52,7 @@ export default function CertificateList() {
       const certA = extractCertificateNumber(a.certificateNo);
       const certB = extractCertificateNumber(b.certificateNo);
       
-      return certA - certB;  // For descending order, use certB - certA
+      return certB - certA;  // For descending order, use certB - certA
     });
   }
   
@@ -72,6 +72,8 @@ export default function CertificateList() {
   // }
 
   filterArray = sortByCertificateNumber(filterArray)
+
+  console.log(filterArray,"lol")
 
   if (!filterArray?.length)
     return (

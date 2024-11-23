@@ -39,7 +39,7 @@ function certificateReducer(state, action) {
 
 export default function CertificatePrint() {
   const params = useParams();
-  const { data: courses } = useCourse();
+  const { data: courses,isLoadind:isFetching } = useCourse();
   const { data, isLoading,error } = useCertificate(parseInt(params.id));
 
   const [state, dispatch] = useReducer(certificateReducer, initialState);
@@ -49,7 +49,7 @@ export default function CertificatePrint() {
     dispatch({ type: `${name}`, payload: value });
   };
 
-  if (isLoading) return <Spinner />;
+  if (isLoading || isFetching) return <Spinner />;
   if(error) return <ErrorFallback error={error}/>
 
   const cert = courses?.find(
