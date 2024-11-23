@@ -18,7 +18,7 @@ import { IoIdCardOutline } from "react-icons/io5";
 import { useCourse, useUpdateCourseCount } from "../Enrollment/useCourse";
 import ErrorFallback from "../../../ui/ErrorFallback";
 
-export default function ApprovalView({ data, onCloseModal, updateStudent,isError }) {
+export default function ApprovalView({ data, onCloseModal, updateStudent, isError }) {
   const { updateCount } = useUpdateCourseCount();
   const { data: countList, error } = useCourse();
   const mutate = useDeleteEnrollment();
@@ -57,11 +57,11 @@ export default function ApprovalView({ data, onCloseModal, updateStudent,isError
       newEnrollment: {
         ...data,
         status: true,
-        certificateNo: `JINSR/${courseCode}/${codeAlt}/${count?.count}/${format(
-        // certificateNo: `JINSR/${courseCode}/${codeAlt}/${count?.count}/${format(
+        certificateNo: `JINSR/${courseCode}/${format(
+          // certificateNo: `JINSR/${courseCode}/${codeAlt}/${count?.count}/${format(
           new Date(),
           "yyyy"
-        )}`,
+        )}/${count?.count}`,
       },
       id: id,
     };

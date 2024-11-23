@@ -48,10 +48,10 @@ export function useApproval() {
       }
 
       // Generate the certificate number using the updated local count
-      const certificateNo = `JINSR/${courseCode}/${codeAlt}/${
+      const certificateNo = `JINSR/${courseCode}/${format(new Date(), "yyyy")}/${
         updatedCounts[countKey].count
-      }/${format(new Date(), "yyyy")}`;
-
+      }`;
+ 
       // Update the enrollment object with the new status and certificate number
       const newData = {
         ...ele,
