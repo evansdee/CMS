@@ -8,12 +8,12 @@ import Certificate from "../Templates/Certificate";
 import ErrorFallback from "../../../ui/ErrorFallback";
 
 const initialState = {
-  certNo: 18,
+  certNo: 14,
   name: 30,
   country: 25,
   dob: 25,
-  doi: 19,
-  fromToDate: 20,
+  doi: 25,
+  fromToDate: 25,
   qrCode: 80,
   img:40
 };
@@ -39,7 +39,7 @@ function certificateReducer(state, action) {
 
 export default function CertificatePrint() {
   const params = useParams();
-  const { data: courses,isLoadind:isFetching } = useCourse();
+  const { data: courses } = useCourse();
   const { data, isLoading,error } = useCertificate(parseInt(params.id));
 
   const [state, dispatch] = useReducer(certificateReducer, initialState);
@@ -49,14 +49,14 @@ export default function CertificatePrint() {
     dispatch({ type: `${name}`, payload: value });
   };
 
-  if (isLoading || isFetching) return <Spinner />;
+  if (isLoading) return <Spinner />;
   if(error) return <ErrorFallback error={error}/>
 
   const cert = courses?.find(
     (ele) => ele.courseName === data.courseName
   );
 
-  console.log(cert,"test");
+  console.log(data);
   return (
     <>
       <CertificatePanel state={state} handleInput={handleInputChange} data={data}/>

@@ -49,11 +49,22 @@ export default function CertificatePanel({ state, handleInput, data: enroll }) {
   const { qrCode, img, ...rest } = state;
   const data = Object.keys(rest);
 
+   function handlePrint(){
+    window.print()
+    if (enroll.printStatus) return;
+
+    mutate({
+      newEnrollment: { ...enroll, printStatus: true },
+      id: enroll.id,
+    });
+   }
+
   if(error) return <ErrorFallback error={error}/>
   return (
     <Container>
       <Flex justify="center" align="center" direction="column" gap=".5em">
-        <ButtonIcon onClick={() => window.print()} variation="danger">
+        <ButtonIcon onClick={handlePrint} variation="danger">
+        {/* <ButtonIcon onClick={() => window.print()} variation="danger"> */}
           {isPending ? <SpinnerMini/>:<FaPrint />}
         </ButtonIcon>
         <Btn onClick={() => setActive((p) => !p)}>
