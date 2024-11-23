@@ -42,7 +42,7 @@ const TextOverlay = styled.div`
     font-family: ${(prop) => `"lucida calligraphy",sanserif`};
     border-bottom: 3px ${(prop) => (prop.fm.id === "EDH" ? "dotted" : "solid")}
       #28282b;
-    padding: 0;
+    padding: 7px;
     line-height: 0.7em;
     text-transform: upperCase;
   }

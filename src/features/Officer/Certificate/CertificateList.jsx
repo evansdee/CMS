@@ -36,7 +36,7 @@ export default function CertificateList() {
 
   function handleFilter(arr) {
     const data = arr.filter(
-      (ele) => ele.status === true && ele.isSignature !== null
+      (ele) => ele.status === true && ele.isSignature !== null && !ele.printStatus
     );
 
     return data;

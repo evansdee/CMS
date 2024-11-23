@@ -10,7 +10,7 @@ const CertificateContainer = styled.div`
   position: relative;
   width: 8.07in; /* A4 width in inches */
   height: ${(prop) =>
-    prop.size === "short" ? "5.445in" : "11.69in"}; /* A4 height in inches */
+    prop.size === "short" ? "5.445in" : "9.69in"}; /* A4 height in inches */
   background-image: url(${(prop) => `${prop.certImg}`});
   background-size: contain;
   overflow: hidden;
@@ -34,14 +34,14 @@ const TextOverlay = styled.div`
   font-size: ${(prop) => `${prop.size}px`};
 
   &.certNo {
-    font-family: ${(prop) => `"elephant",sanserif`};
+    font-family: ${(prop) => `ARIAL,sanserif`};
     // font-family: ${(prop) => `"${prop.fm.otherFamily}",sanserif`};
   }
 
   &.name {
-    font-family: ${(prop) => `"lucida calligraphy",sanserif`};
-    border-bottom: 3px ${(prop) => (prop.fm.id === "EDH" ? "dotted" : "solid")}
-      #28282b;
+    font-family: ${(prop) => `"COLISEO-NORMAL",sanserif`};
+    // border-bottom: 3px ${(prop) => (prop.fm.id === "EDH" ? "dotted" : "solid")}
+    //   #28282b;
     padding: 0;
     line-height: 0.7em;
     text-transform: upperCase;
@@ -92,60 +92,57 @@ const Certificate = ({ state, cert, data }) => {
       key: "certNo",
       text: data.certificateNo,
       fontSize: state.certNo,
-      position: size === "short" ? { x: 129, y: 389 } : { x: 400, y: 400 },
+      position: size === "short" ? { x: 129, y: 389 } : { x: 183, y: 755 },
     },
     {
       key: "name",
       text: data.fullName,
       fontSize: state.name,
-      position: size === "short" ? { x: 230, y: 237 } : { x: 100, y: 100 },
+      position: size === "short" ? { x: 282, y: 481 } : { x: 262, y: 400 },
     },
     {
       key: "country",
       text: data.country,
       fontSize: state.country,
-      position: { x: 511, y: 827 },
+      position: { x: 800, y: 827 },
     },
     {
       key: "dob",
       text: data.dob,
       fontSize: state.dob,
-      position: { x: 511, y: 827 },
+      position: { x: 800, y: 827 },
     },
     {
       key: "doi",
-      text: format(
-        parse(data.enrollDate, "dd MMMM yy, hh:mm a", new Date()),
-        "dd MMM yyyy"
-      ),
+      text:format(parseISO(data.endDate), "dd MMM yyyy"),
       fontSize: state.doi,
-      position: { x: 511, y: 827 },
+      position: { x: 389, y: 685 },
     },
     {
       key: "startDate",
       text: format(parseISO(data.startDate), "dd MMM yy") || "",
       fontSize: state.fromToDate,
-      position: { x: 511, y: 827 },
+      position: { x: 174, y: 614 },
     },
     {
       key: "endDate",
       text: format(parseISO(data.endDate), "dd MMM yy"),
       fontSize: state.fromToDate,
-      position: { x: 511, y: 827 },
+      position: { x: 544, y: 614 },
     },
     {
       key: "isSignature",
       text: data.isSignature && "Signature",
       fontSize: state.isSignature,
-      position: { x: 511, y: 827 },
+      position: { x: 800, y: 827 },
     },
     {
       key:"qrCode",
-      position: { x: 511, y: 827 },
+      position: { x: 800, y: 827 },
     },
     {
       key:"photo",
-      position: { x: 511, y: 827 },
+      position: { x: 800, y: 827 },
     }
   ];
 

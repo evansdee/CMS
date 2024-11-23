@@ -61,7 +61,17 @@ export default function ReportDataProvider({ children }) {
       );
     });
 
-    setFilteredData(filtered);
+    const sortedData = filtered.sort((a, b) => {
+      // Convert names to lowercase for case-insensitive comparison
+      const nameA = a.fullName.toLowerCase();
+      const nameB = b.fullName.toLowerCase();
+  
+      if (nameA < nameB) return -1; // If nameA comes before nameB
+      if (nameA > nameB) return 1;  // If nameA comes after nameB
+      return 0;                      // If names are equal
+  });
+
+    setFilteredData(sortedData);
   }, [search, approveList]);
   //   , [enrollment, search.year, search.selectedCourse, search.month]);
 
