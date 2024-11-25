@@ -88,7 +88,11 @@ export default function ReportDataProvider({ children }) {
       return 0;                      // If names are equal
   });
 
-    setFilteredData(sortByCertificateNumber(sortedData));
+  const x = sortedData.every(ele=>(ele.courseCode === "FED"))
+
+  console.log(x,"sort")
+
+    setFilteredData(x ? sortByCertificateNumber(sortedData) : sortByCourseAndCertificate(sortedData));
   }, [search, approveList]);
   //   , [enrollment, search.year, search.selectedCourse, search.month]);
 
