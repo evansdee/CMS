@@ -8,6 +8,7 @@ import {
 } from "react";
 import { useGetEnrollment } from "../Enrollment/useEnrollment";
 import { format, parse } from "date-fns";
+import { sortByCourseAndCertificate } from "../../../helper/helper";
 
 const ReportContext = createContext();
 
@@ -26,6 +27,22 @@ export default function ReportDataProvider({ children }) {
     const currentYear = new Date().getFullYear();
     return Array.from({ length: currentYear - 2023 + 1 }, (_, i) => 2023 + i);
   }, []);
+
+  function sortByCertificateNumber(arr) {
+    return arr.sort((a, b) => {
+      // Extract the last numeric part from certificateNo
+      const getCertNumber = (cert) => {
+        const parts = cert.split('/');
+        return parseInt(parts[parts.length - 1], 10); // Assumes the last part is the number to sort by
+      };
+  
+      const certNoA = getCertNumber(a.certificateNo);
+      const certNoB = getCertNumber(b.certificateNo);
+  
+      return certNoA - certNoB;
+    });
+  }
+  
 
   function handleInput(e) {
     const { value, name } = e.target;
@@ -71,7 +88,7 @@ export default function ReportDataProvider({ children }) {
       return 0;                      // If names are equal
   });
 
-    setFilteredData(sortedData);
+    setFilteredData(sortByCertificateNumber(sortedData));
   }, [search, approveList]);
   //   , [enrollment, search.year, search.selectedCourse, search.month]);
 

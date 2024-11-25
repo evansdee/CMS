@@ -70,3 +70,24 @@ export function filterDataFromLastDays(data,value) {
     }
   });
 }
+
+export function sortByCourseAndCertificate(arr) {
+  return arr.sort((a, b) => {
+    // Compare course names alphabetically
+    const courseNameCompare = a.courseName.localeCompare(b.courseName);
+    if (courseNameCompare !== 0) {
+      return courseNameCompare;
+    }
+
+    // Extract the numeric part from certificateNo (assumes format is like "JINSR/RADAR/25/12/2024")
+    const getCertNumber = (cert) => {
+      const parts = cert.split('/');
+      return parseInt(parts[parts.length - 2], 10); // Assumes the number is the second-to-last part
+    };
+
+    const certNoA = getCertNumber(a.certificateNo);
+    const certNoB = getCertNumber(b.certificateNo);
+
+    return certNoA - certNoB;
+  });
+}

@@ -4,6 +4,7 @@ import { useGetEnrollment } from "../Enrollment/useEnrollment";
 import {
   filterDataFromOneDayAgo,
   filterDataFromLastDays,
+  sortByCourseAndCertificate,
 } from "../../../helper/helper";
 import CertificateRow from "./CertificateRow";
 import Spinner from "../../../ui/Spinner";
@@ -47,31 +48,13 @@ export default function CertificateList() {
   if (filterValue === "7") filterArray = handleFilter(seven);
 
 
-  function sortByCertificateNumber(arr) {
-    return arr.sort((a, b) => {
-      const certA = extractCertificateNumber(a.certificateNo);
-      const certB = extractCertificateNumber(b.certificateNo);
-      
-      return certB - certA;  // For descending order, use certB - certA
-    });
-  }
   
-  // Helper function to extract the numerical part from certificate number
-  function extractCertificateNumber(certNumber) {
-    const match = certNumber.match(/\d+/); // Extracts the first number from the string
-    return match ? parseInt(match[0], 10) : 0;  // Convert it to an integer, defaulting to 0 if no number found
-  }
+ 
 
-  // function sortByEnrollDate(arr) {
-  //   return arr.sort((a, b) => {
-  //     const dateA = parse(a.enrollDate, "dd MMMM yy, hh:mm a", new Date());
-  //     const dateB = parse(b.enrollDate, "dd MMMM yy, hh:mm a", new Date());
 
-  //     return dateB - dateA; // For ascending order, or dateB - dateA for descending order
-  //   });
-  // }
+  
 
-  filterArray = sortByCertificateNumber(filterArray)
+  filterArray = sortByCourseAndCertificate(filterArray)
 
   console.log(filterArray,"lol")
 

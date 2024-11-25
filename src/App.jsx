@@ -51,7 +51,7 @@ function App() {
         <DarkModeProvider>
           <TestProvider>
             <QueryClientProvider client={queryClient}>
-              {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+              <ReactQueryDevtools initialIsOpen={false} />
 
               <GlobalStyles />
 
