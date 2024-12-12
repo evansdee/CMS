@@ -1,4 +1,4 @@
-import {} from "react";
+import { } from "react";
 import Table from "../../../ui/Table";
 import { useGetEnrollment } from "../Enrollment/useEnrollment";
 import {
@@ -22,8 +22,8 @@ export default function CertificateList() {
 
   const { data: enrollment, isLoading, error } = useGetEnrollment();
   const today = filterDataFromOneDayAgo(enrollment);
-  const three = filterDataFromLastDays(enrollment,2);
-  const seven = filterDataFromLastDays(enrollment,6);
+  const three = filterDataFromLastDays(enrollment, 2);
+  const seven = filterDataFromLastDays(enrollment, 6);
 
   const [searchParams] = useSearchParams();
 
@@ -37,7 +37,7 @@ export default function CertificateList() {
 
   function handleFilter(arr) {
     const data = arr.filter(
-      (ele) => ele.status === true && ele.isSignature !== null && !ele.printStatus
+      (ele) => ele.status === true && ele.isSignature !== null && ele.printStatus
     );
 
     return data;
@@ -48,15 +48,15 @@ export default function CertificateList() {
   if (filterValue === "7") filterArray = handleFilter(seven);
 
 
-  
- 
 
 
-  
+
+
+
 
   filterArray = sortByCourseAndCertificate(filterArray)
 
-  console.log(filterArray,"lol")
+  console.log(today, "lol")
 
   if (!filterArray?.length)
     return (

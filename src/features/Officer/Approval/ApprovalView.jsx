@@ -57,11 +57,13 @@ export default function ApprovalView({ data, onCloseModal, updateStudent, isErro
       newEnrollment: {
         ...data,
         status: true,
-        certificateNo: `JINSR/${courseCode}/${format(
-          // certificateNo: `JINSR/${courseCode}/${codeAlt}/${count?.count}/${format(
+        // certificateNo: `JINSR/${courseCode}/${format(
+        certificateNo: `JINSR/${courseCode}/${codeAlt}/${count?.count}/${format(
           new Date(),
           "yyyy"
-        )}/${count?.count}`,
+        )}
+        // /${count?.count}
+        `,
       },
       id: id,
     };

@@ -40,8 +40,8 @@ const TextOverlay = styled.div`
 
   &.name {
     font-family: ${(prop) => `"COLISEO-NORMAL",sanserif`};
-    // border-bottom: 3px ${(prop) => (prop.fm.id === "EDH" ? "dotted" : "solid")}
-    //   #28282b;
+    border-bottom: 3px ${(prop) => (prop.fm.id === "EDH" ? "dotted" : "solid")}
+      #28282b;
     padding: 0;
     line-height: 0.7em;
     text-transform: upperCase;
